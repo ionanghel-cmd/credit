@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Rate Credit - Calcul REAL</title>
+    <title>Calculator Rate Credit – Versiune FINALĂ 100% REALĂ</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {font-family: Arial, sans-serif; max-width: 850px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
+        body {font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
         .calculator {background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
         h1 {text-align: center; color: #2c3e50; margin-bottom: 30px;}
         .form-group {margin-bottom: 22px;}
         label {display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;}
-        input[type="number"] {width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; box-sizing: border-box;}
+        input[type="number"] {width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px;}
         .radio-group {display: flex; gap: 40px; margin: 20px 0; font-size: 18px;}
         .plus-option {background: #e8f5e9; padding: 20px; border-radius: 12px; margin: 25px 0; border-left: 6px solid #27ae60;}
         .results {margin-top: 35px; padding: 30px; background: #f8f9fa; border-radius: 12px; border-left: 6px solid #27ae60;}
@@ -19,16 +19,16 @@
         .big-price {font-size: 38px; font-weight: bold; color: #e74c3c;}
         .old-price {text-decoration: line-through; color: #95a5a6; font-size: 22px; margin-left: 15px;}
         .magazin {background: #fef9e7; padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 6px solid #f39c12;}
-        .magazin strong {color: #d35400; font-size: 21px;}
         .profit {color: #27ae60; font-weight: bold; font-size: 24px;}
-        .pierdere {color: #c0392b; font-weight: bold;}
-        button {background: #27ae60; color: white; padding: 16px 40px; border: none; border-radius: 8px; font-size: 19px; cursor: pointer; font-weight: bold;}
-        button:hover {background: #219653;}
+        .copy-btn {background: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px;}
+        .copy-btn:hover {background: #2980b9;}
+        button.main {background: #27ae60; color: white; padding: 16px 40px; border: none; border-radius: 8px; font-size: 19px; cursor: pointer; font-weight: bold;}
+        button.main:hover {background: #219653;}
     </style>
 </head>
 <body>
     <div class="calculator">
-        <h1>Calculator Rate Credit - Calcul 100% Real</h1>
+        <h1>Calculator Rate Credit – 100% REAL</h1>
         
         <div class="form-group">
             <label>Perioada credit:</label>
@@ -55,7 +55,7 @@
             </label>
         </div>
 
-        <button onclick="calculeaza()">Calculează</button>
+        <button class="main" onclick="calculeaza()">Calculează</button>
 
         <div id="rezultate" class="results" style="display:none;">
             <h2>Rezultatul pentru client</h2>
@@ -78,7 +78,7 @@
                 Rata lunară: <strong id="rataLunara">0</strong> LEI
             </div>
 
-            <!-- SECȚIUNE MAGAZIN - CALCUL REAL -->
+            <!-- SECȚIUNE MAGAZIN – CALCUL 100% REAL -->
             <div class="magazin">
                 <strong>Tu (magazinul) primești în cont de la bancă:</strong><br><br>
                 <div style="font-size:32px; color:#d35400; margin:10px 0;">
@@ -88,6 +88,13 @@
                     <span id="detaliuBanca"></span><br>
                     <span id="profitReal"></span>
                 </div>
+            </div>
+
+            <!-- MESAJ PREGĂTIT PENTRU CLIENT (apare doar când e bifată Opțiunea +) -->
+            <div id="mesajClient" style="display:none; margin:30px 0; padding:25px; background:#e8f5e9; border-radius:12px; border-left:6px solid #27ae60;">
+                <strong>Mesaj gata de trimis clientului (WhatsApp / Viber):</strong><br><br>
+                <div id="textMesaj" style="background:white; padding:18px; border-radius:8px; font-size:16px; line-height:1.7; white-space: pre-line;"></div><br>
+                <button class="copy-btn" onclick="copyToClipboard()">Copiază mesajul</button>
             </div>
         </div>
     </div>
@@ -110,16 +117,12 @@
             const rataLunara = sumaCuPlus / perioada;
             const pretTotalClient = sumaCuPlus + avans;
 
-            // BANCA ÎȚI SCade comisionul din suma CU +
+            // BANCA scade comisionul din suma deja majorată
             const comisionBanca = perioada === 6 ? 4.5 : 7.5;
             const sumaIncasata = sumaCuPlus * (1 - comisionBanca / 100);
-            const profitReal = sumaIncasata - sumaCreditata;
+            const profitReal = sumaIncasata - sumaCreditata;   // profitul tău real cu Opțiunea +
 
-            // Fără Opțiunea +
-            const sumaFaraPlus = sumaCreditata * (1 - comisionBanca / 100);
-            const diferentaVsFaraPlus = sumaIncasata - sumaFaraPlus;
-
-            // Afisare
+            // Afisare client
             document.getElementById('sumaCreditata').textContent = sumaCreditata.toFixed(0);
             document.getElementById('sumaFinala').textContent = sumaCuPlus.toFixed(0);
             document.getElementById('rataLunara').textContent = rataLunara.toFixed(0);
@@ -132,20 +135,49 @@
                 document.getElementById('pretFinalClient').style.display = 'none';
             }
 
+            // Încasare magazin
             document.getElementById('sumaIncasata').textContent = sumaIncasata.toFixed(0);
 
             if (plusActiv) {
                 document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCuPlus.toFixed(0)} × (100% − ${comisionBanca}%)`;
-                document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span><br>
-                    Față de creditul standard câștigi +${diferentaVsFaraPlus.toFixed(0)} LEI`;
+                document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span>`;
+
+                // MESAJUL PENTRU CLIENT (apare doar cu Opțiunea +)
+                const mesaj = `Bună${sumaTotala >= 100000 ? '!' : ' ziua!'}
+
+Pentru produsul de ${sumaTotala.toLocaleString()} LEI am pregătit varianta cea mai avantajoasă pentru amândoi:
+
+Avans: ${avans.toLocaleString()} LEI
+Restul în ${perioada} rate prin credit + Opțiunea +
+
+Astfel:
+• Primiți imediat produsul
+• Rata lunară: ${rataLunara.toFixed(0)} LEI
+• Eu primesc banii integral și vă ofer livrare gratuită / accesorii cadou
+
+Vă convine? Vă pregătesc actele în 10 minute!
+
+Mulțumesc și aștept confirmarea!`;
+
+                document.getElementById('textMesaj').textContent = mesaj;
+                document.getElementById('mesajClient').style.display = 'block';
             } else {
                 document.getElementById('detaliuBanca').innerHTML = `Banca îți scade ${comisionBanca}% din suma creditată`;
-                document.getElementById('profitReal').innerHTML = `Primești doar ${sumaFaraPlus.toFixed(0)} LEI (pierzi ${(sumaCreditata - sumaFaraPlus).toFixed(0)} LEI)`;
+                document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata * (1 - comisionBanca/100)).toFixed(0)} LEI`;
+                document.getElementById('mesajClient').style.display = 'none';
             }
 
             document.getElementById('rezultate').style.display = 'block';
         }
 
+        function copyToClipboard() {
+            const text = document.getElementById('textMesaj').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Mesajul a fost copiat! Trimite-l clientului');
+            });
+        }
+
+        // Actualizare automată
         document.querySelectorAll('input').forEach(el => {
             el.addEventListener('input', calculeaza);
             el.addEventListener('change', calculeaza);
