@@ -200,10 +200,23 @@ Mulțumesc și aștept confirmarea!`;
             document.getElementById('rezultate').style.display = 'block';
         }
 
-        function copyToClipboard() {
-            const text = document.getElementById('textMesaj').textContent;
-            navigator.clipboard.writeText(text).then(() => alert('Mesajul a fost copiat!'));
-        }
+       function copyToClipboard() {
+    const text = document.getElementById('textMesaj').textContent;
+    const button = document.querySelector('.copy-btn');
+    
+    navigator.clipboard.writeText(text);
+    
+    // Schimbă textul butonului
+    const originalText = button.textContent;
+    button.textContent = 'Copiat!';
+    button.style.background = '#27ae60'; // verde
+
+    // Revine la starea inițială după 2 secunde
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#3498db';
+    }, 2000);
+}
 
         document.querySelectorAll('input').forEach(el => {
             el.addEventListener('input', calculeaza);
