@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Rate Credit – Versiune FINALĂ PERFECTĂ</title>
+    <title>Calculator Rate Credit – Versiune FINALĂ 100% REALĂ</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
@@ -20,6 +20,7 @@
         .old-price {text-decoration: line-through; color: #95a5a6; font-size: 22px; margin-left: 15px;}
         .magazin {background: #fef9e7; padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 6px solid #f39c12;}
         .profit {color: #27ae60; font-weight: bold; font-size: 24px;}
+        .comision {color: #c0392b; font-weight: bold;}
         .copy-btn {background: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px;}
         .copy-btn:hover {background: #2980b9;}
         button.main {background: #27ae60; color: white; padding: 16px 40px; border: none; border-radius: 8px; font-size: 19px; cursor: pointer; font-weight: bold;}
@@ -41,18 +42,18 @@
 
         <div class="form-group">
             <label>Valoare totală produs (LEI):</label>
-            <input type="number" id="sumaTotala" value="1000" min="1000" step="100">
+            <input type="number" id="sumaTotala" value="500000" min="1000" step="100">
         </div>
 
         <div class="form-group">
             <label>Avans client (LEI):</label>
-            <input type="number" id="avans" value="0" min="0" step="100">
+            <input type="number" id="avans" value="40000" min="0" step="100">
         </div>
 
         <div class="plus-option">
             <label>
                 <input type="checkbox" id="plusOption" style="transform:scale(1.6); margin-right:15px;">
-                <strong>Opțiune + activată</strong> (+7% la 6 luni / +9% la 12 luni)
+                <strong>Opțiune + activată</strong> 
             </label>
         </div>
 
@@ -87,11 +88,12 @@
                 </div>
                 <div style="font-size:20px; line-height:1.8;">
                     <span id="detaliuBanca"></span><br>
+                    <span id="comisionLei"></span><br>
                     <span id="profitReal"></span>
                 </div>
             </div>
 
-            <!-- MESAJ PREGĂTIT PENTRU CLIENT – apare întotdeauna -->
+            <!-- MESAJ PREGĂTIT PENTRU CLIENT – întotdeauna vizibil, fără mențiune "Opțiunea +" -->
             <div id="mesajClient">
                 <strong>Mesaj gata de trimis clientului (WhatsApp / Viber):</strong><br><br>
                 <div id="textMesaj" style="background:white; padding:18px; border-radius:8px; font-size:16px; line-height:1.7; white-space: pre-line;"></div><br>
@@ -120,7 +122,8 @@
 
             // Banca scade comisionul din suma deja majorată
             const comisionBanca = perioada === 6 ? 4.5 : 7.5;
-            const sumaIncasata = sumaCuPlus * (1 - comisionBanca / 100);
+            const comisionLei = sumaCuPlus * (comisionBanca / 100);
+            const sumaIncasata = sumaCuPlus - comisionLei;
             const profitReal = sumaIncasata - sumaCreditata;
 
             // Afisare client
@@ -138,18 +141,21 @@
 
             // Magazin
             document.getElementById('sumaIncasata').textContent = sumaIncasata.toFixed(0);
+
             if (plusActiv) {
-                document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCuPlus.toFixed(0)} × (100% − ${comisionBanca}%)`;
+                document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCuPlus.toFixed(0)} LEI`;
+                document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${comisionLei.toFixed(0)} LEI</span>`;
                 document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span>`;
             } else {
-                document.getElementById('detaliuBanca').innerHTML = `Banca îți scade ${comisionBanca}% din suma creditată`;
-                document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata * (1 - comisionBanca/100)).toFixed(0)} LEI`;
+                document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCreditata.toFixed(0)} LEI`;
+                document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${(sumaCreditata * comisionBanca / 100).toFixed(0)} LEI</span>`;
+                document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata - (sumaCreditata * comisionBanca / 100)).toFixed(0)} LEI`;
             }
 
-            // MESAJ PENTRU CLIENT – întotdeauna vizibil, fără a menționa "Opțiunea +"
+            // MESAJ PENTRU CLIENT – întotdeauna vizibil, curat, fără "Opțiunea +"
             const mesaj = `Bună!
 
-Pentru produsul de ${sumaTotala.toLocaleString()} LEI am pregătit varianta cea mai avantajoasă pentru amândoi:
+Pentru produsul de ${sumaTotala.toLocaleString()} LEI am pregătit varianta cea mai avantajoasă pentru dumneavoastră:
 
 Avans: ${avans.toLocaleString()} LEI
 Restul în ${perioada} rate prin credit
@@ -157,7 +163,7 @@ Restul în ${perioada} rate prin credit
 Astfel:
 • Primiți imediat produsul
 • Rata lunară: ${rataLunara.toFixed(0)} LEI
-• Eu primesc banii integral și vă ofer livrare gratuită / accesorii cadou
+• Putem face livrarea imediat dupa aprobare. 
 
 Vă convine? Vă pregătesc actele în 10 minute!
 
