@@ -202,7 +202,7 @@ Mulțumesc și aștept confirmarea!`;
 
         function copyToClipboard() {
             const text = document.getElementById('textMesaj').textContent;
-            navigator.clipboard.writeText(text).then(() => 
+            navigator.clipboard.writeText(text).then(() => alert('Mesajul a fost copiat!'));
         }
 
         document.querySelectorAll('input').forEach(el => {
