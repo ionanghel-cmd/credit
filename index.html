@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator Rate Credit – Versiune FINALĂ 100% REALĂ</title>
+    <title>Calculator Rate Credit – Versiune FINALĂ + ALERTĂ AVANS</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
         .calculator {background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
         h1 {text-align: center; color: #2c3e50; margin-bottom: 30px;}
         .form-group {margin-bottom: 22px;}
-        label {display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;}
+        label {display: block; margin-bottom: 8px; font-weight: bold; color596e;}
         input[type="number"] {width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px;}
         .radio-group {display: flex; gap: 40px; margin: 20px 0; font-size: 18px;}
         .plus-option {background: #e8f5e9; padding: 20px; border-radius: 12px; margin: 25px 0; border-left: 6px solid #27ae60;}
@@ -21,6 +21,7 @@
         .magazin {background: #fef9e7; padding: 25px; border-radius: 12px; margin: 30px 0; border-left: 6px solid #f39c12;}
         .profit {color: #27ae60; font-weight: bold; font-size: 24px;}
         .comision {color: #c0392b; font-weight: bold;}
+        .alert-avans {background: #ffebee; padding: 20px; border-radius: 12px; margin: 25px 0; border-left: 8px solid #e74c3c; font-size: 20px; font-weight: bold; color: #c62828;}
         .copy-btn {background: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px;}
         .copy-btn:hover {background: #2980b9;}
         button.main {background: #27ae60; color: white; padding: 16px 40px; border: none; border-radius: 8px; font-size: 19px; cursor: pointer; font-weight: bold;}
@@ -31,7 +32,7 @@
 <body>
     <div class="calculator">
         <h1>Calculator Rate Credit</h1>
-        
+       
         <div class="form-group">
             <label>Perioada credit:</label>
             <div class="radio-group">
@@ -42,18 +43,18 @@
 
         <div class="form-group">
             <label>Valoare totală produs (LEI):</label>
-            <input type="number" id="sumaTotala" value="1000" min="1000" step="100">
+            <input type="number" id="sumaTotala" value="200000" min="1000" step="100">
         </div>
 
         <div class="form-group">
             <label>Avans client (LEI):</label>
-            <input type="number" id="avans" value="0" min="0" step="100">
+            <input type="number" id="avans" value="20000" min="0" step="100">
         </div>
 
         <div class="plus-option">
             <label>
                 <input type="checkbox" id="plusOption" style="transform:scale(1.6); margin-right:15px;">
-                <strong>Opțiune + activată</strong> 
+                <strong>Opțiune + activată</strong>
             </label>
         </div>
 
@@ -80,6 +81,13 @@
                 Rata lunară: <strong id="rataLunara">0</strong> LEI
             </div>
 
+            <!-- ALERTĂ AVANS MINIM NECESAR (doar dacă comision > 10 000 LEI și fără Opțiunea +) -->
+            <div id="alertAvans" class="alert-avans" style="display:none;">
+                <strong>ATENȚIE: Pierzi prea mult comision băncii!</strong><br><br>
+                Comision plătit băncii: <strong><span id="comisionMare">0</span> LEI</strong><br><br>
+                <span style="color:#27ae60;">Pentru a plăti maxim 10 000 LEI comision → cere avans minim: <strong id="avansMinimNecesar">0</strong> LEI</strong></span>
+            </div>
+
             <!-- SECȚIUNE MAGAZIN -->
             <div class="magazin">
                 <strong>Tu (magazinul) primești în cont de la bancă:</strong><br><br>
@@ -93,7 +101,7 @@
                 </div>
             </div>
 
-            <!-- MESAJ PREGĂTIT PENTRU CLIENT – întotdeauna vizibil, fără mențiune "Opțiunea +" -->
+            <!-- MESAJ PENTRU CLIENT – întotdeauna vizibil -->
             <div id="mesajClient">
                 <strong>Mesaj gata de trimis clientului (WhatsApp / Viber):</strong><br><br>
                 <div id="textMesaj" style="background:white; padding:18px; border-radius:8px; font-size:16px; line-height:1.7; white-space: pre-line;"></div><br>
@@ -120,11 +128,25 @@
             const rataLunara = sumaCuPlus / perioada;
             const pretTotalClient = sumaCuPlus + avans;
 
-            // Banca scade comisionul din suma deja majorată
+            // Comision bancă
             const comisionBanca = perioada === 6 ? 4.5 : 7.5;
             const comisionLei = sumaCuPlus * (comisionBanca / 100);
             const sumaIncasata = sumaCuPlus - comisionLei;
             const profitReal = sumaIncasata - sumaCreditata;
+
+            // === ALERTĂ AVANS MINIM NECESAR (doar fără Opțiunea + și comision > 10 000 LEI) ===
+            if (!plusActiv && comisionLei > 10000) {
+                // Calculăm avansul minim necesar ca comisionul să fie ≤ 10 000 LEI
+                const comisionMaximAcceptat = 10000;
+                const sumaCreditataMaxima = comisionMaximAcceptat / (comisionBanca / 100);
+                const avansMinimNecesar = Math.ceil((sumaTotala - sumaCreditataMaxima) / 1000) * 1000;
+
+                document.getElementById('alertAvans').style.display = 'block';
+                document.getElementById('comisionMare').textContent = comisionLei.toFixed(0);
+                document.getElementById('avansMinimNecesar').textContent = avansMinimNecesar.toLocaleString();
+            } else {
+                document.getElementById('alertAvans').style.display = 'none';
+            }
 
             // Afisare client
             document.getElementById('sumaCreditata').textContent = sumaCreditata.toFixed(0);
@@ -141,44 +163,40 @@
 
             // Magazin
             document.getElementById('sumaIncasata').textContent = sumaIncasata.toFixed(0);
-
             if (plusActiv) {
-                document.getElementById('detaliuBanca').innerHTML = `Suma creditata ${sumaCuPlus.toFixed(0)} LEI`;
+                document.getElementById('detaliuBanca').innerHTML = `Suma creditată ${sumaCuPlus.toFixed(0)} LEI`;
                 document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${comisionLei.toFixed(0)} LEI</span>`;
                 document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span>`;
             } else {
                 document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCreditata.toFixed(0)} LEI`;
                 document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${(sumaCreditata * comisionBanca / 100).toFixed(0)} LEI</span>`;
-                document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata - (sumaCreditata * comisionBanca / 100)).toFixed(0)} LEI`;
+                document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata * (1 - comisionBanca/100)).toFixed(0)} LEI`;
             }
 
-            // MESAJ PENTRU CLIENT – întotdeauna vizibil, curat, fără "Opțiunea +"
+            // Mesaj client
             const mesaj = `Bună!
 
 Pentru produsul de ${sumaTotala.toLocaleString()} LEI am pregătit varianta cea mai avantajoasă pentru dumneavoastră:
 
 Avans: ${avans.toLocaleString()} LEI
-Restul în ${perioada} rate fixe. 
+Restul în ${perioada} rate fixe.
 
 Astfel:
 • Primiți imediat produsul
 • Rata lunară: ${rataLunara.toFixed(0)} LEI
-• Putem face livrarea imediat dupa aprobare. 
+• Putem face livrarea imediat după aprobare.
 
 Vă convine? Vă pregătesc actele în 10 minute!
 
 Mulțumesc și aștept confirmarea!`;
 
             document.getElementById('textMesaj').textContent = mesaj;
-
             document.getElementById('rezultate').style.display = 'block';
         }
 
         function copyToClipboard() {
             const text = document.getElementById('textMesaj').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Mesajul a fost copiat! Trimite-l clientului');
-            });
+            navigator.clipboard.writeText(text).then(() => alert('Mesajul a fost copiat!'));
         }
 
         document.querySelectorAll('input').forEach(el => {
