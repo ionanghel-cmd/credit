@@ -168,7 +168,7 @@
                 document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${comisionLei.toFixed(0)} LEI</span>`;
                 document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span>`;
             } else {
-                document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCreditata.toFixed(0)} LEI`;
+                document.getElementById('detaliuBanca').innerHTML = `Suma creditata ${sumaCreditata.toFixed(0)} LEI`;
                 document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${(sumaCreditata * comisionBanca / 100).toFixed(0)} LEI</span>`;
                 document.getElementById('profitReal').innerHTML = `Primești doar ${(sumaCreditata * (1 - comisionBanca/100)).toFixed(0)} LEI`;
             }
