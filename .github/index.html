@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Rate Credit</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; background: #f5f5f5;}
+        .calculator {background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);}
+        h1 {text-align: center; color: #2c3e50; margin-bottom: 30px;}
+        .form-group {margin-bottom: 22px;}
+        label {display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;}
+        input[type="number"] {width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; box-sizing: border-box;}
+        .radio-group {display: flex; gap: 40px; margin: 20px 0; font-size: 18px;}
+        .radio-item {display: flex; align-items: center; gap: 10px;}
+        .plus-option {background: #f8f9fa; padding: 18px; border-radius: 10px; margin: 25px 0; border-left: 5px solid #3498db;}
+        .results {margin-top: 35px; padding: 28px; background: #f8f9fa; border-radius: 12px; border-left: 6px solid #27ae60;}
+        .highlight {font-size: 28px; font-weight: bold; color: #27ae60;}
+        .big-price {font-size: 32px; font-weight: bold; color: #e74c3c;}
+        .old-price {text-decoration: line-through; color: #95a5a6; font-size: 20px; margin-left: 15px;}
+        #chartContainer {margin-top: 35px; height: 400px;}
+        button {background: #27ae60; color: white; padding: 15px 35px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; font-weight: bold;}
+        button:hover {background: #219653;}
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculator Rate Credit</h1>
+        
+        <div class="form-group">
+            <label>Perioada credit:</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="luni6" name="perioada" value="6" checked>
+                    <label for="luni6">6 luni</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="luni12" name="perioada" value="12">
+                    <label for="luni12">12 luni</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Valoare totală produs:</label>
+            <input type="number" id="sumaTotala" value="10000" min="1000" step="100">
+        </div>
+
+        <div class="form-group">
+            <label>Avans client:</label>
+            <input type="number" id="avans" value="2000" min="0" step="100">
+        </div>
+
+        <div class="plus-option">
+            <label>
+                <input type="checkbox" id="plusOption" style="transform:scale(1.5); margin-right:15px;">
+                <strong>Opțiune +</strong>
+            </label>
+        </div>
+
+        <button onclick="calculeaza()">Calculează</button>
+
+        <div id="rezultate" class="results" style="display:none;">
+            <h2>Rezultatul creditului</h2>
+
+            <!-- Preț final pentru client când e bifat + -->
+            <div id="pretFinalClient" style="display:none; margin:25px 0; padding:20px; background:#fff3cd; border-radius:10px; text-align:center;">
+                <div style="font-size:20px; color:#856404; margin-bottom:8px;">
+                    Prețul final plătit de client:
+                </div>
+                <div class="big-price" id="pretTotalClient">0</div>
+                <span class="old-price" id="pretInitialVechi">0 LEI</span>
+            </div>
+
+            <div style="margin:15px 0; font-size:18px;">
+                Suma creditată: <strong id="sumaCreditata">0</strong> LEI
+            </div>
+
+            <div id="plusInfo" style="display:none; margin:15px 0; padding:12px; background:#e8f5e9; border-radius:8px; color:#27ae60; font-weight:bold;">
+                Opțiune + activată
+            </div>
+
+            <div style="margin:25px 0;" class="highlight">
+                Suma totală de rambursat: <span id="sumaFinala">0</span> LEI
+            </div>
+
+            <div style="margin:15px 0; font-size:20px;">
+                Rata lunară: <strong id="rataLunara">0</strong> LEI
+            </div>
+
+            <div style="margin:10px 0; color:#7f8c8d;">
+                Perioada: <strong id="perioadaSelectata">6</strong> luni
+            </div>
+
+            <div id="chartContainer">
+                <canvas id="paymentChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chart = null;
+
+        function calculeaza() {
+            const sumaTotala = parseFloat(document.getElementById('sumaTotala').value) || 0;
+            const avans = parseFloat(document.getElementById('avans').value) || 0;
+            const perioada = parseInt(document.querySelector('input[name="perioada"]:checked').value);
+            const plusActiv = document.getElementById('plusOption').checked;
+
+            let sumaCreditata = Math.max(sumaTotala - avans, 0);
+            let sumaFinala = sumaCreditata;
+
+            if (plusActiv) {
+                const procentPlus = perioada === 6 ? 7 : 9;
+                sumaFinala = sumaCreditata * (1 + procentPlus / 100);
+            }
+
+            const rataLunara = sumaFinala / perioada;
+            const pretTotalClient = sumaFinala + avans;  // Cât plătește clientul în total
+
+            // Afisare rezultate
+            document.getElementById('sumaCreditata').textContent = sumaCreditata.toFixed(0);
+            document.getElementById('sumaFinala').textContent = sumaFinala.toFixed(0);
+            document.getElementById('rataLunara').textContent = rataLunara.toFixed(0);
+            document.getElementById('perioadaSelectata').textContent = perioada;
+
+            // Afișează prețul total plătit de client doar dacă e bifat +
+            if (plusActiv) {
+                document.getElementById('pretTotalClient').textContent = pretTotalClient.toFixed(0) + ' LEI';
+                document.getElementById('pretInitialVechi').textContent = sumaTotala.toFixed(0) + ' LEI';
+                document.getElementById('pretFinalClient').style.display = 'block';
+                document.getElementById('plusInfo').style.display = 'block';
+            } else {
+                document.getElementById('pretFinalClient').style.display = 'none';
+                document.getElementById('plusInfo').style.display = 'none';
+            }
+
+            document.getElementById('rezultate').style.display = 'block';
+
+            genereazaGrafic(sumaFinala, rataLunara, perioada);
+        }
+
+        function genereazaGrafic(sumaTotala, rataLunara, luni) {
+            const ctx = document.getElementById('paymentChart').getContext('2d');
+            if (chart) chart.destroy();
+
+            const azi = new Date();
+            const labels = [];
+            const solduri = [sumaTotala];
+            let sold = sumaTotala;
+
+            for (let i = 1; i <= luni; i++) {
+                const data = new Date(azi);
+                data.setMonth(data.getMonth() + i);
+                labels.push(data.toLocaleDateString('ro-RO', { month: 'short', year: 'numeric' }));
+
+                sold -= rataLunara;
+                if (sold < 0) sold = 0;
+                solduri.push(parseFloat(sold.toFixed(0)));
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sold rămas (LEI)',
+                        data: solduri,
+                        borderColor: '#27ae60',
+                        backgroundColor: 'rgba(39, 174, 96, 0.15)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: 'Evoluția soldului creditului', font: { size: 18 } }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: value => value.toLocaleString('ro-RO') + ' LEI' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Actualizare în timp real
+        document.querySelectorAll('input').forEach(el => {
+            el.addEventListener('input', calculeaza);
+            el.addEventListener('change', calculeaza);
+        });
+
+        // Calcul la încărcare
+        window.onload = calculeaza;
+    </script>
+</body>
+</html>
