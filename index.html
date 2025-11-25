@@ -143,7 +143,7 @@
             document.getElementById('sumaIncasata').textContent = sumaIncasata.toFixed(0);
 
             if (plusActiv) {
-                document.getElementById('detaliuBanca').innerHTML = `Banca îți virează ${sumaCuPlus.toFixed(0)} LEI`;
+                document.getElementById('detaliuBanca').innerHTML = `Suma creditata ${sumaCuPlus.toFixed(0)} LEI`;
                 document.getElementById('comisionLei').innerHTML = `<span class="comision">Banca reține comision: ${comisionBanca}% = ${comisionLei.toFixed(0)} LEI</span>`;
                 document.getElementById('profitReal').innerHTML = `<span class="profit">Profitul tău real: +${profitReal.toFixed(0)} LEI</span>`;
             } else {
@@ -158,7 +158,7 @@
 Pentru produsul de ${sumaTotala.toLocaleString()} LEI am pregătit varianta cea mai avantajoasă pentru dumneavoastră:
 
 Avans: ${avans.toLocaleString()} LEI
-Restul în ${perioada} rate prin credit
+Restul în ${perioada} rate fixe. 
 
 Astfel:
 • Primiți imediat produsul
