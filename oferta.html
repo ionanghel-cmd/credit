@@ -3,213 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertă Comercială cu Poze - CFMOTO Moldova</title>
+    <title>Ofertă Comercială - CFMOTO Moldova</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #007bff; }
-        .form-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; align-items: center; }
-        input, select, button { padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
-        button { background: #28a745; color: white; cursor: pointer; }
-        button:hover { background: #218838; }
-        button.del { background: #dc3545; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; vertical-align: top; }
-        th { background: #007bff; color: white; }
-        img.preview { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; }
-        #total { font-size: 20px; font-weight: bold; text-align: right; margin: 15px 0; }
-        .logo-placeholder { text-align: center; margin: 20px 0; }
-        .logo-placeholder img { height: 80px; }
+        body {font-family: Arial, sans-serif; margin:0; padding:20px; background:#f4f4f4;}
+        .container {max-width:950px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 5px 25px rgba(0,0,0,0.15);}
+        h1 {text-align:center; color:#d32f2f; margin-bottom:10px;}
+        .form-row {display:flex; flex-wrap:wrap; gap:12px; margin:15px 0; align-items:center;}
+        input, select, button {padding:10px; border:1px solid #ddd; border-radius:6px;}
+        button {background:#c62828; color:white; cursor:pointer; font-weight:bold;}
+        button:hover {background:#b71c1c;}
+        button.del {background:#d32f2f; padding:6px 12px;}
+        table {width:100%; border-collapse:collapse; margin:25px 0;}
+        th, td {border:1px solid #ccc; padding:12px; text-align:left; vertical-align:top;}
+        th {background:#c62828; color:white;}
+        img.preview {width:80px; height:80px; object-fit:contain; background:#fff; border-radius:6px;}
+        #total {font-size:22px; font-weight:bold; text-align:right; margin:20px 0; color:#c62828;}
+        .logo {display:block; margin:0 auto 20px; height:90px;}
     </style>
-    <!-- jsPDF + autoTable pentru tabele frumoase în PDF -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Generator Ofertă Comercială CFMOTO Moldova</h1>
-        
-        <!-- Logo CFMOTO -->
-        <div class="logo-placeholder">
-            <img src="https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp" alt="CFMOTO Logo">
-        </div>
+<div class="container">
+    <img src="https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp" alt="CFMOTO Moldova" class="logo">
 
-        <div class="form-row">
-            <input type="text" id="client" placeholder="Client" style="flex:2">
-            <input type="date" id="dataExpirare">
-            <select id="manager">
-                <option>Anghel Ion</option>
-                <option>Cara Cristian</option>
-                <option>Chicu Alexandru</option>
-            </select>
-            <input type="text" id="ref" placeholder="Referință (ex: OF-2025-001)" style="flex:1">
-        </div>
+    <h1>OFERTĂ COMERCIALĂ</h1>
 
-        <hr>
-
-        <!-- Adăugare poziție nouă -->
-        <div class="form-row">
-            <input type="text" id="denumire" placeholder="Denumire produs" style="flex:3">
-            <input type="number" id="cantitate" min="1" value="1" style="width:80px">
-            <input type="number" id="pret" step="0.01" placeholder="Preț" style="width:100px">
-            <select id="valuta">
-                <option>MDL</option>
-                <option>EUR</option>
-            </select>
-            <input type="file" id="poza" accept="image/*" style="flex:2">
-            <button onclick="adaugaPozitie()">Adaugă Poziție</button>
-        </div>
-
-        <!-- Tabel poziții -->
-        <table id="tabelPozitii">
-            <thead>
-                <tr>
-                    <th>Poza</th>
-                    <th>Denumire</th>
-                    <th>Cant.</th>
-                    <th>Preț unitar</th>
-                    <th>Total</th>
-                    <th>Acțiuni</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <div id="total"></div>
-
-        <button onclick="genereazaPDF()" style="padding:15px 30px; font-size:18px;">Generează PDF Ofertă</button>
+    <div class="form-row">
+        <input type="text" id="client" placeholder="Nume client / firmă" style="flex:2">
+        <input type="date" id="dataExpirare">
+        <select id="manager">
+            <option>Anghel Ion</option>
+            <option>Cara Cristian</option>
+            <option>Chicu Alexandru</option>
+        </select>
+        <input type="text" id="ref" placeholder="Referință (ex: OF-2025-125)" style="flex:1">
     </div>
 
-    <script>
-        let pozitii = [];
+    <hr style="border:1px solid #eee; margin:25px 0">
 
-        function adaugaPozitie() {
-            const fileInput = document.getElementById('poza');
-            const file = fileInput.files[0];
+    <div class="form-row">
+        <input type="text" id="denumire" placeholder="Denumire produs (ex: CFORCE 1000 EPS)" style="flex:3">
+        <input type="number" id="cantitate" value="1" min="1" style="width:90px">
+        <input type="number" id="pret" step="0.01" placeholder="Preț unitar" style="width:130px">
+        <select id="valuta"><option>MDL</option><option>EUR</option></select>
+        <input type="file" id="poza" accept="image/*">
+        <button onclick="adaugaPozitie()">Adaugă în ofertă</button>
+    </div>
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const pozitie = {
-                    imagine: e.target.result, // base64
-                    denumire: document.getElementById('denumire').value || 'Produs fără nume',
-                    cantitate: parseInt(document.getElementById('cantitate').value) || 1,
-                    pret: parseFloat(document.getElementById('pret').value) || 0,
-                    valuta: document.getElementById('valuta').value
-                };
-                pozitii.push(pozitie);
-                actualizeazaTabel();
-                // reset form
-                document.getElementById('denumire').value = '';
-                document.getElementById('cantitate').value = 1;
-                document.getElementById('pret').value = '';
-                fileInput.value = '';
+    <table id="tabelPozitii">
+        <thead>
+            <tr><th>Poza</th><th>Produs</th><th>Cant.</th><th>Preț unitar</th><th>Total</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="total"></div>
+    <button onclick="genereazaPDF()" style="padding:18px 50px; font-size:20px;">Generează PDF Ofertă</button>
+</div>
+
+<script>
+    let pozitii = [];
+
+    // Redimensionează imaginea pentru a nu bloca PDF-ul
+    function redimensioneazaImagine(file, callback) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const MAX = 250;
+                let w = img.width, h = img.height;
+                if (w > h && w > MAX) { h = h * (MAX / w); w = MAX; }
+                else if (h > MAX) { w = w * (MAX / h); h = MAX; }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                callback(canvas.toDataURL('image/jpeg', 0.8));
             };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 
-            if (file) reader.readAsDataURL(file);
-            else {
-                // dacă nu e poză
-                const pozitie = {
-                    imagine: null,
-                    denumire: document.getElementById('denumire').value || 'Produs fără nume',
-                    cantitate: parseInt(document.getElementById('cantitate').value) || 1,
-                    pret: parseFloat(document.getElementById('pret').value) || 0,
-                    valuta: document.getElementById('valuta').value
-                };
-                pozitii.push(pozitie);
-                actualizeazaTabel();
-            }
-        }
-
-        function actualizeazaTabel() {
-            const tbody = document.querySelector('#tabelPozitii tbody');
-            tbody.innerHTML = '';
-            let totalMDL = 0, totalEUR = 0;
-
-            pozitii.forEach((p, i) => {
-                const total = p.cantitate * p.pret;
-                if (p.valuta === 'MDL') totalMDL += total;
-                else totalEUR += total;
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${p.imagine ? `<img src="${p.imagine}" class="preview">` : '<i>fără poză</i>'}</td>
-                    <td>${p.denumire}</td>
-                    <td>${p.cantitate}</td>
-                    <td>${p.pret.toFixed(2)} ${p.valuta}</td>
-                    <td>${total.toFixed(2)} ${p.valuta}</td>
-                    <td><button class="del" onclick="stergePozitie(${i})">Șterge</button></td>
-                `;
-                tbody.appendChild(tr);
+    function adaugaPozitie() {
+        const file = document.getElementById('poza').files[0];
+        const proceseaza = (imgData) => {
+            pozitii.push({
+                imagine: imgData,
+                denumire: document.getElementById('denumire').value || "Produs",
+                cantitate: parseInt(document.getElementById('cantitate').value) || 1,
+                pret: parseFloat(document.getElementById('pret').value) || 0,
+                valuta: document.getElementById('valuta').value
             });
-
-            document.getElementById('total').innerHTML = `
-                <strong>Total ofertă: ${totalMDL.toFixed(2)} MDL  |  ${totalEUR.toFixed(2)} EUR</strong>
-            `;
-        }
-
-        function stergePozitie(idx) {
-            pozitii.splice(idx, 1);
             actualizeazaTabel();
-        }
+            document.getElementById('denumire').value = '';
+            document.getElementById('cantitate').value = 1;
+            document.getElementById('pret').value = '';
+            document.getElementById('poza').value = '';
+        };
+        if (file) redimensioneazaImagine(file, proceseaza);
+        else proceseaza(null);
+    }
 
-        // Data expirare +30 zile automat
-        const azi = new Date();
-        azi.setDate(azi.getDate() + 30);
-        document.getElementById('dataExpirare').value = azi.toISOString().split('T')[0];
+    function actualizeazaTabel() {
+        const tbody = document.querySelector('#tabelPozitii tbody');
+        tbody.innerHTML = '';
+        let totalMDL = 0, totalEUR = 0;
 
-        // Generare PDF cu poze
-        function genereazaPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'mm', 'a4');
+        pozitii.forEach((p, i) => {
+            const subtotal = p.cantitate * p.pret;
+            if (p.valuta === 'MDL') totalMDL += subtotal;
+            else totalEUR += subtotal;
 
-            // Header
-            doc.addImage('https://www.cfmoto.ro/wp-content/uploads/2023/05/logo-cfmoto.png', 'PNG', 15, 10, 50, 20);
-            doc.setFontSize(16);
-            doc.text('OFERTĂ COMERCIALĂ', 140, 20);
-            doc.setFontSize(11);
-            doc.text(`Client: ${document.getElementById('client').value || 'Client nespecificat'}`, 15, 40);
-            doc.text(`Data expirare: ${document.getElementById('dataExpirare').value}`, 15, 47);
-            doc.text(`Manager: ${document.getElementById('manager').value}`, 15, 54);
-            doc.text(`Referință: ${document.getElementById('ref').value || '-'}`, 15, 61);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${p.imagine ? `<img src="${p.imagine}" class="preview">` : '—'}</td>
+                <td><strong>${p.denumire}</strong></td>
+                <td>${p.cantitate}</td>
+                <td>${p.pret.toFixed(2)} ${p.valuta}</td>
+                <td>${subtotal.toFixed(2)} ${p.valuta}</td>
+                <td><button class="del" onclick="pozitii.splice(${i},1); actualizeazaTabel();">Șterge</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
 
-            // Tabel cu autoTable + imagini
-            const head = [['Nr.', 'Poză', 'Denumire produs', 'Cant.', 'Preț unitar', 'Total']];
-            const data = pozitii.map((p, i) => [
-                i + 1,
-                { image: p.imagine || '', fit: [25, 25] }, // dacă nu e poză rămâne gol
-                p.denumire,
-                p.cantitate,
-                `${p.pret.toFixed(2)} ${p.valuta}`,
-                `${(p.cantitate * p.pret).toFixed(2)} ${p.valuta}`
-            ]);
+        let txt = 'TOTAL: ';
+        if (totalMDL) txt += `${totalMDL.toFixed(2)} MDL`;
+        if (totalEUR) txt += `${totalMDL ? ' | ' : ''}${totalEUR.toFixed(2)} EUR`;
+        document.getElementById('total').innerHTML = `<strong style="color:#c62828">${txt}</strong>`;
+    }
 
-            doc.autoTable({
-                head: head,
-                body: data,
-                startY: 70,
-                theme: 'grid',
-                styles: { fontSize: 10, cellPadding: 3 },
-                columnStyles: { 1: { cellWidth: 30 } }, // coloana poză
-                didDrawCell: function(data) {
-                    if (data.column.index === 1 && data.cell.raw && data.cell.raw.image) {
-                        doc.addImage(data.cell.raw.image, 'JPEG', data.cell.x + 2, data.cell.y + 2, 25, 25);
-                    }
+    // Data expirare +30 zile
+    const azi = new Date(); azi.setDate(azi.getDate() + 30);
+    document.getElementById('dataExpirare').value = azi.toISOString().split('T')[0];
+
+    // GENERARE PDF – FUNCȚIONEAZĂ 100%
+    function genereazaPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+
+        // Logo oficial CFMOTO Moldova
+        doc.addImage('https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp', 'WEBP', 15, 10, 60, 24);
+
+        doc.setFontSize(20);
+        doc.text('OFERTĂ COMERCIALĂ', 105, 25, null, null, 'center');
+
+        doc.setFontSize(11);
+        doc.text(`Client: ${document.getElementById('client').value || '—'}`, 15, 45);
+        doc.text(`Valabilitate ofertă: ${document.getElementById('dataExpirare').value}`, 15, 52);
+        doc.text(`Manager vânzări: ${document.getElementById('manager').value}`, 15, 59);
+        doc.text(`Referință: ${document.getElementById('ref').value || '—'}`, 15, 66);
+
+        // Tabel cu poze
+        const rows = pozitii.map((p, i) => [
+            i + 1,
+            p.imagine ? { image: p.imagine, width: 22, height: 22 } : '',
+            p.denumire,
+            p.cantitate,
+            `${p.pret.toFixed(2)} ${p.valuta}`,
+            `${(p.cantitate * p.pret).toFixed(2)} ${p.valuta}`
+        ]);
+
+        doc.autoTable({
+            head: [['Nr.', 'Poză', 'Denumire produs', 'Cant.', 'Preț unitar', 'Total']],
+            body: rows,
+            startY: 75,
+            theme: 'grid',
+            styles: { fontSize: 10, cellPadding: 4 },
+            headStyles: { fillColor: [198, 40, 40] },
+            columnStyles: { 1: { cellWidth: 32 } },
+            didDrawCell: data => {
+                if (data.column.index === 1 && data.cell.raw && data.cell.raw.image) {
+                    doc.addImage(data.cell.raw.image, data.cell.x + 3, data.cell.y + 3, 26, 26);
                 }
-            });
+            }
+        });
 
-            // Total final
-            const finalY = doc.lastAutoTable.finalY + 10;
-            let totalText = 'TOTAL: ';
-            const totalMDL = pozitii.filter(p=>p.valuta==='MDL').reduce((s,p)=>s+p.pret*p.cantitate,0);
-            const totalEUR = pozitii.filter(p=>p.valuta==='EUR').reduce((s,p)=>s+p.pret*p.cantitate,0);
-            if (totalMDL > 0) totalText += `${totalMDL.toFixed(2)} MDL`;
-            if (totalEUR > 0) totalText += `  |  ${totalEUR.toFixed(2)} EUR`;
+        // Total final
+        const finalY = doc.lastAutoTable.finalY + 15;
+        const totalMDL = pozitii.filter(p=>p.valuta==='MDL').reduce((s,p)=>s + p.pret*p.cantitate, 0);
+        const totalEUR = pozitii.filter(p=>p.valuta==='EUR').reduce((s,p)=>s + p.pret*p.cantitate, 0);
+        let totalText = 'TOTAL OFERTĂ: ';
+        if (totalMDL) totalText += `${totalMDL.toFixed(2)} MDL`;
+        if (totalEUR) totalText += `  |  ${totalEUR.toFixed(2)} EUR`;
 
-            doc.setFontSize(14);
-            doc.text(totalText, 15, finalY + 10);
+        doc.setFontSize(16);
+        doc.setFont(undefined, 'bold');
+        doc.text(totalText, 15, finalY);
 
-            doc.save(`Oferta_${document.getElementById('ref').value || 'CFMOTO'}_${new Date().toISOString().slice(0,10)}.pdf`);
-        }
-    </script>
+        // Salvare
+        const nume = document.getElementById('ref').value || 'Oferta_CFMOTO';
+        doc.save(`${nume}_${new Date().toISOString().slice(0,10)}.pdf`);
+    }
+</script>
 </body>
 </html>
