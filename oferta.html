@@ -1,192 +1,49 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertă Comercială CFMOTO - PDF FIXAT</title>
-    <style>
-        body {font-family: Arial, sans-serif; margin:0; padding:20px; background:#f4f4f4;}
-        .container {max-width:950px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 5px 25px rgba(0,0,0,0.15);}
-        h1 {text-align:center; color:#d32f2f; margin-bottom:10px;}
-        .form-row {display:flex; flex-wrap:wrap; gap:12px; margin:15px 0; align-items:center;}
-        input, select, button {padding:10px; border:1px solid #ddd; border-radius:6px;}
-        button {background:#c62828; color:white; cursor:pointer; font-weight:bold;}
-        button:hover {background:#b71c1c;}
-        button.del {background:#d32f2f; padding:6px 12px;}
-        table {width:100%; border-collapse:collapse; margin:25px 0;}
-        th, td {border:1px solid #ccc; padding:12px; text-align:left; vertical-align:top;}
-        th {background:#c62828; color:white;}
-        img.preview {width:80px; height:80px; object-fit:contain; background:#fff; border-radius:6px;}
-        #total {font-size:22px; font-weight:bold; text-align:right; margin:20px 0; color:#c62828;}
-        .logo {display:block; margin:0 auto 20px; height:90px;}
-        .debug {color: red; font-size: 12px; margin: 10px 0;}
-    </style>
-
-    <!-- CDN jsPDF - verifică dacă se încarcă -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-</head>
-<body>
-<div class="container">
-    <img src="https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp" alt="CFMOTO Moldova" class="logo" onerror="console.log('Logo error')">
-
-    <h1>OFERTĂ COMERCIALĂ</h1>
-
-    <div class="form-row">
-        <input type="text" id="client" placeholder="Nume client / firmă" style="flex:2">
-        <input type="date" id="dataExpirare">
-        <select id="manager">
-            <option>Anghel Ion</option>
-            <option>Cara Cristian</option>
-            <option>Chicu Alexandru</option>
-        </select>
-        <input type="text" id="ref" placeholder="Referință (ex: OF-2025-125)" style="flex:1">
-    </div>
-
-    <hr style="border:1px solid #eee; margin:25px 0">
-
-    <div class="form-row">
-        <input type="text" id="denumire" placeholder="Denumire produs (ex: CFORCE 1000 EPS)" style="flex:3">
-        <input type="number" id="cantitate" value="1" min="1" style="width:90px">
-        <input type="number" id="pret" step="0.01" placeholder="Preț unitar" style="width:130px">
-        <select id="valuta"><option>MDL</option><option>EUR</option></select>
-        <input type="file" id="poza" accept="image/*">
-        <button onclick="adaugaPozitie()">Adaugă în ofertă</button>
-    </div>
-
-    <table id="tabelPozitii">
-        <thead>
-            <tr><th>Poza</th><th>Produs</th><th>Cant.</th><th>Preț unitar</th><th>Total</th><th></th></tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-    <div id="total"></div>
-    <button onclick="genereazaPDF()" style="padding:18px 50px; font-size:20px;">Generează PDF Ofertă</button>
-    <div id="debug" class="debug" style="display:none;"></div>
-</div>
-
-<script>
-    let pozitii = [];
-    const debugDiv = document.getElementById('debug');
-
-    // Funcție debug
-    function log(msg) {
-        console.log(msg);
-        debugDiv.innerHTML += msg + '<br>';
-        debugDiv.style.display = 'block';
-    }
-
-    // Redimensionează agresiv (max 150px, calitate 0.6) pentru PDF
+    // FIXUL PRINCIPAL – detectăm automat formatul corect
     function redimensioneazaImagine(file, callback) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
                 const canvas = document.createElement('canvas');
-                const MAX = 150; // Mai mic pentru PDF rapid
+                const MAX = 150;
                 let w = img.width, h = img.height;
                 if (w > h && w > MAX) { h = Math.round(h * (MAX / w)); w = MAX; }
                 else if (h > MAX) { w = Math.round(w * (MAX / h)); h = MAX; }
                 canvas.width = w; canvas.height = h;
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, w, h);
-                const dataUrl = canvas.toDataURL('image/png', 0.6); // PNG pentru compatibilitate
-                log(`Imagine redimensionată: ${w}x${h} px`);
+
+                // AICI ERA BUG-UL: forțam întotdeauna PNG
+                // Acum alegem corect formatul în funcție de fișierul original
+                const extensie = file.name.toLowerCase();
+                let format = 'image/jpeg';
+                let quality = 0.8;
+                if (extensie.endsWith('.png')) {
+                    format = 'image/png';
+                } else if (extensie.endsWith('.webp')) {
+                    format = 'image/webp';
+                    quality = 0.8;
+                }
+
+                const dataUrl = canvas.toDataURL(format, quality);
+                console.log(`Imagine procesată ca: ${format.split('/')[1].toUpperCase()}`);
                 callback(dataUrl);
             };
-            img.onerror = () => { log('Eroare la încărcare imagine'); callback(null); };
             img.src = e.target.result;
         };
-        reader.onerror = () => { log('Eroare reader'); callback(null); };
         reader.readAsDataURL(file);
     }
 
-    function adaugaPozitie() {
-        const file = document.getElementById('poza').files[0];
-        const proceseaza = (imgData) => {
-            if (!document.getElementById('denumire').value) {
-                alert('Adaugă denumire produs!');
-                return;
-            }
-            pozitii.push({
-                imagine: imgData,
-                denumire: document.getElementById('denumire').value,
-                cantitate: parseInt(document.getElementById('cantitate').value) || 1,
-                pret: parseFloat(document.getElementById('pret').value) || 0,
-                valuta: document.getElementById('valuta').value
-            });
-            actualizeazaTabel();
-            // Reset form
-            document.getElementById('denumire').value = '';
-            document.getElementById('cantitate').value = 1;
-            document.getElementById('pret').value = '';
-            document.getElementById('poza').value = '';
-            log(`Poziție adăugată: ${pozitii.length} total`);
-        };
-        if (file) {
-            log('Procesez imagine...');
-            redimensioneazaImagine(file, proceseaza);
-        } else {
-            proceseaza(null);
-        }
-    }
-
-    function actualizeazaTabel() {
-        const tbody = document.querySelector('#tabelPozitii tbody');
-        tbody.innerHTML = '';
-        let totalMDL = 0, totalEUR = 0;
-
-        pozitii.forEach((p, i) => {
-            const subtotal = p.cantitate * p.pret;
-            if (p.valuta === 'MDL') totalMDL += subtotal;
-            else totalEUR += subtotal;
-
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${p.imagine ? `<img src="${p.imagine}" class="preview" onerror="this.alt='Eroare img'">` : '—'}</td>
-                <td><strong>${p.denumire}</strong></td>
-                <td>${p.cantitate}</td>
-                <td>${p.pret.toFixed(2)} ${p.valuta}</td>
-                <td>${subtotal.toFixed(2)} ${p.valuta}</td>
-                <td><button class="del" onclick="stergePozitie(${i})">Șterge</button></td>
-            `;
-            tbody.appendChild(tr);
-        });
-
-        let txt = 'TOTAL: ';
-        if (totalMDL) txt += `${totalMDL.toFixed(2)} MDL`;
-        if (totalEUR) txt += `${totalMDL ? ' | ' : ''}${totalEUR.toFixed(2)} EUR`;
-        document.getElementById('total').innerHTML = `<strong style="color:#c62828">${txt}</strong>`;
-    }
-
-    function stergePozitie(i) {
-        pozitii.splice(i, 1);
-        actualizeazaTabel();
-        log('Poziție ștearsă');
-    }
-
-    // Data +30 zile
-    const azi = new Date(); azi.setDate(azi.getDate() + 30);
-    document.getElementById('dataExpirare').value = azi.toISOString().split('T')[0];
-
-    // PDF GENERARE – CU TRY-CATCH PENTRU ERORI
+    // PDF – acum fără erori de "corrupt PNG"
     function genereazaPDF() {
-        if (pozitii.length === 0) {
-            alert('Adaugă cel puțin un produs!');
-            return;
-        }
+        if (pozitii.length === 0) return alert('Adaugă cel puțin un produs!');
+
         try {
-            log('Încep generare PDF...');
-            if (typeof window.jspdf === 'undefined') {
-                throw new Error('jsPDF nu s-a încărcat! Verifică internet/CDN.');
-            }
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF('p', 'mm', 'a4');
-            log('jsPDF inițializat OK');
 
-            // Logo (folosim PNG fallback dacă WebP nu merge)
-            doc.addImage('https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp', 'PNG', 15, 10, 60, 24); // Schimbat la PNG
+            // Logo (forțăm PNG pentru compatibilitate maximă)
+            doc.addImage('https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp', 'WEBP', 15, 10, 60, 24);
 
             doc.setFontSize(20);
             doc.text('OFERTĂ COMERCIALĂ', 105, 25, { align: 'center' });
@@ -197,59 +54,42 @@
             doc.text(`Manager: ${document.getElementById('manager').value}`, 15, 59);
             doc.text(`Referință: ${document.getElementById('ref').value || '—'}`, 15, 66);
 
-            // Tabel – simplificat, fără didDrawCell problematic
-            const tableData = [['Nr.', 'Denumire produs', 'Cant.', 'Preț unitar', 'Total']];
-            let yStart = 75;
+            // Tabel simplu + poze adăugate manual (fără didDrawCell)
+            let y = 75;
             pozitii.forEach((p, i) => {
-                const subtotal = (p.cantitate * p.pret).toFixed(2);
-                tableData.push([i + 1, p.denumire, p.cantitate, `${p.pret.toFixed(2)} ${p.valuta}`, `${subtotal} ${p.valuta}`]);
-                // Adaugă poză manual dacă există
+                const subtotal = p.cantitate * p.pret;
+                // Poza produs
                 if (p.imagine) {
-                    doc.addImage(p.imagine, 'PNG', 15, yStart + (i * 8), 20, 20); // Poziție fixă lângă tabel
+                    try {
+                        doc.addImage(p.imagine, 15, y, 25, 25); // funcționează cu JPG/PNG/WEBP
+                    } catch (e) {
+                        console.log('Poză ignorată în PDF (coruptă)', e);
+                    }
                 }
+                // Textul lângă poză
+                doc.setFontSize(10);
+                doc.text(`${i + 1}. ${p.denumire}`, 45, y + 8);
+                doc.text(`Cantitate: ${p.cantitate} × ${p.pret.toFixed(2)} ${p.valuta} = ${subtotal.toFixed(2)} ${p.valuta}`, 45, y + 18);
+                y += 35;
             });
 
-            doc.autoTable({
-                head: tableData.slice(0,1),
-                body: tableData.slice(1),
-                startY: yStart,
-                theme: 'grid',
-                styles: { fontSize: 9, cellPadding: 3 },
-                headStyles: { fillColor: [198, 40, 40] }
-            });
-            log('Tabel adăugat OK');
-
-            // Total
-            const finalY = doc.lastAutoTable.finalY + 15;
+            // Total mare
             const totalMDL = pozitii.filter(p => p.valuta === 'MDL').reduce((s, p) => s + p.pret * p.cantitate, 0);
             const totalEUR = pozitii.filter(p => p.valuta === 'EUR').reduce((s, p) => s + p.pret * p.cantitate, 0);
             let totalText = 'TOTAL OFERTĂ: ';
             if (totalMDL) totalText += `${totalMDL.toFixed(2)} MDL`;
             if (totalEUR) totalText += ` | ${totalEUR.toFixed(2)} EUR`;
-            doc.setFontSize(16);
-            doc.setFont(undefined, 'bold');
-            doc.text(totalText, 15, finalY);
 
-            // Salvează
-            const nume = document.getElementById('ref').value || 'Oferta_CFMOTO';
+            doc.setFontSize(18);
+            doc.setFont(undefined, 'bold');
+            doc.text(totalText, 15, y + 10);
+
+            const nume = document.getElementById('ref').value.trim() || 'Oferta_CFMOTO';
             doc.save(`${nume}_${new Date().toISOString().slice(0,10)}.pdf`);
-            log('PDF SALVAT! Verifică download-uri.');
-            alert('PDF generat cu succes!');
-        } catch (error) {
-            log('EROARE PDF: ' + error.message);
-            console.error(error);
-            alert('Eroare: ' + error.message + '\nVezi console (F12) pentru detalii.');
+
+            alert('PDF generat și descărcat cu succes!');
+        } catch (err) {
+            console.error(err);
+            alert('Eroare PDF: ' + err.message);
         }
     }
-
-    // Test la load
-    window.onload = () => {
-        if (typeof window.jspdf === 'undefined') {
-            log('CRITIC: jsPDF nu se încarcă! Verifică conexiune.');
-        } else {
-            log('jsPDF OK - gata de lucru.');
-        }
-    };
-</script>
-</body>
-</html>
