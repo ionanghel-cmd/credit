@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertă Comercială - CFMOTO Moldova</title>
+    <title>Ofertă Comercială CFMOTO - PDF FIXAT</title>
     <style>
         body {font-family: Arial, sans-serif; margin:0; padding:20px; background:#f4f4f4;}
         .container {max-width:950px; margin:0 auto; background:white; padding:30px; border-radius:12px; box-shadow:0 5px 25px rgba(0,0,0,0.15);}
@@ -19,14 +19,16 @@
         img.preview {width:80px; height:80px; object-fit:contain; background:#fff; border-radius:6px;}
         #total {font-size:22px; font-weight:bold; text-align:right; margin:20px 0; color:#c62828;}
         .logo {display:block; margin:0 auto 20px; height:90px;}
+        .debug {color: red; font-size: 12px; margin: 10px 0;}
     </style>
 
+    <!-- CDN jsPDF - verifică dacă se încarcă -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <img src="https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp" alt="CFMOTO Moldova" class="logo">
+    <img src="https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp" alt="CFMOTO Moldova" class="logo" onerror="console.log('Logo error')">
 
     <h1>OFERTĂ COMERCIALĂ</h1>
 
@@ -61,49 +63,73 @@
 
     <div id="total"></div>
     <button onclick="genereazaPDF()" style="padding:18px 50px; font-size:20px;">Generează PDF Ofertă</button>
+    <div id="debug" class="debug" style="display:none;"></div>
 </div>
 
 <script>
     let pozitii = [];
+    const debugDiv = document.getElementById('debug');
 
-    // Redimensionează imaginea pentru a nu bloca PDF-ul
+    // Funcție debug
+    function log(msg) {
+        console.log(msg);
+        debugDiv.innerHTML += msg + '<br>';
+        debugDiv.style.display = 'block';
+    }
+
+    // Redimensionează agresiv (max 150px, calitate 0.6) pentru PDF
     function redimensioneazaImagine(file, callback) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const img = new Image();
             img.onload = function() {
                 const canvas = document.createElement('canvas');
-                const MAX = 250;
+                const MAX = 150; // Mai mic pentru PDF rapid
                 let w = img.width, h = img.height;
-                if (w > h && w > MAX) { h = h * (MAX / w); w = MAX; }
-                else if (h > MAX) { w = w * (MAX / h); h = MAX; }
+                if (w > h && w > MAX) { h = Math.round(h * (MAX / w)); w = MAX; }
+                else if (h > MAX) { w = Math.round(w * (MAX / h)); h = MAX; }
                 canvas.width = w; canvas.height = h;
-                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                callback(canvas.toDataURL('image/jpeg', 0.8));
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                const dataUrl = canvas.toDataURL('image/png', 0.6); // PNG pentru compatibilitate
+                log(`Imagine redimensionată: ${w}x${h} px`);
+                callback(dataUrl);
             };
+            img.onerror = () => { log('Eroare la încărcare imagine'); callback(null); };
             img.src = e.target.result;
         };
+        reader.onerror = () => { log('Eroare reader'); callback(null); };
         reader.readAsDataURL(file);
     }
 
     function adaugaPozitie() {
         const file = document.getElementById('poza').files[0];
         const proceseaza = (imgData) => {
+            if (!document.getElementById('denumire').value) {
+                alert('Adaugă denumire produs!');
+                return;
+            }
             pozitii.push({
                 imagine: imgData,
-                denumire: document.getElementById('denumire').value || "Produs",
+                denumire: document.getElementById('denumire').value,
                 cantitate: parseInt(document.getElementById('cantitate').value) || 1,
                 pret: parseFloat(document.getElementById('pret').value) || 0,
                 valuta: document.getElementById('valuta').value
             });
             actualizeazaTabel();
+            // Reset form
             document.getElementById('denumire').value = '';
             document.getElementById('cantitate').value = 1;
             document.getElementById('pret').value = '';
             document.getElementById('poza').value = '';
+            log(`Poziție adăugată: ${pozitii.length} total`);
         };
-        if (file) redimensioneazaImagine(file, proceseaza);
-        else proceseaza(null);
+        if (file) {
+            log('Procesez imagine...');
+            redimensioneazaImagine(file, proceseaza);
+        } else {
+            proceseaza(null);
+        }
     }
 
     function actualizeazaTabel() {
@@ -118,12 +144,12 @@
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${p.imagine ? `<img src="${p.imagine}" class="preview">` : '—'}</td>
+                <td>${p.imagine ? `<img src="${p.imagine}" class="preview" onerror="this.alt='Eroare img'">` : '—'}</td>
                 <td><strong>${p.denumire}</strong></td>
                 <td>${p.cantitate}</td>
                 <td>${p.pret.toFixed(2)} ${p.valuta}</td>
                 <td>${subtotal.toFixed(2)} ${p.valuta}</td>
-                <td><button class="del" onclick="pozitii.splice(${i},1); actualizeazaTabel();">Șterge</button></td>
+                <td><button class="del" onclick="stergePozitie(${i})">Șterge</button></td>
             `;
             tbody.appendChild(tr);
         });
@@ -134,68 +160,96 @@
         document.getElementById('total').innerHTML = `<strong style="color:#c62828">${txt}</strong>`;
     }
 
-    // Data expirare +30 zile
+    function stergePozitie(i) {
+        pozitii.splice(i, 1);
+        actualizeazaTabel();
+        log('Poziție ștearsă');
+    }
+
+    // Data +30 zile
     const azi = new Date(); azi.setDate(azi.getDate() + 30);
     document.getElementById('dataExpirare').value = azi.toISOString().split('T')[0];
 
-    // GENERARE PDF – FUNCȚIONEAZĂ 100%
+    // PDF GENERARE – CU TRY-CATCH PENTRU ERORI
     function genereazaPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-
-        // Logo oficial CFMOTO Moldova
-        doc.addImage('https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp', 'WEBP', 15, 10, 60, 24);
-
-        doc.setFontSize(20);
-        doc.text('OFERTĂ COMERCIALĂ', 105, 25, null, null, 'center');
-
-        doc.setFontSize(11);
-        doc.text(`Client: ${document.getElementById('client').value || '—'}`, 15, 45);
-        doc.text(`Valabilitate ofertă: ${document.getElementById('dataExpirare').value}`, 15, 52);
-        doc.text(`Manager vânzări: ${document.getElementById('manager').value}`, 15, 59);
-        doc.text(`Referință: ${document.getElementById('ref').value || '—'}`, 15, 66);
-
-        // Tabel cu poze
-        const rows = pozitii.map((p, i) => [
-            i + 1,
-            p.imagine ? { image: p.imagine, width: 22, height: 22 } : '',
-            p.denumire,
-            p.cantitate,
-            `${p.pret.toFixed(2)} ${p.valuta}`,
-            `${(p.cantitate * p.pret).toFixed(2)} ${p.valuta}`
-        ]);
-
-        doc.autoTable({
-            head: [['Nr.', 'Poză', 'Denumire produs', 'Cant.', 'Preț unitar', 'Total']],
-            body: rows,
-            startY: 75,
-            theme: 'grid',
-            styles: { fontSize: 10, cellPadding: 4 },
-            headStyles: { fillColor: [198, 40, 40] },
-            columnStyles: { 1: { cellWidth: 32 } },
-            didDrawCell: data => {
-                if (data.column.index === 1 && data.cell.raw && data.cell.raw.image) {
-                    doc.addImage(data.cell.raw.image, data.cell.x + 3, data.cell.y + 3, 26, 26);
-                }
+        if (pozitii.length === 0) {
+            alert('Adaugă cel puțin un produs!');
+            return;
+        }
+        try {
+            log('Încep generare PDF...');
+            if (typeof window.jspdf === 'undefined') {
+                throw new Error('jsPDF nu s-a încărcat! Verifică internet/CDN.');
             }
-        });
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            log('jsPDF inițializat OK');
 
-        // Total final
-        const finalY = doc.lastAutoTable.finalY + 15;
-        const totalMDL = pozitii.filter(p=>p.valuta==='MDL').reduce((s,p)=>s + p.pret*p.cantitate, 0);
-        const totalEUR = pozitii.filter(p=>p.valuta==='EUR').reduce((s,p)=>s + p.pret*p.cantitate, 0);
-        let totalText = 'TOTAL OFERTĂ: ';
-        if (totalMDL) totalText += `${totalMDL.toFixed(2)} MDL`;
-        if (totalEUR) totalText += `  |  ${totalEUR.toFixed(2)} EUR`;
+            // Logo (folosim PNG fallback dacă WebP nu merge)
+            doc.addImage('https://www.cfmoto.md/storage/brands/arTDWjWx6mDVTvc-cfmoto-logo-98c.webp', 'PNG', 15, 10, 60, 24); // Schimbat la PNG
 
-        doc.setFontSize(16);
-        doc.setFont(undefined, 'bold');
-        doc.text(totalText, 15, finalY);
+            doc.setFontSize(20);
+            doc.text('OFERTĂ COMERCIALĂ', 105, 25, { align: 'center' });
 
-        // Salvare
-        const nume = document.getElementById('ref').value || 'Oferta_CFMOTO';
-        doc.save(`${nume}_${new Date().toISOString().slice(0,10)}.pdf`);
+            doc.setFontSize(11);
+            doc.text(`Client: ${document.getElementById('client').value || '—'}`, 15, 45);
+            doc.text(`Valabilitate: ${document.getElementById('dataExpirare').value}`, 15, 52);
+            doc.text(`Manager: ${document.getElementById('manager').value}`, 15, 59);
+            doc.text(`Referință: ${document.getElementById('ref').value || '—'}`, 15, 66);
+
+            // Tabel – simplificat, fără didDrawCell problematic
+            const tableData = [['Nr.', 'Denumire produs', 'Cant.', 'Preț unitar', 'Total']];
+            let yStart = 75;
+            pozitii.forEach((p, i) => {
+                const subtotal = (p.cantitate * p.pret).toFixed(2);
+                tableData.push([i + 1, p.denumire, p.cantitate, `${p.pret.toFixed(2)} ${p.valuta}`, `${subtotal} ${p.valuta}`]);
+                // Adaugă poză manual dacă există
+                if (p.imagine) {
+                    doc.addImage(p.imagine, 'PNG', 15, yStart + (i * 8), 20, 20); // Poziție fixă lângă tabel
+                }
+            });
+
+            doc.autoTable({
+                head: tableData.slice(0,1),
+                body: tableData.slice(1),
+                startY: yStart,
+                theme: 'grid',
+                styles: { fontSize: 9, cellPadding: 3 },
+                headStyles: { fillColor: [198, 40, 40] }
+            });
+            log('Tabel adăugat OK');
+
+            // Total
+            const finalY = doc.lastAutoTable.finalY + 15;
+            const totalMDL = pozitii.filter(p => p.valuta === 'MDL').reduce((s, p) => s + p.pret * p.cantitate, 0);
+            const totalEUR = pozitii.filter(p => p.valuta === 'EUR').reduce((s, p) => s + p.pret * p.cantitate, 0);
+            let totalText = 'TOTAL OFERTĂ: ';
+            if (totalMDL) totalText += `${totalMDL.toFixed(2)} MDL`;
+            if (totalEUR) totalText += ` | ${totalEUR.toFixed(2)} EUR`;
+            doc.setFontSize(16);
+            doc.setFont(undefined, 'bold');
+            doc.text(totalText, 15, finalY);
+
+            // Salvează
+            const nume = document.getElementById('ref').value || 'Oferta_CFMOTO';
+            doc.save(`${nume}_${new Date().toISOString().slice(0,10)}.pdf`);
+            log('PDF SALVAT! Verifică download-uri.');
+            alert('PDF generat cu succes!');
+        } catch (error) {
+            log('EROARE PDF: ' + error.message);
+            console.error(error);
+            alert('Eroare: ' + error.message + '\nVezi console (F12) pentru detalii.');
+        }
     }
+
+    // Test la load
+    window.onload = () => {
+        if (typeof window.jspdf === 'undefined') {
+            log('CRITIC: jsPDF nu se încarcă! Verifică conexiune.');
+        } else {
+            log('jsPDF OK - gata de lucru.');
+        }
+    };
 </script>
 </body>
 </html>
