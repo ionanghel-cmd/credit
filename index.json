@@ -1,0 +1,27 @@
+[
+  {
+    "name": "PRICELIST",
+    "link": "https://peculiar-alla-0motoland1-861f4fcf.koyeb.app/",
+    "logo": "logos/pricelist.png"
+  },
+  {
+    "name": "FICHES",
+    "link": "https://ionanghel-cmd.github.io/credit/fiches.html",
+    "logo": "logos/piese.png"
+  },
+  {
+    "name": "CONSUMABILE",
+    "link": "https://ionanghel-cmd.github.io/credit/cons.html",
+    "logo": "logos/cons.png"
+  },
+  {
+    "name": "Cataloage",
+    "link": "https://ionanghel-cmd.github.io/credit/catalog.html",
+    "logo": "logos/catalog.jpg"
+  },
+  {
+    "name": "CALCULATOR RATE",
+    "link": "https://ionanghel-cmd.github.io/credit/credit.html",
+    "logo": "logos/credit.png"
+  }
+]
