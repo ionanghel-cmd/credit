@@ -1,0 +1,43 @@
+[
+  {
+    "name": "HIFLOFILTRO - Filtre",
+    "link": "https://www.hiflofiltro.com/catalogue",
+    "logo": "logos/hiflo.jpg"
+  },
+  {
+    "name": "JTSPROCKETS / Pinioane",
+    "link": "https://epc.brp.com/",
+    "logo": "logos/brp.png"
+  },
+  {
+    "name": "SBS - PLACUTE FRANA",
+    "link": "https://www.sbs.dk/",
+    "logo": "logos/sbs.png"
+  },
+  {
+    "name": "YUASA - BATERII",
+    "link": "https://www.yuasabatteries.com/",
+    "logo": "logos/yuasa.jpg"
+  },
+    {
+    "name": "MOTOREX",
+    "link": "https://motorex.com/en/Service-Consulting/Oil-Finder?step=brand&categoryId=4",
+    "logo": "logos/motorex.png"
+  },
+    {
+    "name": "ARIETE - Simering",
+    "link": "https://www.ariete.com/ari-search",
+    "logo": "logos/ariete.png"
+  },
+    {
+    "name": "AllBalls",
+    "link": "https://www.allballsracing.com/",
+    "logo": "logos/allballs.svg"
+  },
+    {
+    "name": "NGK - BUGII",
+    "link": "https://www.ngkpartfinder.co.uk/",
+    "logo": "logos/ngk.png"
+  },
+  
+]
