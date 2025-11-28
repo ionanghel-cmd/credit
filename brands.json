@@ -2,21 +2,21 @@
   {
     "name": "CFMOTO",
     "link": "https://cfmotoparts.eu/",
-    "logo": "/logos/cfmoto.webp"
+    "logo": "logos/cfmoto.webp"
   },
   {
     "name": "BRP",
     "link": "https://epc.brp.com/",
-    "logo": "/logos/brp.png"
+    "logo": "logos/brp.png"
   },
   {
     "name": "HONDA",
     "link": "https://www.bike-parts-honda.com/",
-    "logo": "/logos/honda.webp"
+    "logo": "logos/honda.webp"
   },
   {
     "name": "YAMAHA",
     "link": "https://www.bike-parts-yam.com/",
-    "logo": "/logos/yamaha.webp"
+    "logo": "logos/yamaha.webp"
   }
 ]
