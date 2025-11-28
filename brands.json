@@ -19,22 +19,22 @@
     "link": "https://www.bike-parts-yam.com/",
     "logo": "logos/yamaha.webp"
   },
-    {
+  {
     "name": "KAWASAKI",
     "link": "https://www.bike-parts-kawa.com/",
     "logo": "logos/kawasaki.png"
   },
-    {
+  {
     "name": "KTM",
-    "link": "https://www.bike-parts-ktm.com//",
+    "link": "https://www.bike-parts-ktm.com/",
     "logo": "logos/ktm.png"
   },
-    {
+  {
     "name": "HUSQVARNA",
     "link": "https://husqvarna.genuine-parts-catalogue.com/",
     "logo": "logos/husq.png"
   },
-    {
+  {
     "name": "APRILIA",
     "link": "https://aprilia.genuine-parts-catalogue.com/",
     "logo": "logos/aprilia.webp"
@@ -44,7 +44,7 @@
     "link": "https://piaggio.genuine-parts-catalogue.com/",
     "logo": "logos/piaggio.png"
   },
-   {
+  {
     "name": "BETA",
     "link": "https://swan-beta.softway.it/partsfinder/",
     "logo": "logos/beta.png"
@@ -54,10 +54,9 @@
     "link": "https://www.bike-parts-bmw.com/",
     "logo": "logos/bmw.png"
   },
-    {
+  {
     "name": "DUCATI",
     "link": "https://www.bike-parts-ducati.com/",
     "logo": "logos/ducati.png"
   }
-  
 ]
