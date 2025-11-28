@@ -1,22 +1,22 @@
 [
   {
-    "name": "Nike",
-    "link": "https://www.nike.com/ro/",
-    "logo": "assets/logos/nike.svg"
+    "name": "CFMOTO",
+    "link": "https://cfmotoparts.eu/",
+    "logo": "/logos/cfmoto.webp"
   },
   {
-    "name": "Adidas",
-    "link": "https://www.adidas.ro/",
-    "logo": "assets/logos/adidas.svg"
+    "name": "BRP",
+    "link": "https://epc.brp.com/",
+    "logo": "/logos/brp.png"
   },
   {
-    "name": "Puma",
-    "link": "https://eu.puma.com/ro/",
-    "logo": "assets/logos/puma.png"
+    "name": "HONDA",
+    "link": "https://www.bike-parts-honda.com/",
+    "logo": "/logos/honda.webp"
   },
   {
-    "name": "New Balance",
-    "link": "https://www.newbalance.ro/",
-    "logo": "assets/logos/nb.svg"
+    "name": "YAMAHA",
+    "link": "https://www.bike-parts-yam.com/",
+    "logo": "/logos/yamaha.webp"
   }
 ]
