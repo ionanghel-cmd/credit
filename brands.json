@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Nike",
+    "link": "https://www.nike.com/ro/",
+    "logo": "assets/logos/nike.svg"
+  },
+  {
+    "name": "Adidas",
+    "link": "https://www.adidas.ro/",
+    "logo": "assets/logos/adidas.svg"
+  },
+  {
+    "name": "Puma",
+    "link": "https://eu.puma.com/ro/",
+    "logo": "assets/logos/puma.png"
+  },
+  {
+    "name": "New Balance",
+    "link": "https://www.newbalance.ro/",
+    "logo": "assets/logos/nb.svg"
+  }
+]
