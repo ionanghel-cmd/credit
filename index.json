@@ -7,7 +7,7 @@
   {
     "name": "FICHES",
     "link": "https://ionanghel-cmd.github.io/credit/fiches.html",
-    "logo": "logos/piese.png"
+    "logo": "logos/PIESE.png"
   },
   {
     "name": "CONSUMABILE",
@@ -17,11 +17,11 @@
   {
     "name": "Cataloage",
     "link": "https://ionanghel-cmd.github.io/credit/catalog.html",
-    "logo": "logos/catalog.jpg"
+    "logo": "logos/CATALOG.PNG"
   },
   {
     "name": "CALCULATOR RATE",
     "link": "https://ionanghel-cmd.github.io/credit/credit.html",
-    "logo": "logos/credit.png"
+    "logo": "logos/credit.PNG"
   }
 ]
