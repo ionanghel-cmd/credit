@@ -10,28 +10,13 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
   <div class="max-w-4xl w-full" x-data="app()">
-<!-- Header cu buton Înapoi + Logo centrat -->
-  <header class="bg-white shadow-sm border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <!-- Buton Înapoi -->
-      <a href="../credit/" 
-         class="flex items-center gap-3 text-gray-700 hover:text-gray-900 font-medium transition">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        <span>Înapoi</span>
-      </a>
-
-      <!-- Logo centrat (clickabil) -->
-      <a href="../credit/" class="absolute left-1/2 transform -translate-x-1/2">
-        <img src="logos/logo.svg" alt="MOTOLAND" class="h-10">
-      </a>
-
-      <!-- Spațiu gol dreapta pentru simetrie -->
-      <div class="w-20"></div>
-    </div>
-  </header>
+<div class="text-center mb-12">
+  <a href="https://motoland.md" target="_blank">
+    <img src="logos/logo.svg"
+         alt="MOTOLAND - Magazin piese & accesorii moto"
+         class="mx-auto h-20 md:h-28 lg:h-32 object-contain drop-shadow-lg hover:drop-shadow-2xl transition-all">
+  </a>
+</div>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
       <template x-for="brand in brands" :key="brand.name">
         <a :href="brand.link"
