@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ro" class="h-full">
+<html lang="ro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,72 +8,76 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="icon" href="data:,">
 </head>
-<body class="min-h-screen bg-gradient-to-b from-purple-50 to-white flex flex-col">
+<body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- Header minimalist cu logo -->
-  <header class="py-6 text-center">
-    <img src="logos/logo.svg" alt="MOTOLAND" class="h-12 mx-auto">
+  <!-- Logo sus -->
+  <header class="bg-white shadow-sm border-b border-gray-200 py-5 text-center">
+    <img src="logos/logo.svg" alt="MOTOLAND" class="h-10 mx-auto">
   </header>
 
-  <main class="flex-1 flex items-start justify-center px-4 pt-8 pb-20">
-    <div class="w-full max-w-2xl" x-data="priceSearch()">
+  <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-12">
+    <div x-data="priceSearch()">
 
-      <!-- Titlu + subtitlu -->
-      <h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center mb-3">
+      <!-- Titlu serios și elegant -->
+      <h1 class="text-4xl font-bold text-gray-800 text-center mb-3">
         Căutare Prețuri Piese
       </h1>
-      <p class="text-center text-gray-600 mb-10">Introdu codul piesei pentru preț instant</p>
+      <p class="text-center text-gray-600 mb-10">
+        Introdu câteva cuvinte din denumirea piesei
+      </p>
 
-      <!-- Search Box exact ca în poză -->
-      <div class="bg-white rounded-3xl shadow-2xl p-8 mb-12">
-        <form @submit.prevent>
-          <input 
-            type="text"
-            x-model="query"
-            placeholder="ex: amortizor thunder, lant 520, placute cbr, ulei 10w40..."
-            class="w-full px-6 py-5 text-lg border-2 border-red-500 rounded-2xl focus:outline-none focus:border-blue-600 transition-colors"
-            autofocus
-          >
-          <button 
-            @click="query = query" 
-            class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl py-5 rounded-2xl flex items-center justify-center gap-3 shadow-lg"
-          >
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-            Caută
-          </button>
-        </form>
+      <!-- Search box minimalist și profesional -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 mb-12">
+        <input 
+          type="text"
+          x-model.debounce.300ms="query"
+          placeholder="ex: amortizor thunder, lant 520, placute cbr..."
+          class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-500 focus:outline-none transition"
+          autofocus
+        >
+        <button 
+          class="mt-5 w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-4 rounded-xl transition flex items-center justify-center gap-3"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          Caută
+        </button>
       </div>
 
-      <!-- Rezultate – cards identice cu poza ta -->
+      <!-- Rezultate – design curat, serios, elegant -->
       <div class="space-y-6">
         <template x-for="item in results" :key="item.name">
-          <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:shadow-2xl transition-shadow">
-            <h3 class="text-xl font-bold text-gray-800 mb-4" x-text="item.name"></h3>
-            <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2"
-                 x-text="formatPrice(item.price)"></div>
-            <p class="text-lg text-gray-600">lei</p>
-            <p class="text-sm text-gray-400 mt-3">Cod: <span x-text="item.code || '—'"></span></p>
+          <div class="bg-white rounded-xl shadow-md border border-gray-200 p-200 p-8 hover:shadow-lg transition-shadow">
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-4" x-text="item.name"></h3>
+            <div class="text-center">
+              <span class="text-5xl font-bold text-gray-900" x-text="formatPrice(item.price)"></span>
+              <span class="text-2xl text-gray-600 ml-2">lei</span>
+            </div>
           </div>
         </template>
       </div>
 
-      <!-- No results -->
+      <!-- Niciun rezultat -->
       <div x-show="query && results.length === 0" class="text-center py-16">
-        <p class="text-2xl text-gray-500 font-medium">Niciun rezultat găsit</p>
-        <p class="text-gray-400 mt-2">Verifică scrierea și încearcă din nou</p>
+        <p class="text-xl text-gray-600">Niciun rezultat găsit</p>
+        <p class="text-gray-500 mt-2">Încearcă alte cuvinte din denumire</p>
       </div>
 
     </div>
   </main>
 
+  <!-- Footer discret -->
+  <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+    <p class="text-center text-gray-500 text-sm">© 2025 MOTOLAND • Prețuri cu TVA inclus</p>
+  </footer>
+
   <script>
     function priceSearch() {
       return {
         query: '',
-        allItems: [],
         results: [],
+        allItems: [],
 
         init() {
           fetch('price.json?t=' + Date.now())
@@ -82,7 +86,7 @@
               this.allItems = data;
               this.$watch('query', () => this.search());
             })
-            .catch(() => alert('Eroare încărcare prețuri'));
+            .catch(() => this.results = []);
         },
 
         search() {
@@ -91,18 +95,19 @@
             return;
           }
 
-          const terms = this.query.toLowerCase().trim().split(/\s+/);
+          const terms = this.query.toLowerCase().trim().split(/\s+/).filter(t => t.length > 1);
 
           this.results = this.allItems
             .filter(item => {
-              const text = (item.name + ' ' + (item.code || '')).toLowerCase();
-              return terms.every(term => text.includes(term));
+              const name = item.name.toLowerCase();
+              return terms.every(term => name.includes(term));
             })
-            .slice(0, 200); // max 50 rezultate ca să nu încarce
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .slice(0, 100);
         },
 
         formatPrice(price) {
-          if (!price && price !== 0) return '—';
+          if (price == null || price === '') return '—';
           return Number(price).toLocaleString('ro-RO');
         }
       }
