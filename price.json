@@ -1,5 +1,5001 @@
 [
  {
+   "name": "0GR0-051004-20000 Arc ambreiaj",
+   "price": "160"
+ },
+ {
+   "name": "2025071603 Tractor T-24 (1a) 4*4 24HP vers fata 1 cu acoperis",
+   "price": ""
+ },
+ {
+   "name": "2025071618 Tractor T-24 (1) 4*2 24HP vers fata 1",
+   "price": ""
+ },
+ {
+   "name": "2025071619 Tractor T-24 (1) 4*2 24HP vers fata 1",
+   "price": ""
+ },
+ {
+   "name": "2025071622 Tractor T-24 (2)  4*2 24HP vers fata 2",
+   "price": ""
+ },
+ {
+   "name": "2025071623 Tractor T-24 (2) 4*2 24HP vers fata 2",
+   "price": ""
+ },
+ {
+   "name": "25RS-64 Lant (1840-32)",
+   "price": "225"
+ },
+ {
+   "name": "25RS-72 Lant (1840-36)",
+   "price": "250"
+ },
+ {
+   "name": "25RS-76 Lant (1840-38)",
+   "price": "255"
+ },
+ {
+   "name": "35RS-68 Lant (1640-34)",
+   "price": "275"
+ },
+ {
+   "name": "36RS-66 Lant (1640-33)",
+   "price": "265"
+ },
+ {
+   "name": "61PM-50 Lant (1640-25)",
+   "price": "175"
+ },
+ {
+   "name": "63PS-52 Lant (1640-26)",
+   "price": "160"
+ },
+ {
+   "name": "63PS-55 Lant (1640-27.5)",
+   "price": "190"
+ },
+ {
+   "name": "63PS-56 Lant (1640-28)",
+   "price": "200"
+ },
+ {
+   "name": "63PS-57 Lant (1640-28.5)",
+   "price": "200"
+ },
+ {
+   "name": "AK 20, Baterie-acumulator 4520-400-6535",
+   "price": ""
+ },
+ {
+   "name": "AL 101, Incarcator pentru acumulator 230 V 4850-430-2520",
+   "price": ""
+ },
+ {
+   "name": "Ambielaj 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Ambielaj 1100NM (55x70 C/R)",
+   "price": ""
+ },
+ {
+   "name": "Ambielaj 1100NM (55x70 R/R)",
+   "price": ""
+ },
+ {
+   "name": "Ambielaj 168F 19mm ax pana",
+   "price": "350"
+ },
+ {
+   "name": "Ambielaj 168F 20mm ax pana",
+   "price": "350"
+ },
+ {
+   "name": "Ambielaj 168F 20mm canelura",
+   "price": "350"
+ },
+ {
+   "name": "Ambielaj 168F 20mm canelura (des)",
+   "price": "550"
+ },
+ {
+   "name": "Ambielaj 168F 25mm canelura",
+   "price": "350"
+ },
+ {
+   "name": "Ambielaj 173",
+   "price": "800"
+ },
+ {
+   "name": "Ambielaj 177F",
+   "price": "450"
+ },
+ {
+   "name": "Ambielaj 177F pana ",
+   "price": "450"
+ },
+ {
+   "name": "Ambielaj 178FB",
+   "price": "800"
+ },
+ {
+   "name": "Ambielaj 180",
+   "price": "650"
+ },
+ {
+   "name": "Ambielaj 190",
+   "price": "850"
+ },
+ {
+   "name": "Ambielaj 195",
+   "price": "950"
+ },
+ {
+   "name": "Ambielaj 195NDL",
+   "price": "1350"
+ },
+ {
+   "name": "Ambielaj ansamblu 195N",
+   "price": "1500"
+ },
+ {
+   "name": "Ambielaj ansamblu HT-135/9HP",
+   "price": "1300"
+ },
+ {
+   "name": "Ambielaj CG520B",
+   "price": "150"
+ },
+ {
+   "name": "Ambielaj GH-41",
+   "price": "700"
+ },
+ {
+   "name": "Ambielaj HT-105/6HP",
+   "price": "800"
+ },
+ {
+   "name": "Ambielaj HT-135",
+   "price": "1200"
+ },
+ {
+   "name": "Ambielaj R175A",
+   "price": "700"
+ },
+ {
+   "name": "Ambielaj ZS1115",
+   "price": "2800"
+ },
+ {
+   "name": "Ambreiaj 1100 NM",
+   "price": "850"
+ },
+ {
+   "name": "Ambreiaj AG-52",
+   "price": "100"
+ },
+ {
+   "name": "Ambreiaj ansamblu 1000",
+   "price": "550"
+ },
+ {
+   "name": "Ambreiaj ansamblu 180/190/195N",
+   "price": "700"
+ },
+ {
+   "name": "Ambreiaj centrifugal (cheie 20mm) 168F",
+   "price": "1200"
+ },
+ {
+   "name": "Ambreiaj centrifugal (cheie 25mm) 177F",
+   "price": "1300"
+ },
+ {
+   "name": "Ambreiaj cilindru hidraulic ZS1100",
+   "price": "250"
+ },
+ {
+   "name": "Ambreiaj set intarit 1000",
+   "price": "350"
+ },
+ {
+   "name": "Ambreiaj set intarit 1100",
+   "price": "350"
+ },
+ {
+   "name": "Ampermetru R180NM/190NM/195NM",
+   "price": "150"
+ },
+ {
+   "name": "Ansamblu intinzator curele de transmisie KRO 900",
+   "price": "400"
+ },
+ {
+   "name": "Ansamblu roti 6.00*12 (sub 5 suruburi)",
+   "price": "1500"
+ },
+ {
+   "name": "Ansamblu sateliti transmisie",
+   "price": ""
+ },
+ {
+   "name": "Ansamblu sateliti transmisie DT-150E",
+   "price": "1700"
+ },
+ {
+   "name": "Ansamblu sateliti transmisie MT",
+   "price": "2200"
+ },
+ {
+   "name": "Ansamblu sateliti transmisie Q15E",
+   "price": "1800"
+ },
+ {
+   "name": "Ansamblu sateliti transmisie Z250",
+   "price": "2000"
+ },
+ {
+   "name": "Arc + bila  180N",
+   "price": "40"
+ },
+ {
+   "name": "Arc + bila ambreiaj 180N",
+   "price": "50"
+ },
+ {
+   "name": "Arc ambreiaj AG52",
+   "price": "10"
+ },
+ {
+   "name": "Arc pe tija carburatorului 168F",
+   "price": "40"
+ },
+ {
+   "name": "Arc supape 168F",
+   "price": ""
+ },
+ {
+   "name": "Arc supape 186",
+   "price": "80"
+ },
+ {
+   "name": "Arcuri ambreiaj 101",
+   "price": "100"
+ },
+ {
+   "name": "Arcuri supape 180N",
+   "price": "100"
+ },
+ {
+   "name": "Arcuri supape 190N",
+   "price": ""
+ },
+ {
+   "name": "Arcuri supape 195N",
+   "price": ""
+ },
+ {
+   "name": "Aripa 81/101",
+   "price": "480"
+ },
+ {
+   "name": "Atasament freza SH150",
+   "price": "2000"
+ },
+ {
+   "name": "Atomizor 3WB-900S",
+   "price": "3200"
+ },
+ {
+   "name": "Ax ambreiaj/pompa hidraulica SH120 L-365mm",
+   "price": "450"
+ },
+ {
+   "name": "Ax ansamblu seceratoare ",
+   "price": "450"
+ },
+ {
+   "name": "Ax central roata 101-2 ",
+   "price": "350"
+ },
+ {
+   "name": "Ax central roata 101-2 ansamblu",
+   "price": "700"
+ },
+ {
+   "name": "Ax central roata 101-2 set ansamblu",
+   "price": "700"
+ },
+ {
+   "name": "Ax central roti 40cm 1100",
+   "price": "350"
+ },
+ {
+   "name": "Ax central roti 50cm 1100",
+   "price": "400"
+ },
+ {
+   "name": "Ax cu came 168F",
+   "price": "400"
+ },
+ {
+   "name": "Ax cu came 173",
+   "price": "400"
+ },
+ {
+   "name": "Ax cu came 178FB",
+   "price": "350"
+ },
+ {
+   "name": "Ax cu came 180N",
+   "price": "550"
+ },
+ {
+   "name": "Ax cu came 186FB",
+   "price": "400"
+ },
+ {
+   "name": "Ax cu came 190NM",
+   "price": "650"
+ },
+ {
+   "name": "Ax cu came 195M",
+   "price": "750"
+ },
+ {
+   "name": "Ax cu came ZS1100",
+   "price": "350"
+ },
+ {
+   "name": "Ax cutie viteza L-203 mm Z-6",
+   "price": "300"
+ },
+ {
+   "name": "Ax cutie viteza mica 101-2",
+   "price": "300"
+ },
+ {
+   "name": "Ax diferential L-161mm 101/6",
+   "price": "250"
+ },
+ {
+   "name": "Ax diferential Q15E",
+   "price": "450"
+ },
+ {
+   "name": "Ax directie 81-1",
+   "price": "300"
+ },
+ {
+   "name": "Ax freza 1100",
+   "price": ""
+ },
+ {
+   "name": "Ax planetara inferioara 1100",
+   "price": "320"
+ },
+ {
+   "name": "Ax planetara superioara 1000",
+   "price": "350"
+ },
+ {
+   "name": "Ax planetara superioara 1100",
+   "price": "350"
+ },
+ {
+   "name": "Ax primar 1000",
+   "price": "300"
+ },
+ {
+   "name": "Ax primar 1100",
+   "price": "200"
+ },
+ {
+   "name": "Ax primar 365mm MT",
+   "price": "300"
+ },
+ {
+   "name": "Ax primar L-151mm 101/6",
+   "price": "250"
+ },
+ {
+   "name": "Ax primar reductor 81-1",
+   "price": "650"
+ },
+ {
+   "name": "Ax priza putere freza RDT240E",
+   "price": ""
+ },
+ {
+   "name": "Ax priza putere freza SH120",
+   "price": ""
+ },
+ {
+   "name": "Ax priza putere XT180",
+   "price": ""
+ },
+ {
+   "name": "Ax reductor freza lung 1100NM",
+   "price": "400"
+ },
+ {
+   "name": "Ax reductor inferior freza 190",
+   "price": "350"
+ },
+ {
+   "name": "Ax reductor intermediar (3) Z-180",
+   "price": "300"
+ },
+ {
+   "name": "Ax reductor intermediar lung Q12E",
+   "price": "500"
+ },
+ {
+   "name": "Ax reductor intermediar lung Q12E (1)",
+   "price": ""
+ },
+ {
+   "name": "Ax reductor intermediar scurt Q12E",
+   "price": "600"
+ },
+ {
+   "name": "Ax reductor intermediar Z-180",
+   "price": "300"
+ },
+ {
+   "name": "Ax reductor Q70/GN-4/6.5HP",
+   "price": "450"
+ },
+ {
+   "name": "Ax reductor superior freza 190",
+   "price": "350"
+ },
+ {
+   "name": "Ax revers cutie viteze 1100",
+   "price": "200"
+ },
+ {
+   "name": "Ax roaba ",
+   "price": ""
+ },
+ {
+   "name": "Ax roata 600/49mm SH120",
+   "price": "1100"
+ },
+ {
+   "name": "Ax seceratoare 1",
+   "price": "300"
+ },
+ {
+   "name": "Ax seceratoare 14cm",
+   "price": "250"
+ },
+ {
+   "name": "Ax seceratoare 19cm",
+   "price": "250"
+ },
+ {
+   "name": "Ax seceratoare 19cm canelura",
+   "price": "250"
+ },
+ {
+   "name": "Ax seceratoare 27cm",
+   "price": ""
+ },
+ {
+   "name": "Ax seceratoare 3",
+   "price": "300"
+ },
+ {
+   "name": "Ax seceratoare 60cm",
+   "price": ""
+ },
+ {
+   "name": "Ax secundar ansamblu 190NM",
+   "price": "850"
+ },
+ {
+   "name": "Ax transmisie 180/190/195N",
+   "price": "450"
+ },
+ {
+   "name": "Ax transmisie primar SH120",
+   "price": "450"
+ },
+ {
+   "name": "Ax transmisie primar SH150",
+   "price": "450"
+ },
+ {
+   "name": "Ax viteza mica 101-2",
+   "price": ""
+ },
+ {
+   "name": "Balansor 173",
+   "price": "400"
+ },
+ {
+   "name": "Balansor ambielaj 178F",
+   "price": "300"
+ },
+ {
+   "name": "Balansor ambielaj 186F",
+   "price": "350"
+ },
+ {
+   "name": "Balansor ambielaj 190NM",
+   "price": "250"
+ },
+ {
+   "name": "Balansor ambielaj 195NM",
+   "price": "350"
+ },
+ {
+   "name": "Balansor ambielaj R180N",
+   "price": "250"
+ },
+ {
+   "name": "Balansor ambielaj R190N",
+   "price": "1"
+ },
+ {
+   "name": "Balansor motor 190",
+   "price": "300"
+ },
+ {
+   "name": "Balansor motor 195",
+   "price": "350"
+ },
+ {
+   "name": "Balansor motor pompa ulei SH150",
+   "price": "500"
+ },
+ {
+   "name": "Balansor motor SH150",
+   "price": "500"
+ },
+ {
+   "name": "Banda p-u protectia auzului Concept 24 0000-884-0541",
+   "price": "300"
+ },
+ {
+   "name": "Banda p-u protectia auzului Concept 24F 0000-884-0530",
+   "price": ""
+ },
+ {
+   "name": "Barda 600gr. AX 6 0000-881-1969",
+   "price": "480"
+ },
+ {
+   "name": "Bec far 180 NM",
+   "price": "50"
+ },
+ {
+   "name": "Bec far 190 NM",
+   "price": "50"
+ },
+ {
+   "name": "Bec far 190NDL",
+   "price": "50"
+ },
+ {
+   "name": "Bendix 1100NM",
+   "price": "300"
+ },
+ {
+   "name": "Bendix HT105/135",
+   "price": "350"
+ },
+ {
+   "name": "Bendix R180N",
+   "price": "300"
+ },
+ {
+   "name": "Bendix R190N",
+   "price": "350"
+ },
+ {
+   "name": "Bendix R195N",
+   "price": "400"
+ },
+ {
+   "name": "BG 50 Suflanta cu motor pe benzina (U) BG50",
+   "price": "3800"
+ },
+ {
+   "name": "Biela 1100NM",
+   "price": "750"
+ },
+ {
+   "name": "Biela 1113",
+   "price": ""
+ },
+ {
+   "name": "Biela 168F",
+   "price": "200"
+ },
+ {
+   "name": "Biela 173",
+   "price": "380"
+ },
+ {
+   "name": "Biela 177F",
+   "price": "400"
+ },
+ {
+   "name": "Biela 178F",
+   "price": "350"
+ },
+ {
+   "name": "Biela 178FB",
+   "price": "380"
+ },
+ {
+   "name": "Biela 180N",
+   "price": "300"
+ },
+ {
+   "name": "Biela 186F",
+   "price": "400"
+ },
+ {
+   "name": "Biela 186FB",
+   "price": "350"
+ },
+ {
+   "name": "Biela 190N",
+   "price": "400"
+ },
+ {
+   "name": "Biela DT-240E",
+   "price": "750"
+ },
+ {
+   "name": "Biela GH41",
+   "price": "350"
+ },
+ {
+   "name": "Biela+cuzineti HT-105/6HP",
+   "price": "420"
+ },
+ {
+   "name": "Biela+cuzineti HT-135/9HP",
+   "price": "420"
+ },
+ {
+   "name": "Bloc motor 168F",
+   "price": "750"
+ },
+ {
+   "name": "Bloc motor 170F",
+   "price": "750"
+ },
+ {
+   "name": "Bloc motor 173",
+   "price": "1800"
+ },
+ {
+   "name": "Bloc motor 178FB",
+   "price": "2200"
+ },
+ {
+   "name": "Bloc motor 186FA",
+   "price": "2000"
+ },
+ {
+   "name": "Bloc motor 188F",
+   "price": "2500"
+ },
+ {
+   "name": "Bloc motor ansamblu R190N",
+   "price": "3500"
+ },
+ {
+   "name": "Bloc motor ansamblu R195NM",
+   "price": "3200"
+ },
+ {
+   "name": "Bloc motor lung R180N",
+   "price": "3000"
+ },
+ {
+   "name": "Bloc motor R180N",
+   "price": "3000"
+ },
+ {
+   "name": "Bloc motor ZS1100",
+   "price": ""
+ },
+ {
+   "name": "Bobina fir profil patrat 2.4mm-1.35kg",
+   "price": "850"
+ },
+ {
+   "name": "Bobina fir profil patrat 3.0mm-1.35kg",
+   "price": "850"
+ },
+ {
+   "name": "Bobina fir profil rotund 2.4mm-1.35kg",
+   "price": "850"
+ },
+ {
+   "name": "Bobina fir profil rotund 3.0mm-1.35kg",
+   "price": "850"
+ },
+ {
+   "name": "Bobina inductie 177F",
+   "price": "350"
+ },
+ {
+   "name": "Bobina inductie AG-52 ",
+   "price": "250"
+ },
+ {
+   "name": "Bobina inductie CG430B",
+   "price": "80"
+ },
+ {
+   "name": "Bobina inductie CMI BKS 40",
+   "price": ""
+ },
+ {
+   "name": "Bobina inductie PS-Q70/6.5HP",
+   "price": "250"
+ },
+ {
+   "name": "Bobina nailon trimer BKP",
+   "price": "150"
+ },
+ {
+   "name": "Bolt chiulasa 190",
+   "price": "150"
+ },
+ {
+   "name": "Bolt culbutori 180N",
+   "price": "150"
+ },
+ {
+   "name": "Bolt culbutori 190N",
+   "price": "150"
+ },
+ {
+   "name": "Bolt disc intermediar ambreiaj 101-2",
+   "price": "120"
+ },
+ {
+   "name": "Bolt pompa combustibil 180N-195N",
+   "price": "40"
+ },
+ {
+   "name": "Bolt remorca 101",
+   "price": "100"
+ },
+ {
+   "name": "Bolt siguranta-deconectare (sistem regulator) 178/186F",
+   "price": "70"
+ },
+ {
+   "name": "Boltul de injectie - 180N-195N",
+   "price": "40"
+ },
+ {
+   "name": "Borne baterie",
+   "price": "50"
+ },
+ {
+   "name": "Borne baterie + cablu ",
+   "price": "120"
+ },
+ {
+   "name": "Boxa plastic ghidon DT910",
+   "price": "150"
+ },
+ {
+   "name": "Bucsa ambielaj 1100NM",
+   "price": "200"
+ },
+ {
+   "name": "Bucsa ambielaj 173",
+   "price": "100"
+ },
+ {
+   "name": "Bucsa ambielaj 178FB",
+   "price": "100"
+ },
+ {
+   "name": "Bucsa ambielaj 186FB",
+   "price": "100"
+ },
+ {
+   "name": "Bucsa biela HT-105",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa biela HT-135",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa biela R180N",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa biela R190N",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa biela SH150",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa capac cutie spate 101",
+   "price": "100"
+ },
+ {
+   "name": "Bucsa cilindru hidraulic ZS1100",
+   "price": "100"
+ },
+ {
+   "name": "Bucsa cutie viteza 101",
+   "price": "150"
+ },
+ {
+   "name": "Bucsa electromotor 190",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa furca frictiune 101-2",
+   "price": "120"
+ },
+ {
+   "name": "Bucsa hexagonala ax transmisie 1100",
+   "price": "80"
+ },
+ {
+   "name": "Bucsa injector 178F",
+   "price": "40"
+ },
+ {
+   "name": "Bucsa injector 186F",
+   "price": "40"
+ },
+ {
+   "name": "Bucsa pornire R180",
+   "price": "80"
+ },
+ {
+   "name": "Bujie GN-4/6cp",
+   "price": "50"
+ },
+ {
+   "name": "Bujie STIHL M14 0000-400-7016",
+   "price": "100"
+ },
+ {
+   "name": "Burghiu 150MM",
+   "price": "400"
+ },
+ {
+   "name": "Burghiu 200MM",
+   "price": "550"
+ },
+ {
+   "name": "Burghiu 80MM",
+   "price": "350"
+ },
+ {
+   "name": "Butelie pentru mixare 1L 0000-881-9411",
+   "price": "110"
+ },
+ {
+   "name": "Butuc transmisie SH150",
+   "price": ""
+ },
+ {
+   "name": "Butuc transmisie SH150 L-190",
+   "price": "950"
+ },
+ {
+   "name": "Cablaj 1100NM",
+   "price": "900"
+ },
+ {
+   "name": "Cablaj+ contact pornire caseta directie SH150",
+   "price": "650"
+ },
+ {
+   "name": "Cablu acceleratie 1100NM + maneta",
+   "price": "160"
+ },
+ {
+   "name": "Cablu ambreiaj 1100",
+   "price": "80"
+ },
+ {
+   "name": "Cablu ambreiaj 168 (arc pirghie)",
+   "price": "80"
+ },
+ {
+   "name": "Cablu ambreiaj 168F",
+   "price": "80"
+ },
+ {
+   "name": "Cablu ambreiaj GN-4/6.5 cp",
+   "price": "80"
+ },
+ {
+   "name": "Cablu de gaz L-1550 mm  - MT",
+   "price": "100"
+ },
+ {
+   "name": "Cablu revers 1100",
+   "price": "80"
+ },
+ {
+   "name": "Cablu siguranta 1100",
+   "price": "80"
+ },
+ {
+   "name": "Cabluri set Q74",
+   "price": ""
+ },
+ {
+   "name": "Cama demaror manual 178/186",
+   "price": "150"
+ },
+ {
+   "name": "Cama pompa combustibil R190/195N",
+   "price": "100"
+ },
+ {
+   "name": "Canistra combinata 3L/1.5L",
+   "price": ""
+ },
+ {
+   "name": "Canistra de benzina 5L, portocalie 000-881-0200",
+   "price": "150"
+ },
+ {
+   "name": "Canistra de benzina 5L, transparenta 0000-881-0202",
+   "price": "150"
+ },
+ {
+   "name": "Cap de bara directie set SH120",
+   "price": "450"
+ },
+ {
+   "name": "Cap pentru cosit cu fir, Autocut 25-2 4002-710-2108",
+   "price": "300"
+ },
+ {
+   "name": "Cap pentru cosit cu fir, Autocut 30-2.02.7mm",
+   "price": "750"
+ },
+ {
+   "name": "Cap pentru cosit cu fir, Autocut 40-2.02.7mm",
+   "price": "450"
+ },
+ {
+   "name": "Cap pentru cosit cu fir, Autocut C 26-2 4002-710-2169",
+   "price": "330"
+ },
+ {
+   "name": "Cap pentru cosit cu fir, Autocut C 6-2, FS 38/40/45 4006-710-2126",
+   "price": "250"
+ },
+ {
+   "name": "Capac + joja ulei GH-41",
+   "price": "150"
+ },
+ {
+   "name": "Capac ambreiaj 180/190/195",
+   "price": "400"
+ },
+ {
+   "name": "Capac ax intermediar HT105/135",
+   "price": "60"
+ },
+ {
+   "name": "Capac bloc motor 178",
+   "price": "1200"
+ },
+ {
+   "name": "Capac bloc motor 186",
+   "price": "1300"
+ },
+ {
+   "name": "Capac carcasa ax reductor 101-2",
+   "price": "200"
+ },
+ {
+   "name": "Capac carter carburator MS 230/250 1123-140-1902",
+   "price": ""
+ },
+ {
+   "name": "Capac carter R180",
+   "price": "120"
+ },
+ {
+   "name": "Capac cauciuc cutie viteze 190",
+   "price": "50"
+ },
+ {
+   "name": "Capac chiulasa 168F",
+   "price": "100"
+ },
+ {
+   "name": "Capac chiulasa 178F",
+   "price": "250"
+ },
+ {
+   "name": "Capac chiulasa 180N",
+   "price": "250"
+ },
+ {
+   "name": "Capac chiulasa 186F",
+   "price": "280"
+ },
+ {
+   "name": "Capac chiulasa 190N",
+   "price": "300"
+ },
+ {
+   "name": "Capac chiulasa 195",
+   "price": "250"
+ },
+ {
+   "name": "Capac chiulasa RDT150",
+   "price": ""
+ },
+ {
+   "name": "Capac chiulasa ZS1100",
+   "price": ""
+ },
+ {
+   "name": "Capac chiulasa ZUBR HT-105",
+   "price": "250"
+ },
+ {
+   "name": "Capac chiulasa ZUBR HT-135",
+   "price": "280"
+ },
+ {
+   "name": "Capac cutie spate SH150",
+   "price": ""
+ },
+ {
+   "name": "Capac diferential 101 - MT",
+   "price": "250"
+ },
+ {
+   "name": "Capac diferential 101 cu reglare",
+   "price": "250"
+ },
+ {
+   "name": "Capac diferential 101 mare",
+   "price": "120"
+ },
+ {
+   "name": "Capac diferential 101 mic",
+   "price": "150"
+ },
+ {
+   "name": "Capac filtru aer 186F",
+   "price": "100"
+ },
+ {
+   "name": "Capac filtru aer НТ105",
+   "price": "100"
+ },
+ {
+   "name": "Capac maneta pornire 180",
+   "price": "80"
+ },
+ {
+   "name": "Capac motor GH-41",
+   "price": "350"
+ },
+ {
+   "name": "Capac motor lateral din partea volantei R190N/195N",
+   "price": "550"
+ },
+ {
+   "name": "Capac motor pornire manuala 180N",
+   "price": "1"
+ },
+ {
+   "name": "Capac motor pornire manuala 190NM",
+   "price": "850"
+ },
+ {
+   "name": "Capac motor scurt 180N",
+   "price": "450"
+ },
+ {
+   "name": "Capac pornire demaror manual 178F",
+   "price": "100"
+ },
+ {
+   "name": "Capac pornire demaror manual 186F",
+   "price": "120"
+ },
+ {
+   "name": "Capac priza de putere 180/190/195N",
+   "price": "30"
+ },
+ {
+   "name": "Capac protector 1100",
+   "price": "75"
+ },
+ {
+   "name": "Capac radiator 180",
+   "price": "40"
+ },
+ {
+   "name": "Capac radiator 190N",
+   "price": "40"
+ },
+ {
+   "name": "Capac reductor 1100",
+   "price": "450"
+ },
+ {
+   "name": "Capac reductor 180/190/195N",
+   "price": "200"
+ },
+ {
+   "name": "Capac rezervor",
+   "price": "250"
+ },
+ {
+   "name": "Capac rezervor 178F",
+   "price": "50"
+ },
+ {
+   "name": "Capac rezervor 180",
+   "price": "40"
+ },
+ {
+   "name": "Capac rezervor 180 Old",
+   "price": "40"
+ },
+ {
+   "name": "Capac rezervor 190",
+   "price": "40"
+ },
+ {
+   "name": "Capac rezervor GN-4/6.5HP",
+   "price": "80"
+ },
+ {
+   "name": "Capac spate cutie viteze 190NM",
+   "price": "450"
+ },
+ {
+   "name": "Capac stanga cutie viteze 101",
+   "price": "350"
+ },
+ {
+   "name": "Capac stinga cutie viteze 101",
+   "price": ""
+ },
+ {
+   "name": "Capac supape 173",
+   "price": "50"
+ },
+ {
+   "name": "Capac supape 178",
+   "price": "50"
+ },
+ {
+   "name": "Capac supape 186",
+   "price": "50"
+ },
+ {
+   "name": "Capac supape RDT150",
+   "price": "100"
+ },
+ {
+   "name": "Capac superior cutie de viteze - MT",
+   "price": "550"
+ },
+ {
+   "name": "Capac superior cutie viteze (2 gauri) 180/190/195NM",
+   "price": "350"
+ },
+ {
+   "name": "Capac superior cutie viteze 190",
+   "price": "350"
+ },
+ {
+   "name": "Capac superior cutie viteze 81",
+   "price": "450"
+ },
+ {
+   "name": "Carbuni electromotor 180N",
+   "price": "150"
+ },
+ {
+   "name": "Carbuni electromotor 190",
+   "price": "150"
+ },
+ {
+   "name": "Carburator 177F",
+   "price": "450"
+ },
+ {
+   "name": "Carburator 3WB-900",
+   "price": "350"
+ },
+ {
+   "name": "Carburator GN-4/6,5HP",
+   "price": "280"
+ },
+ {
+   "name": "Carcasa ax reductor 101-2",
+   "price": "400"
+ },
+ {
+   "name": "Carcasa cutie viteza 1100",
+   "price": "1500"
+ },
+ {
+   "name": "Carcasa cutie viteza 180/190/195NM",
+   "price": "3500"
+ },
+ {
+   "name": "Carcasa cutie viteze SH150",
+   "price": "2500"
+ },
+ {
+   "name": "Carcasa far 190NM",
+   "price": "100"
+ },
+ {
+   "name": "Carcasa reductor 101-2",
+   "price": "1500"
+ },
+ {
+   "name": "Carcasa reductor 1100",
+   "price": "1600"
+ },
+ {
+   "name": "Carcasa reductor freza RDT150",
+   "price": ""
+ },
+ {
+   "name": "Carcasa reductor freza SH150",
+   "price": ""
+ },
+ {
+   "name": "Carcasa reductor seceratoare 101",
+   "price": "150"
+ },
+ {
+   "name": "Carlig de remorcare ",
+   "price": ""
+ },
+ {
+   "name": "Caseta directie SH150",
+   "price": "1800"
+ },
+ {
+   "name": "Chiulasa 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Chiulasa 178FA (3 gauri)",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa 178FB",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa 186FB",
+   "price": "1200"
+ },
+ {
+   "name": "Chiulasa 188F",
+   "price": "1000"
+ },
+ {
+   "name": "Chiulasa ansamblu 168F",
+   "price": "650"
+ },
+ {
+   "name": "Chiulasa ansamblu 173",
+   "price": "1200"
+ },
+ {
+   "name": "Chiulasa ansamblu 175N (model vechi)",
+   "price": "900"
+ },
+ {
+   "name": "Chiulasa ansamblu 178F",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa ansamblu 180N",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa ansamblu 186F",
+   "price": "1200"
+ },
+ {
+   "name": "Chiulasa ansamblu 190N",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa ansamblu 190NDL",
+   "price": "1200"
+ },
+ {
+   "name": "Chiulasa ansamblu 190NM",
+   "price": "1100"
+ },
+ {
+   "name": "Chiulasa ansamblu 195 (pentru tractor)",
+   "price": "1400"
+ },
+ {
+   "name": "Chiulasa ansamblu 195NDL",
+   "price": "1300"
+ },
+ {
+   "name": "Chiulasa ansamblu 195NM",
+   "price": "1350"
+ },
+ {
+   "name": "Chiulasa ansamblu GH41",
+   "price": "1200"
+ },
+ {
+   "name": "Chiulasa cilindru RDT150",
+   "price": ""
+ },
+ {
+   "name": "Chiulasa goala 168F",
+   "price": ""
+ },
+ {
+   "name": "Chiulasa ZS1105",
+   "price": "2800"
+ },
+ {
+   "name": "Chiuloasa ansamblu DT-240E",
+   "price": "2800"
+ },
+ {
+   "name": "Cilindru 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Cilindru 180NM",
+   "price": "320"
+ },
+ {
+   "name": "Cilindru 185",
+   "price": "450"
+ },
+ {
+   "name": "Cilindru 190NM",
+   "price": "500"
+ },
+ {
+   "name": "Cilindru 192",
+   "price": "500"
+ },
+ {
+   "name": "Cilindru 195 Old",
+   "price": "500"
+ },
+ {
+   "name": "Cilindru 195NDL",
+   "price": "450"
+ },
+ {
+   "name": "Cilindru 195NM",
+   "price": "500"
+ },
+ {
+   "name": "Cilindru DT-240E",
+   "price": ""
+ },
+ {
+   "name": "Cilindru GH41",
+   "price": "750"
+ },
+ {
+   "name": "Cilindru hidraulic JR-Q12E",
+   "price": "1400"
+ },
+ {
+   "name": "Cilindru hidraulic SH150",
+   "price": "1300"
+ },
+ {
+   "name": "Cilindru hidraulic XT180",
+   "price": ""
+ },
+ {
+   "name": "Cilindru R175",
+   "price": "350"
+ },
+ {
+   "name": "Cilindru set CG-430B",
+   "price": "180"
+ },
+ {
+   "name": "Cilindru ZS1105",
+   "price": "650"
+ },
+ {
+   "name": "Cleme baterie 178/186",
+   "price": "70"
+ },
+ {
+   "name": "Cleme baterie 180/190",
+   "price": "70"
+ },
+ {
+   "name": "Clichet ambreiaj + rulment 180/190/195N",
+   "price": "350"
+ },
+ {
+   "name": "Clichet ambreiaj + rulment SH120",
+   "price": "500"
+ },
+ {
+   "name": "Clichet ambreiaj 180/190/195N",
+   "price": "200"
+ },
+ {
+   "name": "Clichet ambreiaj 190",
+   "price": "150"
+ },
+ {
+   "name": "Clichet ambreiaj R180",
+   "price": "200"
+ },
+ {
+   "name": "Clichet ambreiaj RDT150",
+   "price": "200"
+ },
+ {
+   "name": "Clichet ambreiaj SH120",
+   "price": "250"
+ },
+ {
+   "name": "Clichet ambreiaj SH150",
+   "price": "150"
+ },
+ {
+   "name": "Clichet ambreiaj Shifeng 240",
+   "price": "180"
+ },
+ {
+   "name": "Clichet ambreiaj VOM Minitractor",
+   "price": "350"
+ },
+ {
+   "name": "Clichet reductor 1100",
+   "price": "2300"
+ },
+ {
+   "name": "Clichet reductor freza SH120",
+   "price": ""
+ },
+ {
+   "name": "Coarda pornire goala НТ-105/135/GN-4/6,5HP",
+   "price": "30"
+ },
+ {
+   "name": "Coarda pornire НТ-105/135/GN-4/6,5HP",
+   "price": "50"
+ },
+ {
+   "name": "Combinatie de protectie faciala si auditiva 0000-884-0255",
+   "price": "400"
+ },
+ {
+   "name": "Compresor de aer / Компрессор АС5037",
+   "price": ""
+ },
+ {
+   "name": "Compresor de aer Technoworker 24 L 1500 W VOR56553",
+   "price": "2950"
+ },
+ {
+   "name": "Compresor de aer Technoworker 50 L 1500 W VOR56554",
+   "price": "4000"
+ },
+ {
+   "name": "Compresor de aer Technoworker SK 1500-100 L 1500 W VOR56558",
+   "price": "7500"
+ },
+ {
+   "name": "Comutator de comutare masiva - MT",
+   "price": "200"
+ },
+ {
+   "name": "Comutator siguranta 1100",
+   "price": "250"
+ },
+ {
+   "name": "Conducta combustibil 1100NM",
+   "price": "150"
+ },
+ {
+   "name": "Conducta combustibil 173",
+   "price": "200"
+ },
+ {
+   "name": "Conducta combustibil 178F",
+   "price": "150"
+ },
+ {
+   "name": "Conducta combustibil 180N",
+   "price": "100"
+ },
+ {
+   "name": "Conducta combustibil 186F",
+   "price": "150"
+ },
+ {
+   "name": "Conducta combustibil 190N",
+   "price": "130"
+ },
+ {
+   "name": "Conducta combustibil 190N (1)",
+   "price": "130"
+ },
+ {
+   "name": "Conducta combustibil 195NDL",
+   "price": "130"
+ },
+ {
+   "name": "Conducta combustibil 195NM",
+   "price": "150"
+ },
+ {
+   "name": "Conducta combustibil de inalta preseune TATA - 192D",
+   "price": "120"
+ },
+ {
+   "name": "Conducta combustibil pentru motor pe benzina P70F",
+   "price": "40"
+ },
+ {
+   "name": "Conducta combustibil RDT150",
+   "price": ""
+ },
+ {
+   "name": "Conducta combustibil RDT150 (1)",
+   "price": ""
+ },
+ {
+   "name": "Conducta combustibil ZS1100",
+   "price": "130"
+ },
+ {
+   "name": "Conducta de alimentare cu combustibil - 178F/186F",
+   "price": "30"
+ },
+ {
+   "name": "Conducta de retur combustibil ZS1100",
+   "price": "120"
+ },
+ {
+   "name": "Conducta filtru combustibil 1100NM",
+   "price": "150"
+ },
+ {
+   "name": "Conducta pompa ulei 190",
+   "price": "200"
+ },
+ {
+   "name": "Conducta pompa ulei 190 subtire",
+   "price": "150"
+ },
+ {
+   "name": "Conducta pompa ulei 195",
+   "price": "150"
+ },
+ {
+   "name": "Contact pornire 1100",
+   "price": "150"
+ },
+ {
+   "name": "Contact pornire R180/190/195",
+   "price": "120"
+ },
+ {
+   "name": "Cos ambreiaj 1100",
+   "price": "400"
+ },
+ {
+   "name": "Cos ambreiaj 173",
+   "price": "300"
+ },
+ {
+   "name": "Cos ambreiaj 173 (20mm)",
+   "price": ""
+ },
+ {
+   "name": "Cositoare rotativa pt minitractor",
+   "price": ""
+ },
+ {
+   "name": "Cositoare rotativa pt motocultor",
+   "price": "4000"
+ },
+ {
+   "name": "Cot carburator CG-430B",
+   "price": "50"
+ },
+ {
+   "name": "Cot filtru aer 178 F",
+   "price": "200"
+ },
+ {
+   "name": "Cot filtru aer 186 F",
+   "price": "150"
+ },
+ {
+   "name": "Cot filtru aer 195NM",
+   "price": "250"
+ },
+ {
+   "name": "Cot filtru aer GH41",
+   "price": "200"
+ },
+ {
+   "name": "Cot galeria admisie 186 F",
+   "price": "200"
+ },
+ {
+   "name": "Cot teava de esapament R195NM",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori 178F",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori 186F",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori 195N",
+   "price": "200"
+ },
+ {
+   "name": "Culbutori ansamblu 180",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori ansamblu 195",
+   "price": "300"
+ },
+ {
+   "name": "Culbutori ansamblu RDT150",
+   "price": "350"
+ },
+ {
+   "name": "Culbutori ansamblu НТ-105",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori ansamblu НТ-135",
+   "price": "250"
+ },
+ {
+   "name": "Culbutori ZS1115",
+   "price": "250"
+ },
+ {
+   "name": "Cultivator L-2100",
+   "price": "11500"
+ },
+ {
+   "name": "Cultivator КМC-2 f/t",
+   "price": "4000"
+ },
+ {
+   "name": "Cultivator КУМC-600",
+   "price": ""
+ },
+ {
+   "name": "Curea 1120Li - KRO 900",
+   "price": "100"
+ },
+ {
+   "name": "Curea 1670",
+   "price": "65"
+ },
+ {
+   "name": "Curea 17*914L(963)",
+   "price": "100"
+ },
+ {
+   "name": "Curea 17*963",
+   "price": "140"
+ },
+ {
+   "name": "Curea 1700",
+   "price": "65"
+ },
+ {
+   "name": "Curea 1750",
+   "price": "130"
+ },
+ {
+   "name": "Curea 1800",
+   "price": "130"
+ },
+ {
+   "name": "Curea 1830",
+   "price": "130"
+ },
+ {
+   "name": "Curea 3200",
+   "price": "320"
+ },
+ {
+   "name": "Curea 900",
+   "price": "40"
+ },
+ {
+   "name": "Curea 914",
+   "price": "80"
+ },
+ {
+   "name": "Curea 965L",
+   "price": "50"
+ },
+ {
+   "name": "Curea B1050",
+   "price": "70"
+ },
+ {
+   "name": "Curea B-1100",
+   "price": "70"
+ },
+ {
+   "name": "Curea B-1120",
+   "price": ""
+ },
+ {
+   "name": "Curea B1171",
+   "price": ""
+ },
+ {
+   "name": "Curea B-2311",
+   "price": "150"
+ },
+ {
+   "name": "Curea B-2550",
+   "price": "320"
+ },
+ {
+   "name": "Curea B3080",
+   "price": "320"
+ },
+ {
+   "name": "Curea B-3100 - MT",
+   "price": "160"
+ },
+ {
+   "name": "Curea B-3250",
+   "price": "130"
+ },
+ {
+   "name": "Curea B-3300",
+   "price": "320"
+ },
+ {
+   "name": "Curea B-3400",
+   "price": "320"
+ },
+ {
+   "name": "Curea B-3450",
+   "price": "320"
+ },
+ {
+   "name": "Curea B-3500",
+   "price": "320"
+ },
+ {
+   "name": "Curea B-900",
+   "price": ""
+ },
+ {
+   "name": "Curea de transmisie (13*945Lw-7) - 156F",
+   "price": "100"
+ },
+ {
+   "name": "Curea generator Z1100",
+   "price": "40"
+ },
+ {
+   "name": "Curea generator/ventilator Z-914 180N",
+   "price": "50"
+ },
+ {
+   "name": "Cutie baterie GH101",
+   "price": "350"
+ },
+ {
+   "name": "Cutit de taiat „Kaplea”, set: 4 buc. - 1100 KRE",
+   "price": "250"
+ },
+ {
+   "name": "Cutit freza dreapta 130*165 mm",
+   "price": "40"
+ },
+ {
+   "name": "Cutit freza stanga 130*165 mm",
+   "price": "40"
+ },
+ {
+   "name": "Cutit freza stinga 180/190/195",
+   "price": ""
+ },
+ {
+   "name": "Cutit pentru taiat iarba 230-2, FS 55-250 4001-713-3805",
+   "price": ""
+ },
+ {
+   "name": "Cutit pentru taiat iarba 230-8Z",
+   "price": ""
+ },
+ {
+   "name": "Cutit p-u freza 180/190/195N",
+   "price": "80"
+ },
+ {
+   "name": "Cutit p-u seceratoare segment",
+   "price": "50"
+ },
+ {
+   "name": "Cutit p-u seceratoare segment (Set) 4 buc",
+   "price": "200"
+ },
+ {
+   "name": "Cutit RM/MB 248 6350-702-0103",
+   "price": ""
+ },
+ {
+   "name": "Cutite freza 1100",
+   "price": "80"
+ },
+ {
+   "name": "Cutite freza 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Cuzineti 1100NM",
+   "price": "150"
+ },
+ {
+   "name": "Cuzineti 173",
+   "price": "150"
+ },
+ {
+   "name": "Cuzineti 178FB",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti 180N",
+   "price": "50"
+ },
+ {
+   "name": "Cuzineti 186FB",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti 190N",
+   "price": "50"
+ },
+ {
+   "name": "Cuzineti 192D STD",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti ambielaj DT-240E",
+   "price": "200"
+ },
+ {
+   "name": "Cuzineti HT-105 0.25",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti HT-105/6HP",
+   "price": "80"
+ },
+ {
+   "name": "Cuzineti HT-135 0.25",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti HT-135 0.50",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti HT-135/9HP",
+   "price": "80"
+ },
+ {
+   "name": "Cuzineti Q74 (GH41)",
+   "price": "100"
+ },
+ {
+   "name": "Cuzineti R180N 0.50",
+   "price": "80"
+ },
+ {
+   "name": "Cuzineti R190N 0.50",
+   "price": "50"
+ },
+ {
+   "name": "Cuzineti XT180",
+   "price": "250"
+ },
+ {
+   "name": "Demaror electric Z-11 12V2.0KW ZS/ZH1100YBX",
+   "price": ""
+ },
+ {
+   "name": "Demaror manual (NEW DESIGN) - 170F",
+   "price": "150"
+ },
+ {
+   "name": "Demaror manual 168F",
+   "price": "120"
+ },
+ {
+   "name": "Demaror manual 173",
+   "price": "350"
+ },
+ {
+   "name": "Demaror manual 177F",
+   "price": "250"
+ },
+ {
+   "name": "Demaror manual 178FB",
+   "price": "380"
+ },
+ {
+   "name": "Demaror manual 186FB",
+   "price": "380"
+ },
+ {
+   "name": "Demaror manual 3WZ-7",
+   "price": "150"
+ },
+ {
+   "name": "Demaror manual CG430B",
+   "price": "80"
+ },
+ {
+   "name": "Demaror manual universal 178/186F",
+   "price": "2200"
+ },
+ {
+   "name": "Demaror reductor universal 178F/186F",
+   "price": "2100"
+ },
+ {
+   "name": "Disc - KRO 900",
+   "price": "450"
+ },
+ {
+   "name": "Disc (tip 1) - KRE 1100",
+   "price": "450"
+ },
+ {
+   "name": "Disc 80T",
+   "price": "80"
+ },
+ {
+   "name": "Disc ambreiaj 180/190/195N",
+   "price": "100"
+ },
+ {
+   "name": "Disc ambreiaj Shifeng 240",
+   "price": "380"
+ },
+ {
+   "name": "Disc arcuri ambreiaj Shifeng 240",
+   "price": "220"
+ },
+ {
+   "name": "Disc intermediar ambreiaj 1100",
+   "price": "200"
+ },
+ {
+   "name": "Disc intermediar ambreiaj 180/190/195NM",
+   "price": "250"
+ },
+ {
+   "name": "Disc intermediar ambreiaj central 1100NM",
+   "price": "200"
+ },
+ {
+   "name": "Disc intermediar ambreiaj Shifeng 240",
+   "price": "250"
+ },
+ {
+   "name": "Disc metal ambreiaj Shifeng 240",
+   "price": "450"
+ },
+ {
+   "name": "Disc p/t trimer",
+   "price": "130"
+ },
+ {
+   "name": "Disc roata 10\" 1100",
+   "price": "550"
+ },
+ {
+   "name": "Disc roata 12\" 1100",
+   "price": "400"
+ },
+ {
+   "name": "Disc roata 6.00-12",
+   "price": "450"
+ },
+ {
+   "name": "Disc trimer 3T",
+   "price": "80"
+ },
+ {
+   "name": "Discuri ambreiaj set: 5 buc.",
+   "price": "150"
+ },
+ {
+   "name": "Distribuitor hidraulic 1 directie SH120E",
+   "price": ""
+ },
+ {
+   "name": "Distribuitor hidraulic 2 directii SH120E",
+   "price": ""
+ },
+ {
+   "name": "Distribuitor hidraulic pozitie libera SH120E",
+   "price": "1250"
+ },
+ {
+   "name": "Duza injector 1100NM",
+   "price": "200"
+ },
+ {
+   "name": "Duza injector 178FB",
+   "price": "180"
+ },
+ {
+   "name": "Duza injector 180/190/195NM",
+   "price": "80"
+ },
+ {
+   "name": "Duza injector 186",
+   "price": "200"
+ },
+ {
+   "name": "Electromotor 1100NM",
+   "price": "2500"
+ },
+ {
+   "name": "Electromotor 178FB",
+   "price": "1250"
+ },
+ {
+   "name": "Electromotor 180NM",
+   "price": "1650"
+ },
+ {
+   "name": "Electromotor 195NM",
+   "price": "1700"
+ },
+ {
+   "name": "Electromotor cu reductie R190/195NM",
+   "price": "1800"
+ },
+ {
+   "name": "Electromotor Z-10 195N ",
+   "price": "1800"
+ },
+ {
+   "name": "Electromotor Z-11 190N",
+   "price": "2500"
+ },
+ {
+   "name": "Electromotor ZS1105",
+   "price": "2500"
+ },
+ {
+   "name": "Element filtrare168F",
+   "price": "40"
+ },
+ {
+   "name": "Element filtru aer - ulei - 180N",
+   "price": "80"
+ },
+ {
+   "name": "Element filtru aer 168F",
+   "price": "80"
+ },
+ {
+   "name": "Element filtru aer 180N",
+   "price": "50"
+ },
+ {
+   "name": "Element filtru aer buret 178F",
+   "price": "50"
+ },
+ {
+   "name": "Element filtru curatare fina -  186F",
+   "price": "80"
+ },
+ {
+   "name": "Far 178/186",
+   "price": "350"
+ },
+ {
+   "name": "Far 180N",
+   "price": "150"
+ },
+ {
+   "name": "Far 190",
+   "price": "150"
+ },
+ {
+   "name": "Far 195NM",
+   "price": "250"
+ },
+ {
+   "name": "Far GH10E",
+   "price": "200"
+ },
+ {
+   "name": "Far SH120E",
+   "price": "1100"
+ },
+ {
+   "name": "Far SH150",
+   "price": "400"
+ },
+ {
+   "name": "Ferastrau cu motor electric cu lant  KRAISSMANN 4310",
+   "price": "2500"
+ },
+ {
+   "name": "Fierestrau electric cu lant DAC 316E 316e2015",
+   "price": ""
+ },
+ {
+   "name": "Fierestrau p-u ramuri HANDY CUT/PR16 0000-881-8700",
+   "price": "500"
+ },
+ {
+   "name": "Fierestrau p-u ramuri Super TurboCut 0000-881-4111",
+   "price": "600"
+ },
+ {
+   "name": "Filtru aer 1100",
+   "price": ""
+ },
+ {
+   "name": "Filtru aer 168F",
+   "price": "250"
+ },
+ {
+   "name": "Filtru aer 177F",
+   "price": "380"
+ },
+ {
+   "name": "Filtru aer 186F Generator",
+   "price": "400"
+ },
+ {
+   "name": "Filtru aer ansamblu 178F",
+   "price": "300"
+ },
+ {
+   "name": "Filtru aer ansamblu 180N",
+   "price": "300"
+ },
+ {
+   "name": "Filtru aer ansamblu 186F",
+   "price": "350"
+ },
+ {
+   "name": "Filtru aer ansamblu 190N",
+   "price": "300"
+ },
+ {
+   "name": "Filtru aer ansamblu 195NM",
+   "price": "400"
+ },
+ {
+   "name": "Filtru aer element 180NM",
+   "price": "120"
+ },
+ {
+   "name": "Filtru aer element 190NM",
+   "price": "100"
+ },
+ {
+   "name": "Filtru aer element 195NM",
+   "price": "100"
+ },
+ {
+   "name": "Filtru aer element ZS1100",
+   "price": "100"
+ },
+ {
+   "name": "Filtru aer GN-4/6.5 HP",
+   "price": "250"
+ },
+ {
+   "name": "Filtru combustibil 173",
+   "price": "60"
+ },
+ {
+   "name": "Filtru combustibil 178F",
+   "price": "60"
+ },
+ {
+   "name": "Filtru combustibil 186F",
+   "price": "60"
+ },
+ {
+   "name": "Filtru combustibil XT180",
+   "price": "50"
+ },
+ {
+   "name": "Filtru combustibil ZS1115",
+   "price": "150"
+ },
+ {
+   "name": "Filtru de aer 3WB-900",
+   "price": "150"
+ },
+ {
+   "name": "Filtru de aer AG52",
+   "price": "150"
+ },
+ {
+   "name": "Filtru plasa rezervor 178/186",
+   "price": "40"
+ },
+ {
+   "name": "Filtru plasa rezervor 190NM",
+   "price": "50"
+ },
+ {
+   "name": "Filtru rezervor combustibil 101-2",
+   "price": "30"
+ },
+ {
+   "name": "Filtru robinet combustibil 180/190/195N",
+   "price": "30"
+ },
+ {
+   "name": "Filtru ulei 178",
+   "price": "70"
+ },
+ {
+   "name": "Filtru ulei 180NM",
+   "price": "80"
+ },
+ {
+   "name": "Filtru ulei 186FB",
+   "price": "70"
+ },
+ {
+   "name": "Filtru ulei XT180",
+   "price": ""
+ },
+ {
+   "name": "Filtru ulei ZP3134/CS0151/SO6159",
+   "price": "350"
+ },
+ {
+   "name": "Fir pentru cosit iarba, patrat d  2,7 mm x 32 m 0000-930-2642",
+   "price": "150"
+ },
+ {
+   "name": "Fir pentru cosit iarba, patrat d  3,0 mm x 53 m 0000-930-2644",
+   "price": "300"
+ },
+ {
+   "name": "Fir pentru cosit iarba, rotund d  4,0 mm x 27 m 0000-930-3607",
+   "price": "300"
+ },
+ {
+   "name": "Fir pentru cosit iarba, rotund d.3.0 mm*280 m 0000-930-2543-1",
+   "price": ""
+ },
+ {
+   "name": "Fir pentru cosit iarba, silentios d.1.6 mm*20m 0000-930-2415",
+   "price": ""
+ },
+ {
+   "name": "Fir pentru motocoasa PL240-250-5",
+   "price": ""
+ },
+ {
+   "name": "Fir pu cosit iarba, pentagonal d.3,3 mm x 23 m 0000-930-3345 3.3",
+   "price": "150"
+ },
+ {
+   "name": "Fir pu cosit iarba, silentios d.1,6 mm x 19 m 00009302415-19 1.6",
+   "price": ""
+ },
+ {
+   "name": "Fir pu cosit iarba, silentios d.2,0 mm x 14 m 00009302416-14 2.0",
+   "price": ""
+ },
+ {
+   "name": "Fir trimer profil patrat 2.4mm*15m",
+   "price": "60"
+ },
+ {
+   "name": "Fir trimer profil patrat 3.0mm*15m",
+   "price": "60"
+ },
+ {
+   "name": "Fir trimer profil rotund 2.4mm*15m",
+   "price": "60"
+ },
+ {
+   "name": "Fir trimer profil rotund 3.0mm*15m",
+   "price": "60"
+ },
+ {
+   "name": "Flansa pompa hidraulica RDT150",
+   "price": ""
+ },
+ {
+   "name": "Flansa reductor 1100",
+   "price": "280"
+ },
+ {
+   "name": "Flansa roata 101",
+   "price": "400"
+ },
+ {
+   "name": "Flansa roata fata SH120",
+   "price": ""
+ },
+ {
+   "name": "Flansa roata spate RDT150",
+   "price": ""
+ },
+ {
+   "name": "Flansa roata spate SH150",
+   "price": ""
+ },
+ {
+   "name": "Foarfeca de gradina Universal 0000-881-3637",
+   "price": "900"
+ },
+ {
+   "name": "Foarfeca de gradina, model de baza 0000-881-3604",
+   "price": "230"
+ },
+ {
+   "name": "Foreza AG52",
+   "price": ""
+ },
+ {
+   "name": "Freza brazda 1100 F/T",
+   "price": ""
+ },
+ {
+   "name": "Freza de zapada ZLST401Q 4hp",
+   "price": ""
+ },
+ {
+   "name": "Freza p/u motocultor 101",
+   "price": "900"
+ },
+ {
+   "name": "Freza pt lucrarea solului ZUBR",
+   "price": "6500"
+ },
+ {
+   "name": "Freza SH150",
+   "price": ""
+ },
+ {
+   "name": "Freza WM-12 f/t",
+   "price": ""
+ },
+ {
+   "name": "Freze la motocultor GN-4C",
+   "price": "2500"
+ },
+ {
+   "name": "Freze la motocultor HT-105E",
+   "price": "3500"
+ },
+ {
+   "name": "Freze la motocultor HT-135E",
+   "price": "4000"
+ },
+ {
+   "name": "Freze la motocultor WM1000N-3/1",
+   "price": "3000"
+ },
+ {
+   "name": "Freze pentru prelucrarea solului (RS-PRO/ECO) VOR56732",
+   "price": "3000"
+ },
+ {
+   "name": "Freze pentru prelucrarea solului 1.0 m (motorina) VOR57859",
+   "price": ""
+ },
+ {
+   "name": "Freze pentru prelucrarea solului 1.4 m (motorina) VOR56550",
+   "price": "3000"
+ },
+ {
+   "name": "Freze pentru prelucrarea solului N-line VOR57410",
+   "price": ""
+ },
+ {
+   "name": "Freze pentru prelucrarea solului S - line VOR57411",
+   "price": "2500"
+ },
+ {
+   "name": "FS 120 Motocositoare set cu cutit GC 230-2 si cap de cosit AutoCut 26-2 4134-200-0433",
+   "price": "7000"
+ },
+ {
+   "name": "FS 38, Autocut C6-2 Motocositoare",
+   "price": "3300"
+ },
+ {
+   "name": "FS 55 Motocositoare set cu cutit GC 230-2 si cap de cosit AutoCut 27-2",
+   "price": "4800"
+ },
+ {
+   "name": "FSA45 Cositoare cu acumulator incorporat FSA45",
+   "price": "2400"
+ },
+ {
+   "name": "FSE 31 Motocositoare electrica",
+   "price": "1300"
+ },
+ {
+   "name": "FSE 52 Motocositoare electrica",
+   "price": "1750"
+ },
+ {
+   "name": "Furca ambreiaj 180/190/195N",
+   "price": "120"
+ },
+ {
+   "name": "Furca cutie viteza tip 1 SH120",
+   "price": "250"
+ },
+ {
+   "name": "Furca frictiune 101-2",
+   "price": "150"
+ },
+ {
+   "name": "Furca revers 1100",
+   "price": "150"
+ },
+ {
+   "name": "Furca revers 180/190/195NM",
+   "price": "150"
+ },
+ {
+   "name": "Furca schimb viteza 2-3 101-2",
+   "price": "200"
+ },
+ {
+   "name": "Furca schimb viteza 2-3 81-1",
+   "price": "200"
+ },
+ {
+   "name": "Furca schimb viteze (rapid-lent) 101-2",
+   "price": "150"
+ },
+ {
+   "name": "Furca schimb viteze (rapid-lent) 81-1",
+   "price": "150"
+ },
+ {
+   "name": "Furca schimb viteze 168-170F",
+   "price": "120"
+ },
+ {
+   "name": "Furca schimb viteze HT-105/135",
+   "price": "200"
+ },
+ {
+   "name": "Furca transmisie 1100",
+   "price": "150"
+ },
+ {
+   "name": "Furca transmisie directie 81-1",
+   "price": "150"
+ },
+ {
+   "name": "Furtun 3WZ-7",
+   "price": "150"
+ },
+ {
+   "name": "Furtun hidraulic L-560 mm (racord - piulita) - MT",
+   "price": "250"
+ },
+ {
+   "name": "Furtun hidraulic L-620 mm (unire - piulita) - MT",
+   "price": "200"
+ },
+ {
+   "name": "Furtun hidraulic mic L-650 mm",
+   "price": "200"
+ },
+ {
+   "name": "Furtun hidraulic RDT150 250cm",
+   "price": "300"
+ },
+ {
+   "name": "Furtun hidraulic set 1100NM",
+   "price": "650"
+ },
+ {
+   "name": "Furtun hidraulic set RDT150",
+   "price": "650"
+ },
+ {
+   "name": "Furtun senzor presiune ulei RDT240E",
+   "price": ""
+ },
+ {
+   "name": "Fuseta coloana de directie YBX",
+   "price": "350"
+ },
+ {
+   "name": "Galerie admisie 178FB",
+   "price": "150"
+ },
+ {
+   "name": "Garnitura capac chiulasa 178",
+   "price": "20"
+ },
+ {
+   "name": "Garnitura capac chiulasa 186",
+   "price": "20"
+ },
+ {
+   "name": "Garnitura cauciuc chiulasa 173",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura cauciuc chiulasa 178",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura cauciuc pompa hidraulica 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Garnitura chiulasa 175",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa 180N",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa 180N (cu limba)",
+   "price": "60"
+ },
+ {
+   "name": "Garnitura chiulasa 190N",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa 190N (cu limba)",
+   "price": "60"
+ },
+ {
+   "name": "Garnitura chiulasa 195 Agroteh",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa 195N",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa 195N (cu limba) ",
+   "price": "60"
+ },
+ {
+   "name": "Garnitura chiulasa DT240E",
+   "price": "100"
+ },
+ {
+   "name": "Garnitura chiulasa GH41",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa GN-4",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiulasa ZS1105",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura chiuloasa 1100NM",
+   "price": "60"
+ },
+ {
+   "name": "Garnitura chiuloasa XT180",
+   "price": "200"
+ },
+ {
+   "name": "Garnitura cot filtru aer 186",
+   "price": "20"
+ },
+ {
+   "name": "Garnitura filtru aer 195NM",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura galerie admisie 186FB",
+   "price": "20"
+ },
+ {
+   "name": "Garnitura metalica bloc 178FB",
+   "price": "80"
+ },
+ {
+   "name": "Garnitura metalica bloc 186FB",
+   "price": "100"
+ },
+ {
+   "name": "Garnitura metalica chiulasa 173",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura metalica chiuloasa 178FB",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura metalica chiuloasa 186FB",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura metalica chiuloasa 188F",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura motor HT-135/9HP",
+   "price": "150"
+ },
+ {
+   "name": "Garnitura pentru pompa  de combustibil 180N",
+   "price": "30"
+ },
+ {
+   "name": "Garnitura pompa combustibil 178/186",
+   "price": "30"
+ },
+ {
+   "name": "Garnitura radiator set 195N",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura reductor freza 101-2",
+   "price": "100"
+ },
+ {
+   "name": "Garnitura reductor HT105/135",
+   "price": "50"
+ },
+ {
+   "name": "Garnitura robinetului de combustibil - 178F/186F",
+   "price": "30"
+ },
+ {
+   "name": "Garnitura sapun 190NM",
+   "price": "20"
+ },
+ {
+   "name": "Garnituri cutie set 101",
+   "price": "100"
+ },
+ {
+   "name": "Garnituri motor 1100NM",
+   "price": "200"
+ },
+ {
+   "name": "Garnituri motor 168F",
+   "price": "150"
+ },
+ {
+   "name": "Garnituri motor 170 F-L",
+   "price": "80"
+ },
+ {
+   "name": "Garnituri motor 173",
+   "price": "200"
+ },
+ {
+   "name": "Garnituri motor 178F",
+   "price": "150"
+ },
+ {
+   "name": "Garnituri motor 180N",
+   "price": "100"
+ },
+ {
+   "name": "Garnituri motor 180N capac scurt",
+   "price": "60"
+ },
+ {
+   "name": "Garnituri motor 186F",
+   "price": "150"
+ },
+ {
+   "name": "Garnituri motor 190NM",
+   "price": "100"
+ },
+ {
+   "name": "Garnituri motor 195NM",
+   "price": "100"
+ },
+ {
+   "name": "Garnituri motor GH41",
+   "price": "150"
+ },
+ {
+   "name": "Garnituri motor RDT150",
+   "price": "100"
+ },
+ {
+   "name": "Garnituri radiator set 180N",
+   "price": "50"
+ },
+ {
+   "name": "Garnituri radiator set 190N",
+   "price": "50"
+ },
+ {
+   "name": "Generator GF 3200 E cu roti",
+   "price": "11200"
+ },
+ {
+   "name": "Generator GF 5500 E-3",
+   "price": "13290"
+ },
+ {
+   "name": "Generator HT105/135",
+   "price": "650"
+ },
+ {
+   "name": "Generator R22",
+   "price": "1000"
+ },
+ {
+   "name": "Generator ZS1100",
+   "price": "850"
+ },
+ {
+   "name": "Ghidaj supape set 180N",
+   "price": "100"
+ },
+ {
+   "name": "Ghidaj supape set 190N",
+   "price": "50"
+ },
+ {
+   "name": "GTA 26 Ferestrau pe acumulator ",
+   "price": "3300"
+ },
+ {
+   "name": "HSE 42 Electrofoarfeca de tuns gard viu, 45cm",
+   "price": "2400"
+ },
+ {
+   "name": "Impingator pompa combustibil 180",
+   "price": "80"
+ },
+ {
+   "name": "Impingator supape 178F",
+   "price": "150"
+ },
+ {
+   "name": "Impingator supape 186F",
+   "price": "150"
+ },
+ {
+   "name": "Impingator supape 195NM",
+   "price": "150"
+ },
+ {
+   "name": "Impingator supape RDT150",
+   "price": ""
+ },
+ {
+   "name": "Indicator moto-ore SH120",
+   "price": "450"
+ },
+ {
+   "name": "Inel cauciuc cilindru 180N",
+   "price": "20"
+ },
+ {
+   "name": "Inel cauciuc cilindru 190N",
+   "price": "20"
+ },
+ {
+   "name": "Inel cauciuc cilindru 195N",
+   "price": "20"
+ },
+ {
+   "name": "Inel cauciuc filtru aer 178/186",
+   "price": "30"
+ },
+ {
+   "name": "Inel cauciuc maneta cutie viteze 1100",
+   "price": "10"
+ },
+ {
+   "name": "Injector 1100NM",
+   "price": "450"
+ },
+ {
+   "name": "Injector 175N",
+   "price": "300"
+ },
+ {
+   "name": "Injector 178F",
+   "price": "300"
+ },
+ {
+   "name": "Injector 180N",
+   "price": "250"
+ },
+ {
+   "name": "Injector 186F",
+   "price": "350"
+ },
+ {
+   "name": "Injector 188F",
+   "price": "750"
+ },
+ {
+   "name": "Injector 190N",
+   "price": "250"
+ },
+ {
+   "name": "Injector 195N",
+   "price": "250"
+ },
+ {
+   "name": "Injector combustibil 186FB",
+   "price": "400"
+ },
+ {
+   "name": "Injector combustibil DT-240E",
+   "price": "500"
+ },
+ {
+   "name": "Injector GH10E",
+   "price": "400"
+ },
+ {
+   "name": "Injector GH-41",
+   "price": "450"
+ },
+ {
+   "name": "Injector R192",
+   "price": "300"
+ },
+ {
+   "name": "Injector XT180",
+   "price": "500"
+ },
+ {
+   "name": "Intinzator curea 180NM",
+   "price": "200"
+ },
+ {
+   "name": "Intinzator curea 190NM",
+   "price": "150"
+ },
+ {
+   "name": "Intinzator curea SH120",
+   "price": "450"
+ },
+ {
+   "name": "Intinzator lant freza 190",
+   "price": "120"
+ },
+ {
+   "name": "IP000524 Manson acceleratie",
+   "price": "100"
+ },
+ {
+   "name": "Joja ulei 168F",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei 180N",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei 186F",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei 190N",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei cutie GH41",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei GH10E",
+   "price": "50"
+ },
+ {
+   "name": "Joja ulei RDT150",
+   "price": ""
+ },
+ {
+   "name": "Joja ulei reductor",
+   "price": "40"
+ },
+ {
+   "name": "Joja ulei SH150",
+   "price": "50"
+ },
+ {
+   "name": "Kit arcuri acceleratie 178/186",
+   "price": "100"
+ },
+ {
+   "name": "Kit cilindru 3WZ-7",
+   "price": "180"
+ },
+ {
+   "name": "Kit cilindru AG63",
+   "price": "300"
+ },
+ {
+   "name": "Kit cilindrul CG520B",
+   "price": "180"
+ },
+ {
+   "name": "Kit piston 3WZ-7",
+   "price": "100"
+ },
+ {
+   "name": "Kit piston CG430B",
+   "price": "100"
+ },
+ {
+   "name": "Kit piston CG520B",
+   "price": "100"
+ },
+ {
+   "name": "Kit piston XT180",
+   "price": "600"
+ },
+ {
+   "name": "Kit reparatie demaror manual GN-4",
+   "price": "80"
+ },
+ {
+   "name": "Kit reparatie demaror manual HT135",
+   "price": "150"
+ },
+ {
+   "name": "Kit reparatie pompa combustibil (plunger) 178/186",
+   "price": "100"
+ },
+ {
+   "name": "Lant dublu reductor 1100",
+   "price": "350"
+ },
+ {
+   "name": "Lant reductor freza (2R) RDT150",
+   "price": "280"
+ },
+ {
+   "name": "Lant transmisie 180/190/195N",
+   "price": "200"
+ },
+ {
+   "name": "Lant transmisie freza dublu DT-240E",
+   "price": "350"
+ },
+ {
+   "name": "Lant transmisie freza dublu lung DT-240E",
+   "price": "400"
+ },
+ {
+   "name": "Lopata pentru zapada in asamblare (380*580) Nr2",
+   "price": "75"
+ },
+ {
+   "name": "Lopata pentru zapada in asamblare (385*385) Nr3",
+   "price": "65"
+ },
+ {
+   "name": "Lopata pentru zapada in asamblare (385*485) Nr4",
+   "price": "70"
+ },
+ {
+   "name": "Manere ghidon 186F",
+   "price": "50"
+ },
+ {
+   "name": "Maneta acceleratie + ghidon CG430B",
+   "price": "300"
+ },
+ {
+   "name": "Maneta acceleratie 178-186F",
+   "price": "50"
+ },
+ {
+   "name": "Maneta acceleratie 18/190/195",
+   "price": "80"
+ },
+ {
+   "name": "Maneta acceleratie 3WB-900",
+   "price": "250"
+ },
+ {
+   "name": "Maneta acceleratie AG52",
+   "price": "250"
+ },
+ {
+   "name": "Maneta acceleratie CG430B",
+   "price": "250"
+ },
+ {
+   "name": "Maneta alimentara electrica 180/190/195N",
+   "price": "250"
+ },
+ {
+   "name": "Maneta ambreiaj 178-186F",
+   "price": "70"
+ },
+ {
+   "name": "Maneta capac chiulasa R180N",
+   "price": "100"
+ },
+ {
+   "name": "Maneta capac chiulasa178/186",
+   "price": "100"
+ },
+ {
+   "name": "Maneta cauciuc ghidon 190",
+   "price": "50"
+ },
+ {
+   "name": "Maneta demaror manual 168F",
+   "price": "20"
+ },
+ {
+   "name": "Maneta demaror manual 178F/186F",
+   "price": "50"
+ },
+ {
+   "name": "Maneta frictiune 180/190/195N",
+   "price": "100"
+ },
+ {
+   "name": "Maneta frina sabot transmisie 101",
+   "price": ""
+ },
+ {
+   "name": "Maneta oprire motor 168F",
+   "price": "80"
+ },
+ {
+   "name": "Maneta oprire motor 178-186F",
+   "price": "70"
+ },
+ {
+   "name": "Maneta pornire 180",
+   "price": "150"
+ },
+ {
+   "name": "Maneta pornire 190",
+   "price": "150"
+ },
+ {
+   "name": "Maneta pornire lumina SH120",
+   "price": ""
+ },
+ {
+   "name": "Maneta schimb viteze 180",
+   "price": "250"
+ },
+ {
+   "name": "Maneta schimb viteze 190",
+   "price": "200"
+ },
+ {
+   "name": "Maneta tija directie RDT150",
+   "price": ""
+ },
+ {
+   "name": "Manicot roata motocultor Technoworker d23-25cm VOR58521",
+   "price": "200"
+ },
+ {
+   "name": "Manusi de lucru Dynamic Vent XL 0088-611-1711",
+   "price": "300"
+ },
+ {
+   "name": "Manusi de lucru UNIVERSAL I 0000-884-1118",
+   "price": "100"
+ },
+ {
+   "name": "Masina de spalat cu presiune VHW 155 060098",
+   "price": ""
+ },
+ {
+   "name": "Masina de tuns gazon LW-19A",
+   "price": "12200"
+ },
+ {
+   "name": "Mecanism acceleratie 168F",
+   "price": "150"
+ },
+ {
+   "name": "Mecanism de control al clapetei de acceleratie 168F",
+   "price": "100"
+ },
+ {
+   "name": "Motoare cu piston de aprindere prin compresie 186FE-9HP pt motocultor",
+   "price": "8500"
+ },
+ {
+   "name": "Motoare cu piston de aprindere prin compresie R180-8HP pt motocultor",
+   "price": ""
+ },
+ {
+   "name": "Motoare cu piston de aprindere prin compresie R192-10HP pt motoculltor",
+   "price": "10000"
+ },
+ {
+   "name": "Motoare cu piston de aprindere prin compresie R195-12HP pt motoculltor",
+   "price": "10500"
+ },
+ {
+   "name": "Motobloc TT-900ZX TATA (3+1, curea)",
+   "price": "8000"
+ },
+ {
+   "name": "Motoblock benzina TT-1100C-ZX TATA (reductor)",
+   "price": "8500"
+ },
+ {
+   "name": "Motocultor  MB-ZX100-1 (reductor), roata 4,00*8 (fara aier) (2+1) motor 170f (7hp) - benzina",
+   "price": "7500"
+ },
+ {
+   "name": "MOTOCULTOR \"ZUBR\", 7HP, GN-4C, benzin",
+   "price": "5500"
+ },
+ {
+   "name": "MOTOCULTOR \"ZUBR\", 7HP, HT-105E motorina",
+   "price": "9000"
+ },
+ {
+   "name": "MOTOCULTOR \"ZUBR\", 9HP, HT-135E motorina",
+   "price": "8500"
+ },
+ {
+   "name": "Motocultor MB-1100F(3-12)-ZX (reductor), motor 188F(13hp) - benzina, reductor 3+1 roata 5*12",
+   "price": "11000"
+ },
+ {
+   "name": "Motocultor Technoworker HB 700 RS-ECO(fara freza) VOR56868",
+   "price": "5000"
+ },
+ {
+   "name": "Motocultor Technoworker HB 700 S (fara freza) VOR57472",
+   "price": "6000"
+ },
+ {
+   "name": "Motocultor Technoworker motorina 100 D 3.5 Kw(f.f) VOR57814",
+   "price": ""
+ },
+ {
+   "name": "Motocultor Technoworker motorina 100 DE 3.5 Kw (f.f) VOR57815",
+   "price": ""
+ },
+ {
+   "name": "Motocultor Technoworker motorina 135 D 186FE (f.f) VOR57817",
+   "price": "10000"
+ },
+ {
+   "name": "Motocultor WM1000N-3 (7hp) benzin",
+   "price": ""
+ },
+ {
+   "name": "MOTOCULTOR ZUBR 12HP motorina",
+   "price": "12500"
+ },
+ {
+   "name": "MOTOCULTOR ZUBR 8HP motorina",
+   "price": "11500"
+ },
+ {
+   "name": "Motor 186FE - (pentru cheie diametru 25 mm) (9 h.p.) cu demaror electric",
+   "price": "9500"
+ },
+ {
+   "name": "Motor 6HP HT-105 ELE",
+   "price": ""
+ },
+ {
+   "name": "Motor Benzina 170F/1100",
+   "price": "2400"
+ },
+ {
+   "name": "Motor Benzina 177F",
+   "price": "6500"
+ },
+ {
+   "name": "Motor Diesel 173 F",
+   "price": ""
+ },
+ {
+   "name": "Motor diesel cu demaror electric 178F TATA (cu iesire arbore pentru caneluri, 25 mm) 6 CP",
+   "price": "8000"
+ },
+ {
+   "name": "Motor diesel cu demaror electric 186FE TATA (cu iesire pe arbore sub con) 9 c.p.",
+   "price": "9500"
+ },
+ {
+   "name": "Motor pe benzina 170F design nou tata (cu iesire cu cheie, 20mm) 7CP",
+   "price": "2400"
+ },
+ {
+   "name": "Motor pe benzina 170F TT (cu canelura arborelui, 20 mm) 7 CP",
+   "price": "2200"
+ },
+ {
+   "name": "Motor pe benzina 170FE TATA (cu iesire arbore sub cheie, 20mm) cu demaror electric, 7CP",
+   "price": "3500"
+ },
+ {
+   "name": "Motor pe benzina 192FE TATA (cu canelura arborelui, D 25mm) 16CP, cu demaror electric",
+   "price": "7500"
+ },
+ {
+   "name": "Motor SH190NDL Zubr (10CP) cu demaror electric",
+   "price": "11500"
+ },
+ {
+   "name": "Motor Weima WM192FE/P-2 pt motocultor 459cm3",
+   "price": "8000"
+ },
+ {
+   "name": "Motor WM-170F 20mm 7HP 212cm3 p/t motocultor (sponca)",
+   "price": "2800"
+ },
+ {
+   "name": "Motor WM-186FE (6.8kw) 9HP p/t motocultor, 406cm3",
+   "price": "8000"
+ },
+ {
+   "name": "Motor WM-188FE (190) p/t motocultor, cu filtru de aer",
+   "price": "8500"
+ },
+ {
+   "name": "Motor ZH1100 Zubr (15CP) cu demaror electric",
+   "price": "17000"
+ },
+ {
+   "name": "Motostropitoare 3WF-3S 14L",
+   "price": "3000"
+ },
+ {
+   "name": "Motostropitoare 3WZ-7 20L",
+   "price": "3300"
+ },
+ {
+   "name": "MS 162 Ferestrau pe benzina (S-30 cm)",
+   "price": "3200"
+ },
+ {
+   "name": "MS 172 Ferestrau pe benzina (S-35 cm)",
+   "price": "3800"
+ },
+ {
+   "name": "MS 180 C-BE Ferestrau pe benzina (S)",
+   "price": "4500"
+ },
+ {
+   "name": "MS 180 Ferestrau pe benzina (S) ",
+   "price": "4000"
+ },
+ {
+   "name": "MS 211 Ferestrau pe benzina (S) ",
+   "price": "6000"
+ },
+ {
+   "name": "MS 230 Ferestrau pe benzina",
+   "price": "5800"
+ },
+ {
+   "name": "MS 250 C-BEFerestrau pe benzina 1123-012-3050",
+   "price": "7000"
+ },
+ {
+   "name": "MS 250 Ferestrau pe benzina ",
+   "price": "6500"
+ },
+ {
+   "name": "MS 260 Ferestrau pe benzina ",
+   "price": "8500"
+ },
+ {
+   "name": "MS 361 Ferestrau pe benzina (S) MS361",
+   "price": "13000"
+ },
+ {
+   "name": "MSA 60.0 C-B Ferestrau cu (acumulator AK20 x 1 buc. + incarcator AL 101) SET MA04-011-5814",
+   "price": "7000"
+ },
+ {
+   "name": "MSE 141 C-Q Ferestrau electric (S)",
+   "price": "2800"
+ },
+ {
+   "name": "MSE 170 C-Q Ferestrau electric (S)",
+   "price": "4500"
+ },
+ {
+   "name": "Musuruitor ОМС-2 f/t",
+   "price": ""
+ },
+ {
+   "name": "Oala demaror manual CG430B",
+   "price": "50"
+ },
+ {
+   "name": "Ochelari de protectie FUNCTION Light, transparenti 0000-884-0361",
+   "price": "155"
+ },
+ {
+   "name": "Ochelari de protectie FUNCTION Standard 0000-884-0367",
+   "price": "80"
+ },
+ {
+   "name": "Oglinzi retrovizoare RDT150",
+   "price": "250"
+ },
+ {
+   "name": "Pahar de masurat 100ml 0000-881-0186",
+   "price": "25"
+ },
+ {
+   "name": "Pana 5x12",
+   "price": "1"
+ },
+ {
+   "name": "Pana 5x14",
+   "price": ""
+ },
+ {
+   "name": "Pana 5x7",
+   "price": ""
+ },
+ {
+   "name": "Pana ambielaj 180NM",
+   "price": "50"
+ },
+ {
+   "name": "Pana ambielaj 190NM",
+   "price": "50"
+ },
+ {
+   "name": "Pana ambielaj C5x12 178/186",
+   "price": "30"
+ },
+ {
+   "name": "Pana roata 180/190/195NM",
+   "price": "50"
+ },
+ {
+   "name": "Pastila pompa hidraulica RDT150",
+   "price": ""
+ },
+ {
+   "name": "Pedala acceleratie SH120E",
+   "price": "200"
+ },
+ {
+   "name": "Picior transmisie 1100",
+   "price": "350"
+ },
+ {
+   "name": "Pila 4,0 mm 5605-773-4012",
+   "price": "25"
+ },
+ {
+   "name": "Pila 4,5 mm 5605-773-4512",
+   "price": "25"
+ },
+ {
+   "name": "Pila 4,8 mm 5605-773-4812",
+   "price": "25"
+ },
+ {
+   "name": "Pila 5,2 mm 5605-773-5212",
+   "price": ""
+ },
+ {
+   "name": "Pila 5,5 mm 5605-773-5512",
+   "price": "25"
+ },
+ {
+   "name": "Pinion blocare Z15 101/6",
+   "price": "250"
+ },
+ {
+   "name": "Pinion diferential stinga Z15/16 Minitractor",
+   "price": "350"
+ },
+ {
+   "name": "Pinion dublu Z-13 PRF",
+   "price": "300"
+ },
+ {
+   "name": "Piston + Cilindru 195N (set)",
+   "price": "900"
+ },
+ {
+   "name": "Piston 177F",
+   "price": "450"
+ },
+ {
+   "name": "Piston 186FB",
+   "price": "500"
+ },
+ {
+   "name": "Piston DT-240E",
+   "price": "850"
+ },
+ {
+   "name": "Piston kit 1100NM",
+   "price": "500"
+ },
+ {
+   "name": "Piston kit 178FB",
+   "price": "450"
+ },
+ {
+   "name": "Piston pompare combustibil190N",
+   "price": "100"
+ },
+ {
+   "name": "Piston set 173",
+   "price": "400"
+ },
+ {
+   "name": "Piston set 175N",
+   "price": "300"
+ },
+ {
+   "name": "Piston set 178F",
+   "price": "500"
+ },
+ {
+   "name": "Piston set 180N",
+   "price": "400"
+ },
+ {
+   "name": "Piston set 186F",
+   "price": "500"
+ },
+ {
+   "name": "Piston set 188F",
+   "price": "600"
+ },
+ {
+   "name": "Piston set 190N",
+   "price": "450"
+ },
+ {
+   "name": "Piston set 192NDL",
+   "price": "450"
+ },
+ {
+   "name": "Piston set 195 Agroteh",
+   "price": "450"
+ },
+ {
+   "name": "Piston set 195N",
+   "price": "450"
+ },
+ {
+   "name": "Piston set 68,00 mm",
+   "price": "200"
+ },
+ {
+   "name": "Piston set 70,00 mm",
+   "price": "200"
+ },
+ {
+   "name": "Piston set KAMA +0,25 HT-105",
+   "price": "650"
+ },
+ {
+   "name": "Piston set KAMA +0,5 HT-105",
+   "price": "650"
+ },
+ {
+   "name": "Piston set KAMA +0,5 HT-135",
+   "price": "650"
+ },
+ {
+   "name": "Piston set ZUBR +0,25 HT-105",
+   "price": "400"
+ },
+ {
+   "name": "Piston set Zubr +0,5 HT-135",
+   "price": "650"
+ },
+ {
+   "name": "Piston set ZUBR +0,50 HT-105",
+   "price": "400"
+ },
+ {
+   "name": "Piulita ambielaj 180NM",
+   "price": "50"
+ },
+ {
+   "name": "Piulita ambielaj 190NM",
+   "price": "50"
+ },
+ {
+   "name": "Piulita crenelata M10 - KRO 900 YBX",
+   "price": "30"
+ },
+ {
+   "name": "Placa reglare acceleratie 178/186 ",
+   "price": "150"
+ },
+ {
+   "name": "Placa schimbare viteze 180/190/195",
+   "price": "120"
+ },
+ {
+   "name": "Planetara de jos 1100",
+   "price": "300"
+ },
+ {
+   "name": "Planetara superioara 1000",
+   "price": "350"
+ },
+ {
+   "name": "Planetara superioara 1100",
+   "price": "320"
+ },
+ {
+   "name": "Plita cutie / motor 178/186F",
+   "price": "450"
+ },
+ {
+   "name": "Plug p/u Motobloc Articulat ШПЛ-1-20",
+   "price": ""
+ },
+ {
+   "name": "Plug p/u Motobloc Articulat ШПЛ-1-25",
+   "price": ""
+ },
+ {
+   "name": "Plug pt prelucrarea solului ZUBR",
+   "price": "4000"
+ },
+ {
+   "name": "Plug reglabil Technoworker VOR56606",
+   "price": "450"
+ },
+ {
+   "name": "Pompa apa 1100",
+   "price": "1000"
+ },
+ {
+   "name": "Pompa apa GH-101E",
+   "price": ""
+ },
+ {
+   "name": "Pompa combustibil 178FB",
+   "price": "350"
+ },
+ {
+   "name": "Pompa combustibil 180N",
+   "price": "400"
+ },
+ {
+   "name": "Pompa combustibil 186FB",
+   "price": "350"
+ },
+ {
+   "name": "Pompa combustibil 190N",
+   "price": "400"
+ },
+ {
+   "name": "Pompa combustibil 195NM",
+   "price": "400"
+ },
+ {
+   "name": "Pompa combustibil XT180",
+   "price": ""
+ },
+ {
+   "name": "Pompa de apa 3WB-900",
+   "price": "550"
+ },
+ {
+   "name": "Pompa de apa JETL 100",
+   "price": ""
+ },
+ {
+   "name": "Pompa de apa JGP 1100 F 055362",
+   "price": ""
+ },
+ {
+   "name": "Pompa de apa QB 60 Gherakl",
+   "price": ""
+ },
+ {
+   "name": "Pompa hidraulica + distribuitor pozitie libera SH120E",
+   "price": "1500"
+ },
+ {
+   "name": "Pompa hidraulica + distribuitor SH120E",
+   "price": "2200"
+ },
+ {
+   "name": "Pompa hidraulica SH120E",
+   "price": "1500"
+ },
+ {
+   "name": "Pompa hidraulica XT180",
+   "price": ""
+ },
+ {
+   "name": "Pompa manuala aer WOKIN 38x485mm 720001",
+   "price": ""
+ },
+ {
+   "name": "Pompa ulei 1100NM",
+   "price": "350"
+ },
+ {
+   "name": "Pompa ulei 178FB",
+   "price": "150"
+ },
+ {
+   "name": "Pompa ulei 180N",
+   "price": "180"
+ },
+ {
+   "name": "Pompa ulei 186FB",
+   "price": "180"
+ },
+ {
+   "name": "Pompa ulei 190N",
+   "price": "200"
+ },
+ {
+   "name": "Prezon de roata - 180N-195N",
+   "price": "50"
+ },
+ {
+   "name": "Pulverizator agricol TZ-01 (HX-16F)",
+   "price": ""
+ },
+ {
+   "name": "Pulverizator agricol TZ-02 (HX-16B)",
+   "price": ""
+ },
+ {
+   "name": "QL 20 Motopompa",
+   "price": ""
+ },
+ {
+   "name": "QL 30 Motopompa",
+   "price": ""
+ },
+ {
+   "name": "Radiator 1100NM",
+   "price": "1200"
+ },
+ {
+   "name": "Radiator 180N",
+   "price": "750"
+ },
+ {
+   "name": "Radiator 190N",
+   "price": "900"
+ },
+ {
+   "name": "Radiator 195 ",
+   "price": "1400"
+ },
+ {
+   "name": "Radiator DT-150E",
+   "price": "900"
+ },
+ {
+   "name": "Radiator DT240E",
+   "price": ""
+ },
+ {
+   "name": "Reductor AG-52",
+   "price": "750"
+ },
+ {
+   "name": "Reductor CG-430 patrat",
+   "price": "250"
+ },
+ {
+   "name": "Reductor CG-430B",
+   "price": "250"
+ },
+ {
+   "name": "Reductor freza ansamblu 101-2",
+   "price": "2500"
+ },
+ {
+   "name": "Reductor freza ansamblu HT-105",
+   "price": "3200"
+ },
+ {
+   "name": "Reductor pentru trimer CG-430",
+   "price": "250"
+ },
+ {
+   "name": "Reductor pentru trimer CG-430 patrat",
+   "price": "250"
+ },
+ {
+   "name": "Regulator sistem de control 1100",
+   "price": "150"
+ },
+ {
+   "name": "Releu incarcare 180/190/195NM",
+   "price": "200"
+ },
+ {
+   "name": "Releu incarcare 186FB",
+   "price": "150"
+ },
+ {
+   "name": "Releu pornire 180/190/195NM",
+   "price": "150"
+ },
+ {
+   "name": "Remorca pt motocultor 0.9m*1.9m",
+   "price": "10000"
+ },
+ {
+   "name": "Remorca pt motocultor 1.8m*1.0m, 5,00-12",
+   "price": "8000"
+ },
+ {
+   "name": "Remorca pt motocultor 1m*1.4m",
+   "price": "7500"
+ },
+ {
+   "name": "Remorca Respo 750S301T180",
+   "price": "74250"
+ },
+ {
+   "name": "Rezervor combustibil 168F",
+   "price": "350"
+ },
+ {
+   "name": "Rezervor combustibil 173",
+   "price": "400"
+ },
+ {
+   "name": "Rezervor combustibil 177F",
+   "price": "550"
+ },
+ {
+   "name": "Rezervor combustibil 178FB",
+   "price": "350"
+ },
+ {
+   "name": "Rezervor combustibil 180",
+   "price": "550"
+ },
+ {
+   "name": "Rezervor combustibil 186FB",
+   "price": "400"
+ },
+ {
+   "name": "Rezervor combustibil 190",
+   "price": "650"
+ },
+ {
+   "name": "Rezervor combustibil 195",
+   "price": "750"
+ },
+ {
+   "name": "Rezervor combustibil RDT150",
+   "price": "900"
+ },
+ {
+   "name": "Rezervor combustibil SH150",
+   "price": "1200"
+ },
+ {
+   "name": "Rezervor combustibil ZS/ZH1100 YBX",
+   "price": "1000"
+ },
+ {
+   "name": "Rezervor ulei hidraulic SH150",
+   "price": "380"
+ },
+ {
+   "name": "RLE 240.0 (INT2) Scarificator cu motor electric 6291-011-5615",
+   "price": "3600"
+ },
+ {
+   "name": "RM 248.3 (EU2) Masina de tuns iarba cu motor pe benzina WB21-011-3405",
+   "price": "8800"
+ },
+ {
+   "name": "RM 248.3 T (EU2) Masina de tuns iarba cu motor pe benzina WB21-011-3415",
+   "price": "10300"
+ },
+ {
+   "name": "RMA 235.0 (INT1) Masina de tuns iarba cu acumulator (AK20+AL101) SET 6311-200-0035",
+   "price": "3300"
+ },
+ {
+   "name": "RME 339,0 Masina de tuns iarba electrica 6320-011-2405",
+   "price": "5200"
+ },
+ {
+   "name": "Roaba Technoworker 85 L cu rulment VOR57976",
+   "price": ""
+ },
+ {
+   "name": "Roata 6.50-16 agro",
+   "price": ""
+ },
+ {
+   "name": "Roata dintata volanta 190NM",
+   "price": "400"
+ },
+ {
+   "name": "Roata dintata volanta HT-105",
+   "price": "250"
+ },
+ {
+   "name": "Roata dintata volanta HT-135",
+   "price": "300"
+ },
+ {
+   "name": "Roata dintata volanta R180N",
+   "price": "350"
+ },
+ {
+   "name": "Roata dintata volanta RDT150",
+   "price": ""
+ },
+ {
+   "name": "Roata freza 101-2",
+   "price": "250"
+ },
+ {
+   "name": "Roata motocultor 4.00-8 Technoworker VOR57358",
+   "price": "550"
+ },
+ {
+   "name": "Roata p-u remorca 4.00-12",
+   "price": "1100"
+ },
+ {
+   "name": "Roata p-u remorca 6.00-16",
+   "price": ""
+ },
+ {
+   "name": "Roata p-u remorca 6.50-16",
+   "price": "1500"
+ },
+ {
+   "name": "Robinet combustibil 178FB",
+   "price": "100"
+ },
+ {
+   "name": "Robinet combustibil 180/190/195N",
+   "price": "180"
+ },
+ {
+   "name": "Robinet combustibil generator GX168",
+   "price": "100"
+ },
+ {
+   "name": "Robinet scurgere 180",
+   "price": "50"
+ },
+ {
+   "name": "Robinet scurgere 190",
+   "price": "50"
+ },
+ {
+   "name": "Robinet tija 3WZ-7",
+   "price": "200"
+ },
+ {
+   "name": "Rola curea transmisie KRO 900",
+   "price": "250"
+ },
+ {
+   "name": "Rola intinzator 168F",
+   "price": "250"
+ },
+ {
+   "name": "Rola intinzator 168F (1 curea)",
+   "price": "250"
+ },
+ {
+   "name": "Rola intinzator curea GN-4/6.5HP",
+   "price": "250"
+ },
+ {
+   "name": "Rola intinzator curea JR-Q12E",
+   "price": "280"
+ },
+ {
+   "name": "Rolie curea ventilatorului ZH1105N YBX",
+   "price": "450"
+ },
+ {
+   "name": "Roti metalice GH-101",
+   "price": ""
+ },
+ {
+   "name": "Ruleta demaror manual 168F",
+   "price": "50"
+ },
+ {
+   "name": "Ruleta funie demaror AG52",
+   "price": "40"
+ },
+ {
+   "name": "Rulment 6205",
+   "price": "60"
+ },
+ {
+   "name": "Rulment 6209",
+   "price": ""
+ },
+ {
+   "name": "Rulment 6210",
+   "price": ""
+ },
+ {
+   "name": "Rulment 6305",
+   "price": "80"
+ },
+ {
+   "name": "Rulment 6306",
+   "price": ""
+ },
+ {
+   "name": "Rulment 6310",
+   "price": "650"
+ },
+ {
+   "name": "Rulment ambreiaj 180/190/195N",
+   "price": "80"
+ },
+ {
+   "name": "Rulment ambreiaj Shifeng 240",
+   "price": "150"
+ },
+ {
+   "name": "Rulment ambreiaj VOM 588909",
+   "price": "120"
+ },
+ {
+   "name": "Rulment cu ace ax planetara superioara 24x18x20",
+   "price": "80"
+ },
+ {
+   "name": "Rulment NK1512 178/186F",
+   "price": "50"
+ },
+ {
+   "name": "Rulment presiune 1100",
+   "price": "100"
+ },
+ {
+   "name": "Sabot frina transmisie 180/190/195N",
+   "price": "150"
+ },
+ {
+   "name": "Saboti frana JR-Q12E ",
+   "price": "250"
+ },
+ {
+   "name": "Saboti frana minitractor 1",
+   "price": "350"
+ },
+ {
+   "name": "Saboti frana minitractor 2",
+   "price": "350"
+ },
+ {
+   "name": "Saboti frana remorca 0.5T",
+   "price": "350"
+ },
+ {
+   "name": "Saboti frana remorca 1T",
+   "price": "350"
+ },
+ {
+   "name": "Saiba arc supape 178F",
+   "price": ""
+ },
+ {
+   "name": "Saiba chiulasa 190/195",
+   "price": "100"
+ },
+ {
+   "name": "Saiba hidraulica",
+   "price": "30"
+ },
+ {
+   "name": "Saiba injector arama 178/186",
+   "price": "10"
+ },
+ {
+   "name": "Sateliti seceratoare Z-20 - KRE 1100",
+   "price": "300"
+ },
+ {
+   "name": "Sateliti seceratoare Z-20 - KRO 900",
+   "price": "300"
+ },
+ {
+   "name": "Sateliti transmisie DT-150E",
+   "price": "120"
+ },
+ {
+   "name": "Sateliti transmisie DT-240E",
+   "price": ""
+ },
+ {
+   "name": "Scarificator reductor freza 180/190/195N",
+   "price": "100"
+ },
+ {
+   "name": "Scaun furca schimb viteze 178/186",
+   "price": ""
+ },
+ {
+   "name": "Scaun SH150",
+   "price": ""
+ },
+ {
+   "name": "Scaun supape 178FB",
+   "price": "100"
+ },
+ {
+   "name": "Scaun supape 180",
+   "price": "100"
+ },
+ {
+   "name": "Scaun supape 186FB",
+   "price": "100"
+ },
+ {
+   "name": "Scaun supape 190",
+   "price": "100"
+ },
+ {
+   "name": "Scaun supape 195N",
+   "price": "100"
+ },
+ {
+   "name": "Scripete curea RDT150 (2R)",
+   "price": "250"
+ },
+ {
+   "name": "Scripete cutie de viteze 168F",
+   "price": "150"
+ },
+ {
+   "name": "Scripete intinzator curea 190NM",
+   "price": "200"
+ },
+ {
+   "name": "Scripete motor 168F 19mm (3 curele)",
+   "price": "350"
+ },
+ {
+   "name": "Scripete motor 168F 20mm (3 curele)",
+   "price": "350"
+ },
+ {
+   "name": "Scripete motor 177F 25mm (2 curele)",
+   "price": "350"
+ },
+ {
+   "name": "Scripete motor 180N",
+   "price": "200"
+ },
+ {
+   "name": "Scripete motor Q70",
+   "price": "250"
+ },
+ {
+   "name": "Scripete pompa hidraulica SH120E",
+   "price": "250"
+ },
+ {
+   "name": "Scripete volanta 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Scripete volanta 180N (2R)",
+   "price": "250"
+ },
+ {
+   "name": "Scripete volanta 190NM (3R) mare",
+   "price": "450"
+ },
+ {
+   "name": "Scripete volanta 190NM (3R) mic",
+   "price": "450"
+ },
+ {
+   "name": "Scripete volanta curea ventilator 180NM",
+   "price": "350"
+ },
+ {
+   "name": "Scripete volanta curea ventilator 190NM",
+   "price": "350"
+ },
+ {
+   "name": "SE 33 Aspirator SE01-012-4413",
+   "price": "2000"
+ },
+ {
+   "name": "Seceratoare de tip rotor prin ax",
+   "price": "4000"
+ },
+ {
+   "name": "Seceratoare de tip rotor prin curea (3 discuri)",
+   "price": "5500"
+ },
+ {
+   "name": "Segmenti piston 1100NM",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston 168F",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston 170F",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston 173",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston 178FB",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston 186FB",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston 188F",
+   "price": "200"
+ },
+ {
+   "name": "Segmenti piston 188F Benzin",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston 192",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston 192D STD",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston GH41",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston HT-105 0.50",
+   "price": "200"
+ },
+ {
+   "name": "Segmenti piston HT-105/6HP",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston R175A",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston set 180N",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston set 185N",
+   "price": ""
+ },
+ {
+   "name": "Segmenti piston set 190N",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston set 195N",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston set 77mm Z-16",
+   "price": "200"
+ },
+ {
+   "name": "Segmenti piston set DT240",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti piston set R175A",
+   "price": "120"
+ },
+ {
+   "name": "Segmenti piston ZUBR/KAMA HT-135 0.25",
+   "price": "150"
+ },
+ {
+   "name": "Segmenti ZUBR/KAMA +0.5 HT-135/9HP",
+   "price": "200"
+ },
+ {
+   "name": "Semiax ansamblu 101-1",
+   "price": "1600"
+ },
+ {
+   "name": "Semiax carcasa 101-1",
+   "price": "750"
+ },
+ {
+   "name": "Semnalizator fata JR-Q12E",
+   "price": "250"
+ },
+ {
+   "name": "Semnalizator fata RDT150",
+   "price": ""
+ },
+ {
+   "name": "Semnalizator spate JR-Q12E",
+   "price": "250"
+ },
+ {
+   "name": "Semnalizator spate RDT150",
+   "price": ""
+ },
+ {
+   "name": "Senzor frina SH120E",
+   "price": "150"
+ },
+ {
+   "name": "Senzor minitractor set",
+   "price": "450"
+ },
+ {
+   "name": "Senzor nivel ulei 168F",
+   "price": "150"
+ },
+ {
+   "name": "Senzor presiune ulei 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Senzor presiune ulei 190",
+   "price": "120"
+ },
+ {
+   "name": "Senzor temperatura apa RDT240E",
+   "price": "150"
+ },
+ {
+   "name": "Set p/u compresor 5/1",
+   "price": ""
+ },
+ {
+   "name": "Sfat de ambreiaj - MT",
+   "price": "50"
+ },
+ {
+   "name": "SH 86 Aspirator cu tocator (U) SH 86",
+   "price": "6700"
+ },
+ {
+   "name": "SHE 71 Aspirator electric cu tocator 4811-011-0829",
+   "price": "2800"
+ },
+ {
+   "name": "Siguranta cutitului - KRO 900",
+   "price": "35"
+ },
+ {
+   "name": "Siguranta roata 178F/186F",
+   "price": "15"
+ },
+ {
+   "name": "Siguranta supape 178",
+   "price": "50"
+ },
+ {
+   "name": "Siguranta supape 186",
+   "price": "50"
+ },
+ {
+   "name": "Simering 20*40*8 - cutie viteze/6",
+   "price": ""
+ },
+ {
+   "name": "Simering cutie de viteze 180/190/195 (set)",
+   "price": ""
+ },
+ {
+   "name": "Simering motor Q70",
+   "price": "100"
+ },
+ {
+   "name": "Simering reductor set 168F-170F",
+   "price": "180"
+ },
+ {
+   "name": "Simering supape 168",
+   "price": "80"
+ },
+ {
+   "name": "Simering supape 178F",
+   "price": "50"
+ },
+ {
+   "name": "Simering supape 186F",
+   "price": "50"
+ },
+ {
+   "name": "Simering supape 195 WL15 Agroteh",
+   "price": ""
+ },
+ {
+   "name": "Simering supape Z-16",
+   "price": "100"
+ },
+ {
+   "name": "Sina pompa de combustibil - 190N",
+   "price": "150"
+ },
+ {
+   "name": "Sina portlant 35cm*1.3mm*3/8P MS 180-251 3005-000-4809",
+   "price": "400"
+ },
+ {
+   "name": "Sina portlant R-37cm*1.6mm*0.325\" MS271/291 3003-008-6811",
+   "price": "500"
+ },
+ {
+   "name": "Sina portlant R-40cm*1.3mm*3/8P MS180-251, MSE 170-230 3005-000-4813",
+   "price": "450"
+ },
+ {
+   "name": "Sina portlant R-40cm*1.6mm*0.325\" MS271/291 3003-000-6813",
+   "price": "650"
+ },
+ {
+   "name": "Sina portlant R-40cm*1.6mm*3/8\" MS440/461 3003-000-5213",
+   "price": ""
+ },
+ {
+   "name": "Sina portlant R-45cm*1.6mm*3/8\" MS361/36/390/MSE250 3003-008-6117",
+   "price": "650"
+ },
+ {
+   "name": "Sina portlant R-45cm*1.6mm*3/8\" MS440/461 3003-000-5217",
+   "price": "600"
+ },
+ {
+   "name": "Sina portlant R-50cm*1.6mm*3/8\" MS440/461 3003-000-5221",
+   "price": "675"
+ },
+ {
+   "name": "Sina portlant SL 90cm*1.6mm*3/8\" 3003-000-2053",
+   "price": "1750"
+ },
+ {
+   "name": "Solenoid electromotor 1100",
+   "price": "350"
+ },
+ {
+   "name": "Solenoid electromotor 178FA",
+   "price": "350"
+ },
+ {
+   "name": "Solenoid electromotor HT105/135",
+   "price": "400"
+ },
+ {
+   "name": "Solenoid electromotor R180NM",
+   "price": "400"
+ },
+ {
+   "name": "Solenoid electromotor R190NM",
+   "price": "400"
+ },
+ {
+   "name": "Stabilizator acceleratie 180",
+   "price": "300"
+ },
+ {
+   "name": "Stabilizator acceleratie 190",
+   "price": "180"
+ },
+ {
+   "name": "Starter electric Z-11 12V 2.0KW TATA ZS/ZH1100",
+   "price": "3000"
+ },
+ {
+   "name": "Stator 180N",
+   "price": "250"
+ },
+ {
+   "name": "Stator generator 190N",
+   "price": "200"
+ },
+ {
+   "name": "Sticla far 190",
+   "price": "50"
+ },
+ {
+   "name": "Sticla far R180",
+   "price": "100"
+ },
+ {
+   "name": "Supape + arcuri 190N",
+   "price": "300"
+ },
+ {
+   "name": "Supape + arcuri 195N",
+   "price": "350"
+ },
+ {
+   "name": "Supape 1100NM",
+   "price": "150"
+ },
+ {
+   "name": "Supape 168F",
+   "price": "150"
+ },
+ {
+   "name": "Supape 173",
+   "price": "200"
+ },
+ {
+   "name": "Supape 178FB",
+   "price": "150"
+ },
+ {
+   "name": "Supape 180N",
+   "price": "100"
+ },
+ {
+   "name": "Supape 188F",
+   "price": "250"
+ },
+ {
+   "name": "Supape 190N",
+   "price": "100"
+ },
+ {
+   "name": "Supape 195N",
+   "price": "100"
+ },
+ {
+   "name": "Supape chiulasa RDT150",
+   "price": "150"
+ },
+ {
+   "name": "Supape chiulasa set 178FB",
+   "price": "250"
+ },
+ {
+   "name": "Supape chiulasa set 186FB",
+   "price": "250"
+ },
+ {
+   "name": "Supape GH41",
+   "price": "200"
+ },
+ {
+   "name": "Supape set 177+ arcuri supape ",
+   "price": "350"
+ },
+ {
+   "name": "Supape set ansamblu Z-16",
+   "price": "200"
+ },
+ {
+   "name": "Supape set GN-4/6, 5HP",
+   "price": "150"
+ },
+ {
+   "name": "Supape set HT-105",
+   "price": "250"
+ },
+ {
+   "name": "Supape XT180",
+   "price": ""
+ },
+ {
+   "name": "Suport + picior transmisie 1100",
+   "price": "500"
+ },
+ {
+   "name": "Suport baterie DT910",
+   "price": "200"
+ },
+ {
+   "name": "Suport cap de bara SH120",
+   "price": ""
+ },
+ {
+   "name": "Suport de pila cu pila rotunda 3,2 mm 5605-750-4300",
+   "price": "125"
+ },
+ {
+   "name": "Suport de pila cu pila rotunda 4,0 mm",
+   "price": "125"
+ },
+ {
+   "name": "Suport de pila cu pila rotunda 4,8 mm 5605-750-4328",
+   "price": "125"
+ },
+ {
+   "name": "Suport de pila cu pila rotunda 5,2 mm 5605-750-4329",
+   "price": "125"
+ },
+ {
+   "name": "Suport electromotor (sub bloc cu capac lung) 180N",
+   "price": "450"
+ },
+ {
+   "name": "Suport electromotor 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Suport electromotor 180",
+   "price": "300"
+ },
+ {
+   "name": "Suport electromotor 190NDL",
+   "price": "450"
+ },
+ {
+   "name": "Suport fata motocultor 101",
+   "price": "200"
+ },
+ {
+   "name": "Suport injector 190",
+   "price": "50"
+ },
+ {
+   "name": "Suport integral motor 101",
+   "price": "450"
+ },
+ {
+   "name": "Suport intinzator lant reductor 190NM",
+   "price": "150"
+ },
+ {
+   "name": "Suport motor 1100NM",
+   "price": ""
+ },
+ {
+   "name": "Suport motor 190NM",
+   "price": "250"
+ },
+ {
+   "name": "Suport motor 81-1",
+   "price": "150"
+ },
+ {
+   "name": "Suport motor fata 190NM",
+   "price": "150"
+ },
+ {
+   "name": "Suport motor spate 190",
+   "price": "150"
+ },
+ {
+   "name": "Suport picior transmisie 1100",
+   "price": "450"
+ },
+ {
+   "name": "Suport radiator 180N",
+   "price": "350"
+ },
+ {
+   "name": "Suport radiator 195N",
+   "price": "450"
+ },
+ {
+   "name": "Suport reductor spate 1100",
+   "price": "450"
+ },
+ {
+   "name": "Suport reglare ghidon 178/186",
+   "price": "320"
+ },
+ {
+   "name": "Suport rezervor 178FB",
+   "price": "150"
+ },
+ {
+   "name": "Suport rezervor 186",
+   "price": "150"
+ },
+ {
+   "name": "Tambur frana SH120",
+   "price": "600"
+ },
+ {
+   "name": "Tambur frina 39mm SH120",
+   "price": "450"
+ },
+ {
+   "name": "Tambur frina 49mm SH120",
+   "price": "550"
+ },
+ {
+   "name": "Tambur frina 54mm SH120",
+   "price": "650"
+ },
+ {
+   "name": "Teava de esapament 173F",
+   "price": "400"
+ },
+ {
+   "name": "Teava de esapament 178F/FBE",
+   "price": "400"
+ },
+ {
+   "name": "Teava de esapament 180N",
+   "price": "250"
+ },
+ {
+   "name": "Teava de esapament 186F/FBE",
+   "price": "450"
+ },
+ {
+   "name": "Teava de esapament 190N",
+   "price": "350"
+ },
+ {
+   "name": "Teava de esapament GH41",
+   "price": "450"
+ },
+ {
+   "name": "Teava de esapament GN-4/6.5cp",
+   "price": "250"
+ },
+ {
+   "name": "Teava de esapament Minitractor",
+   "price": "450"
+ },
+ {
+   "name": "Teava de esapament R195N",
+   "price": "450"
+ },
+ {
+   "name": "Teava de esapament RDT150",
+   "price": "500"
+ },
+ {
+   "name": "Teava de esapament SH150",
+   "price": "550"
+ },
+ {
+   "name": "Tija chiulasa 168F",
+   "price": "100"
+ },
+ {
+   "name": "Tija chiulasa 173",
+   "price": "200"
+ },
+ {
+   "name": "Tija chiulasa DT240E",
+   "price": ""
+ },
+ {
+   "name": "Tija furca schimb viteze 101-2",
+   "price": "150"
+ },
+ {
+   "name": "Tija reglare spate inferioara Shifeng 240",
+   "price": "700"
+ },
+ {
+   "name": "Tija scurta cu robinet",
+   "price": "150"
+ },
+ {
+   "name": "Tija supape + impingator 178FB",
+   "price": "150"
+ },
+ {
+   "name": "Tija supape + impingator 186FB",
+   "price": "150"
+ },
+ {
+   "name": "Tija supape 1100NM",
+   "price": "200"
+ },
+ {
+   "name": "Tija supape 178FB",
+   "price": "100"
+ },
+ {
+   "name": "Tija supape 180NM",
+   "price": "100"
+ },
+ {
+   "name": "Tija supape 186FB",
+   "price": "100"
+ },
+ {
+   "name": "Tija supape 190NM",
+   "price": "100"
+ },
+ {
+   "name": "Tija supape 195NDL",
+   "price": "100"
+ },
+ {
+   "name": "Tija supape 195NM",
+   "price": "100"
+ },
+ {
+   "name": "Tija transmisie CG430B",
+   "price": "150"
+ },
+ {
+   "name": "Tije motocultor set 180/190/195",
+   "price": "250"
+ },
+ {
+   "name": "TOCATOR DE CRENGI WORKER TC 7B 0580052",
+   "price": ""
+ },
+ {
+   "name": "Tractor de tuns iarba RT 6127.1 ZL",
+   "price": ""
+ },
+ {
+   "name": "Tub combustibil 1100NM",
+   "price": "80"
+ },
+ {
+   "name": "Tub combustibil 180",
+   "price": "80"
+ },
+ {
+   "name": "Tub combustibil 190",
+   "price": "80"
+ },
+ {
+   "name": "Tub combustibil 195",
+   "price": "80"
+ },
+ {
+   "name": "Tub combustibil GH121E",
+   "price": "80"
+ },
+ {
+   "name": "Tub combustibil retur 190",
+   "price": "250"
+ },
+ {
+   "name": "Tub de combustibil de joasa presiune (retur) - 180N",
+   "price": "80"
+ },
+ {
+   "name": "Tub hex roti 15.5cm  1100",
+   "price": "350"
+ },
+ {
+   "name": "Tub hex roti 25cm  1100",
+   "price": "350"
+ },
+ {
+   "name": "Tub hex roti 260mm HT-105",
+   "price": "350"
+ },
+ {
+   "name": "Tub hex roti 4.0-8 WM500",
+   "price": "350"
+ },
+ {
+   "name": "Ulei p-u lant ForestPlus 1L 0781-516-6001",
+   "price": "100"
+ },
+ {
+   "name": "Ulei p-u motor 2-t 0.6L HD-10 W-30 0781-309-0007",
+   "price": "120"
+ },
+ {
+   "name": "Ulei p-u motor 2-t HP 1L (tur.) 0781-319-84-1",
+   "price": "120"
+ },
+ {
+   "name": "Ulei p-u motor 2-t HP 1L 0781-319-8410",
+   "price": "200"
+ },
+ {
+   "name": "Ulei p-u motor 2-t HP 20ml 0781-319-8400",
+   "price": "10"
+ },
+ {
+   "name": "Ulei p-u motor 2-t, HP 100ml 0781-319-8401",
+   "price": "35"
+ },
+ {
+   "name": "Ulei p-u motor 2-t. HP Ultra 20 ml 0781-319-8600",
+   "price": "10"
+ },
+ {
+   "name": "Unealta pentru taierea nodurilor 0000-881-3400",
+   "price": ""
+ },
+ {
+   "name": "Valva 11.3mm aluminiu/90grade Hofmann (25MS11.3)",
+   "price": "180"
+ },
+ {
+   "name": "Valva 11.3mm neagra/90grade Alligator (50472)",
+   "price": "250"
+ },
+ {
+   "name": "Valva 8.3mm Aluminiu 90grade Alligator (50302)",
+   "price": "250"
+ },
+ {
+   "name": "Valva 8.3mm Aluminiu 90grade/Neagra  Alligator (50471)",
+   "price": "250"
+ },
+ {
+   "name": "Valva 8.3mm aluminiu/90grade Hofmann (8.3MS25)",
+   "price": "150"
+ },
+ {
+   "name": "Ventilator 168F",
+   "price": "150"
+ },
+ {
+   "name": "Ventilator 177F",
+   "price": "150"
+ },
+ {
+   "name": "Ventilator radiator 180NM",
+   "price": "550"
+ },
+ {
+   "name": "Ventilator radiator 190N",
+   "price": "600"
+ },
+ {
+   "name": "Ventilator radiator 195NM",
+   "price": "750"
+ },
+ {
+   "name": "Volan canelura Minitractor",
+   "price": "300"
+ },
+ {
+   "name": "Volanta + roata dintata R180NM ",
+   "price": "1000"
+ },
+ {
+   "name": "Volanta + roata dintata R190NM ",
+   "price": "1300"
+ },
+ {
+   "name": "Volanta 1100NM",
+   "price": "2500"
+ },
+ {
+   "name": "Volanta 168F",
+   "price": "380"
+ },
+ {
+   "name": "Volanta 173F",
+   "price": "650"
+ },
+ {
+   "name": "Volanta 177F",
+   "price": "700"
+ },
+ {
+   "name": "Volanta 178F",
+   "price": "650"
+ },
+ {
+   "name": "Volanta 180N",
+   "price": "1050"
+ },
+ {
+   "name": "Volanta 186F",
+   "price": "750"
+ },
+ {
+   "name": "Volanta 188F",
+   "price": "1000"
+ },
+ {
+   "name": "Volanta 190N",
+   "price": "1300"
+ },
+ {
+   "name": "Volanta 195NM",
+   "price": "1600"
+ },
+ {
+   "name": "Volanta CG430B",
+   "price": "250"
+ },
+ {
+   "name": "Volanta pornire electrica DT-150E",
+   "price": ""
+ },
+ {
+   "name": "Volanta pornire electrica DT-240E",
+   "price": "2500"
+ },
+ {
+   "name": "Za legatura lant dublu SH120",
+   "price": "50"
+ },
+ {
+   "name": "ZM5200-В07 Катушка зажигания",
+   "price": ""
+ },
+ {
    "name": "COD",
    "price": "PRET"
  },
