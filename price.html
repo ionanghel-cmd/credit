@@ -10,67 +10,66 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- Logo sus -->
-  <header class="bg-white shadow-sm border-b border-gray-200 py-5 text-center">
+  <header class="bg-white shadow-sm border-b py-5 text-center">
     <img src="logos/logo.svg" alt="MOTOLAND" class="h-10 mx-auto">
   </header>
 
-  <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-12">
+  <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-10">
     <div x-data="priceSearch()">
 
-      <!-- Titlu serios și elegant -->
-      <h1 class="text-4xl font-bold text-gray-800 text-center mb-3">
+      <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">
         Căutare Prețuri Piese
       </h1>
-      <p class="text-center text-gray-600 mb-10">
-        Introdu câteva cuvinte din denumirea piesei
+      <p class="text-center text-gray-600 mb-8 text-sm">
+        Scrie câteva cuvinte din denumire (ex: amortizor thunder, lant 520, placute)
       </p>
 
-      <!-- Search box minimalist și profesional -->
-      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 mb-12">
-        <input 
-          type="text"
-          x-model.debounce.300ms="query"
-          placeholder="ex: amortizor thunder, lant 520, placute cbr..."
-          class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-500 focus:outline-none transition"
-          autofocus
-        >
-        <button 
-          class="mt-5 w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-4 rounded-xl transition flex items-center justify-center gap-3"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
-          Caută
-        </button>
-      </div>
+      <!-- Input simplu și curat -->
+      <input 
+        type="text"
+        x-model.debounce.300ms="query"
+        placeholder="Caută piesă..."
+        class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-600 focus:outline-none mb-8"
+        autofocus
+      >
 
-      <!-- Rezultate – design curat, serios, elegant -->
-      <div class="space-y-6">
-        <template x-for="item in results" :key="item.name">
-          <div class="bg-white rounded-xl shadow-md border border-gray-200 p-200 p-8 hover:shadow-lg transition-shadow">
-            <h3 class="text-xl font-semibold text-gray-800 text-center mb-4" x-text="item.name"></h3>
-            <div class="text-center">
-              <span class="text-5xl font-bold text-gray-900" x-text="formatPrice(item.price)"></span>
-              <span class="text-2xl text-gray-600 ml-2">lei</span>
-            </div>
-          </div>
-        </template>
+      <!-- Lista compactă cu bifă verde -->
+      <div x-show="results.length > 0" class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+        <div class="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="font-medium text-green-800">Rezultate găsite: <span x-text="results.length"></span></span>
+        </div>
+
+        <ul class="divide-y divide-gray-200">
+          <template x-for="item in results" :key="item.name">
+            <li class="px-6 py-4 hover:bg-gray-50 transition flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-gray-800 font-medium" x-text="item.name"></span>
+              </div>
+              <span class="text-xl font-bold text-gray-900" x-text="formatPrice(item.price) + ' LEI'"></span>
+            </li>
+          </template>
+        </ul>
       </div>
 
       <!-- Niciun rezultat -->
-      <div x-show="query && results.length === 0" class="text-center py-16">
-        <p class="text-xl text-gray-600">Niciun rezultat găsit</p>
-        <p class="text-gray-500 mt-2">Încearcă alte cuvinte din denumire</p>
+      <div x-show="query && results.length === 0" class="text-center py-12 text-gray-500">
+        <p class="text-lg">Niciun rezultat găsit</p>
+        <p class="text-sm mt-1">Încearcă alte cuvinte</p>
+      </div>
+
+      <!-- Fără căutare -->
+      <div x-show="!query" class="text-center text-gray-400 py-12">
+        <p>Începe să scrii pentru a vedea prețurile</p>
       </div>
 
     </div>
   </main>
-
-  <!-- Footer discret -->
-  <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
-    <p class="text-center text-gray-500 text-sm">© 2025 MOTOLAND • Prețuri cu TVA inclus</p>
-  </footer>
 
   <script>
     function priceSearch() {
@@ -103,11 +102,11 @@
               return terms.every(term => name.includes(term));
             })
             .sort((a, b) => a.name.localeCompare(b.name))
-            .slice(0, 100);
+            .slice(0, 100); // maxim 100 rezultate pentru viteză
         },
 
         formatPrice(price) {
-          if (price == null || price === '') return '—';
+          if (!price && price !== 0) return '—';
           return Number(price).toLocaleString('ro-RO');
         }
       }
