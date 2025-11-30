@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ro" class="h-full bg-gray-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Căutare Prețuri Piese - MOTOLAND</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="icon" href="data:,">
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header cu logo MOTOLAND -->
+  <header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-center md:justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="logos/logo.svg" alt="MOTOLAND Logo" class="h-12 w-auto">
+        <span class="text-2xl font-bold text-gray-800 hidden md:block">MOTOLAND</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conținut principal -->
+  <main class="flex-1 flex items-center justify-center p-6 bg-gradient-to-b from-purple-50 to-white">
+    <div class="max-w-2xl w-full" x-data="priceApp()">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-700 mb-6">
+          Căutare Prețuri Piese
+        </h1>
+        <p class="text-gray-600 text-lg mb-10">Introdu codul piesei pentru preț instant</p>
+        
+        <!-- Search box exact ca în poza ta -->
+        <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+          <form @submit.prevent="searchByCode">
+            <div class="relative mb-6">
+              <input 
+                type="text" 
+                x-model="searchCode" 
+                placeholder="ex: 6A0V-04002-1001-0VP00"
+                class="w-full px-6 py-5 text-lg border-2 border-red-500 rounded-2xl focus:border-blue-600 focus:outline-none transition-colors"
+                autofocus
+              >
+            </div>
+            <button 
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 px-8 rounded-2xl text-xl transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl"
+            >
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <span>Caută</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Rezultate (cards ca în fiches.html) -->
+      <div class="grid gap-6 mt-10" x-show="results.length > 0">
+        <template x-for="item in results" :key="item.name">
+          <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 border border-gray-100 transition-all group">
+            <h3 class="text-xl font-semibold text-gray-800 text-center mb-4" x-text="item.name"></h3>
+            <div class="text-center">
+              <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
+                    x-text="formatPrice(item.price)"></span>
+              <span class="text-2xl text-gray-600 ml-2">lei</span>
+            </div>
+            <p class="text-center text-gray-500 mt-3 text-sm">
+              Cod: <span x-text="item.code || '—'"></span>
+            </p>
+          </div>
+        </template>
+      </div>
+
+      <!-- No results -->
+      <div x-show="results.length === 0 && searched" class="text-center py-16">
+        <p class="text-2xl text-gray-500">Niciun rezultat găsit</p>
+        <p class="text-gray-400 mt-2">Verifică codul introdus și încearcă din nou</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function priceApp() {
+      return {
+        searchCode: '',
+        results: [],
+        searched: false,
+        allItems: [],
+
+        async init() {
+          try {
+            const res = await fetch('price.json?t=' + Date.now());
+            this.allItems = await res.json();
+          } catch (e) {
+            console.error('Eroare încărcare prețuri:', e);
+          }
+        },
+
+        searchByCode() {
+          if (!this.searchCode.trim()) return;
+          this.searched = true;
+          const term = this.searchCode.toLowerCase().trim();
+          this.results = this.allItems.filter(item =>
+            (item.code && item.code.toLowerCase().includes(term)) ||
+            item.name.toLowerCase().includes(term)
+          );
+        },
+
+        formatPrice(price) {
+          if (!price && price !== 0) return '—';
+          return Number(price).toLocaleString('ro-RO');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
