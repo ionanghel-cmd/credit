@@ -112,7 +112,7 @@
               return terms.every(term => name.includes(term));
             })
             .sort((a, b) => a.name.localeCompare(b.name))
-            .slice(0, 100); // maxim 100 rezultate pentru viteză
+            .slice(0, 500); // maxim 100 rezultate pentru viteză
         },
 
         formatPrice(price) {
