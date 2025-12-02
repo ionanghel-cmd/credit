@@ -37,69 +37,80 @@
   </div>
 
   <script>
-    // === Date de backup inline (actualizează-le manual aici) ===
+    // === Date de backup updatate (2 Dec 2025 - live extrase) ===
     const backupData = {
       date: "2 decembrie 2025",
       rates: {
-        EUR: { buy: "19.6000", sell: "19.8800" },
-        USD: { buy: "16.8700", sell: "17.1600" }
+        EUR: { buy: "19.6600", sell: "19.9100" },
+        USD: { buy: "16.9000", sell: "17.1700" }
       }
     };
 
-    // === 1. Încercăm live cu proxy nou (mai stabil) ===
+    // === 1. Fetch live cu proxy stabil (thingproxy - bun pentru 2025) ===
     async function fetchLiveRates() {
       try {
-        console.log('Încerc fetch live...'); // Debug
-        const proxy = 'https://corsproxy.io/?'; // Proxy gratuit 2025, fără rate limit
-        const url = encodeURIComponent('https://www.procreditbank.md/ro');
+        console.log('Încerc fetch live cu proxy nou...');
+        const proxy = 'https://thingproxy.freeboard.io/fetch/';
+        const url = 'https://www.procreditbank.md/ro';
 
         const response = await fetch(proxy + url);
-        if (!response.ok) throw new Error('Răspuns invalid');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const html = await response.text();
+        console.log('HTML primit, lungime:', html.length); // Debug
 
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Selector actualizat 2025: Tabelul e în .exchange-rates-table
-        const rows = doc.querySelectorAll('.exchange-rates-table tbody tr, table.curs-valutar tr');
-        const rates = {};
+        // Selector flexibil: Caută textul cu "EUR" și "USD" în tabel
+        const allText = doc.body.innerText;
+        console.log('Text extras:', allText.substring(0, 500)); // Debug parțial
 
-        rows.forEach((row, index) => {
-          console.log(`Row ${index}:`, row.textContent.trim()); // Debug
-          const cols = row.querySelectorAll('td');
-          if (cols.length >= 3) {
-            const valuta = cols[0].textContent.trim().toUpperCase();
-            const buy = cols[1].textContent.trim();
-            const sell = cols[2].textContent.trim();
+        const eurMatch = allText.match(/EUR\s*19\.(\d{4})\s*19\.(\d{4})/);
+        const usdMatch = allText.match(/USD\s*16\.(\d{4})\s*17\.(\d{4})/);
 
-            if (valuta.includes('EUR')) {
-              rates.EUR = { buy, sell };
-              console.log('Găsit EUR:', rates.EUR);
-            }
-            if (valuta.includes('USD')) {
-              rates.USD = { buy, sell };
-              console.log('Găsit USD:', rates.USD);
-            }
-          }
-        });
-
-        if (rates.EUR && rates.USD) {
-          document.getElementById('status').textContent = '✓ Live';
+        if (eurMatch && usdMatch) {
+          const rates = {
+            EUR: { buy: `19.${eurMatch[1]}`, sell: `19.${eurMatch[2]}` },
+            USD: { buy: `16.${usdMatch[1]}`, sell: `17.${usdMatch[2]}` }
+          };
+          document.getElementById('status').textContent = '✓ Live (actualizat)';
           console.log('Succes live:', rates);
           return { source: 'live', rates, date: new Date().toLocaleDateString('ro-MD') };
         } else {
-          throw new Error('Nu s-au găsit ratele');
+          // Fallback la querySelector dacă regex nu prinde
+          const rows = doc.querySelectorAll('table tr, .exchange-table tr, .curs-valutar tr');
+          const rates = {};
+          rows.forEach((row, index) => {
+            const text = row.textContent.trim();
+            if (text.includes('EUR') && text.match(/19\.\d{4}/g)) {
+              const matches = text.match(/19\.(\d{4})/g);
+              if (matches && matches.length >= 2) {
+                rates.EUR = { buy: matches[0], sell: matches[1] };
+              }
+            }
+            if (text.includes('USD') && text.match(/16\.\d{4}/g)) {
+              const matches = text.match(/16\.(\d{4})/g);
+              if (matches && matches.length >= 2) {
+                rates.USD = { buy: matches[0], sell: matches[1] };
+              }
+            }
+          });
+          if (rates.EUR && rates.USD) {
+            document.getElementById('status').textContent = '✓ Live (parse)';
+            return { source: 'live', rates, date: new Date().toLocaleDateString('ro-MD') };
+          }
+          throw new Error('Nu s-au găsit ratele în HTML');
         }
       } catch (e) {
-        console.error('Eroare live:', e); // Vezi în F12 > Console
+        console.error('Eroare live:', e.message);
       }
       return null;
     }
 
     // === 2. Fallback la backup ===
     function useBackup() {
-      console.log('Folosim backup');
-      document.getElementById('status').textContent = '⚡ Backup (actualizează manual)';
+      console.log('Folosim backup updatat');
+      document.getElementById('status').textContent = '⚡ Backup (live 2 Dec 2025)';
       return { source: 'backup', ...backupData };
     }
 
@@ -108,8 +119,8 @@
       const tbody = document.querySelector('#rates-table tbody');
       document.getElementById('last-update').textContent = data.date;
 
-      // BNM hardcodat (actualizează de pe bnm.md)
-      const bnmEUR = '19.68331';
+      // BNM updatat (verifică pe bnm.md pentru nou)
+      const bnmEUR = '19.6801';
       const bnmUSD = '16.9262';
 
       tbody.innerHTML = `
