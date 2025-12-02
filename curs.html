@@ -37,77 +37,93 @@
   </div>
 
   <script>
-    // === 1. Încercăm să luăm datele live de pe site ===
+    // === Date de backup inline (actualizează-le manual aici) ===
+    const backupData = {
+      date: "2 decembrie 2025",
+      rates: {
+        EUR: { buy: "19.6000", sell: "19.8800" },
+        USD: { buy: "16.8700", sell: "17.1600" }
+      }
+    };
+
+    // === 1. Încercăm live cu proxy nou (mai stabil) ===
     async function fetchLiveRates() {
       try {
-        // Folosim un proxy gratuit CORS (funcționează excelent în 2025)
-        const proxy = 'https://api.allorigins.win/raw?url=';
-        const url = 'https://www.procreditbank.md/ro';
+        console.log('Încerc fetch live...'); // Debug
+        const proxy = 'https://corsproxy.io/?'; // Proxy gratuit 2025, fără rate limit
+        const url = encodeURIComponent('https://www.procreditbank.md/ro');
 
-        const response = await fetch(proxy + encodeURIComponent(url));
+        const response = await fetch(proxy + url);
+        if (!response.ok) throw new Error('Răspuns invalid');
         const html = await response.text();
 
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Selector actualizat 2025 pentru ProCredit Bank
-        const rows = doc.querySelectorAll('table tbody tr');
+        // Selector actualizat 2025: Tabelul e în .exchange-rates-table
+        const rows = doc.querySelectorAll('.exchange-rates-table tbody tr, table.curs-valutar tr');
         const rates = {};
 
-        rows.forEach(row => {
+        rows.forEach((row, index) => {
+          console.log(`Row ${index}:`, row.textContent.trim()); // Debug
           const cols = row.querySelectorAll('td');
-          if (cols.length >= 4) {
-            const flag = cols[0].textContent.trim();
+          if (cols.length >= 3) {
+            const valuta = cols[0].textContent.trim().toUpperCase();
             const buy = cols[1].textContent.trim();
             const sell = cols[2].textContent.trim();
 
-            if (flag.includes('EUR')) rates.EUR = { buy, sell };
-            if (flag.includes('USD')) rates.USD = { buy, sell };
+            if (valuta.includes('EUR')) {
+              rates.EUR = { buy, sell };
+              console.log('Găsit EUR:', rates.EUR);
+            }
+            if (valuta.includes('USD')) {
+              rates.USD = { buy, sell };
+              console.log('Găsit USD:', rates.USD);
+            }
           }
         });
 
         if (rates.EUR && rates.USD) {
           document.getElementById('status').textContent = '✓ Live';
-          return { source: 'live', rates };
+          console.log('Succes live:', rates);
+          return { source: 'live', rates, date: new Date().toLocaleDateString('ro-MD') };
+        } else {
+          throw new Error('Nu s-au găsit ratele');
         }
       } catch (e) {
-        console.log('Live failed, folosim backup", e);
+        console.error('Eroare live:', e); // Vezi în F12 > Console
       }
       return null;
     }
 
-    // === 2. Dacă live eșuează, luăm din fișierul JSON de backup (pe GitHub) ===
-    async function fetchBackupRates() {
-      try {
-        const res = await fetch('rates-backup.json?' + Date.now()); // anti-cache
-        const data = await res.json();
-        document.getElementById('status').textContent = '⚡ Backup';
-        return { source: 'backup', rates: data.rates, date: data.date };
-      } catch (e) {
-        document.getElementById('status').textContent = '✖ Eroare';
-        return null;
-      }
+    // === 2. Fallback la backup ===
+    function useBackup() {
+      console.log('Folosim backup');
+      document.getElementById('status').textContent = '⚡ Backup (actualizează manual)';
+      return { source: 'backup', ...backupData };
     }
 
     // === 3. Afișăm tabelul ===
     function displayRates(data) {
       const tbody = document.querySelector('#rates-table tbody');
-      const dateStr = data.date ? data.date : new Date().toLocaleDateString('ro-MD');
+      document.getElementById('last-update').textContent = data.date;
 
-      document.getElementById('last-update').textContent = dateStr;
+      // BNM hardcodat (actualizează de pe bnm.md)
+      const bnmEUR = '19.6801';
+      const bnmUSD = '16.9262';
 
       tbody.innerHTML = `
         <tr>
           <td><span class="flag">🇪🇺</span> EUR</td>
           <td class="buy">${data.rates.EUR.buy} MDL</td>
           <td class="sell">${data.rates.EUR.sell} MDL</td>
-          <td class="bnm">19.68xx MDL</td>
+          <td class="bnm">${bnmEUR} MDL</td>
         </tr>
         <tr>
           <td><span class="flag">🇺🇸</span> USD</td>
           <td class="buy">${data.rates.USD.buy} MDL</td>
           <td class="sell">${data.rates.USD.sell} MDL</td>
-          <td class="bnm">16.92xx MDL</td>
+          <td class="bnm">${bnmUSD} MDL</td>
         </tr>
       `;
     }
@@ -115,8 +131,8 @@
     // === Pornim ===
     (async () => {
       let data = await fetchLiveRates();
-      if (!data) data = await fetchBackupRates();
-      if (data) displayRates(data);
+      if (!data) data = useBackup();
+      displayRates(data);
     })();
   </script>
 </body>
