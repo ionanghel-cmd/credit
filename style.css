@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+h1 {
+  background: #c41e3a;
+  color: white;
+  margin: 0;
+  padding: 30px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.subtitle {
+  text-align: center;
+  padding: 10px;
+  background: #f8f9fa;
+  margin: 0;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.update {
+  text-align: center;
+  padding: 15px;
+  background: #f0f8ff;
+  font-weight: 600;
+  color: #1a5276;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.3rem;
+}
+
+th {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+td {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.flag { font-size: 1.8rem; margin-right: 8px; }
+
+.buy { color: #27ae60; font-weight: 600; }
+.sell { color: #c41e3a; font-weight: 600; }
+.bnm { color: #8e44ad; font-weight: 600; }
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+a { color: #c41e3a; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr { display: block; }
+  th { display: none; }
+  td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    width: 45%;
+    font-weight: 600;
+    text-align: left;
+  }
+}
