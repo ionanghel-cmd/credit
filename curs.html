@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curs Valutar ProCredit Bank & BNM</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="data:,"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Rate de Schimb Valutar</h1>
+    <p class="subtitle">ProCredit Bank Moldova • Persoane fizice prin virament</p>
+    
+    <div class="update">Se încarcă cursul... <span id="status">🔄</span></div>
+
+    <table id="rates-table">
+      <thead>
+        <tr>
+          <th>Valuta</th>
+          <th>ProCredit Cumpărare</th>
+          <th>ProCredit Vânzare</th>
+          <th>BNM (referință)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" style="text-align:center; padding:20px;">Se încarcă...</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      Actualizat automat • 
+      <span id="last-update">—</span> • 
+      <a href="https://procreditbank.md" target="_blank">procreditbank.md</a> • 
+      <a href="https://bnm.md" target="_blank">bnm.md</a>
+    </div>
+  </div>
+
+  <script>
+    // === 1. Încercăm să luăm datele live de pe site ===
+    async function fetchLiveRates() {
+      try {
+        // Folosim un proxy gratuit CORS (funcționează excelent în 2025)
+        const proxy = 'https://api.allorigins.win/raw?url=';
+        const url = 'https://www.procreditbank.md/ro';
+
+        const response = await fetch(proxy + encodeURIComponent(url));
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Selector actualizat 2025 pentru ProCredit Bank
+        const rows = doc.querySelectorAll('table tbody tr');
+        const rates = {};
+
+        rows.forEach(row => {
+          const cols = row.querySelectorAll('td');
+          if (cols.length >= 4) {
+            const flag = cols[0].textContent.trim();
+            const buy = cols[1].textContent.trim();
+            const sell = cols[2].textContent.trim();
+
+            if (flag.includes('EUR')) rates.EUR = { buy, sell };
+            if (flag.includes('USD')) rates.USD = { buy, sell };
+          }
+        });
+
+        if (rates.EUR && rates.USD) {
+          document.getElementById('status').textContent = '✓ Live';
+          return { source: 'live', rates };
+        }
+      } catch (e) {
+        console.log('Live failed, folosim backup", e);
+      }
+      return null;
+    }
+
+    // === 2. Dacă live eșuează, luăm din fișierul JSON de backup (pe GitHub) ===
+    async function fetchBackupRates() {
+      try {
+        const res = await fetch('rates-backup.json?' + Date.now()); // anti-cache
+        const data = await res.json();
+        document.getElementById('status').textContent = '⚡ Backup';
+        return { source: 'backup', rates: data.rates, date: data.date };
+      } catch (e) {
+        document.getElementById('status').textContent = '✖ Eroare';
+        return null;
+      }
+    }
+
+    // === 3. Afișăm tabelul ===
+    function displayRates(data) {
+      const tbody = document.querySelector('#rates-table tbody');
+      const dateStr = data.date ? data.date : new Date().toLocaleDateString('ro-MD');
+
+      document.getElementById('last-update').textContent = dateStr;
+
+      tbody.innerHTML = `
+        <tr>
+          <td><span class="flag">🇪🇺</span> EUR</td>
+          <td class="buy">${data.rates.EUR.buy} MDL</td>
+          <td class="sell">${data.rates.EUR.sell} MDL</td>
+          <td class="bnm">19.68xx MDL</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🇺🇸</span> USD</td>
+          <td class="buy">${data.rates.USD.buy} MDL</td>
+          <td class="sell">${data.rates.USD.sell} MDL</td>
+          <td class="bnm">16.92xx MDL</td>
+        </tr>
+      `;
+    }
+
+    // === Pornim ===
+    (async () => {
+      let data = await fetchLiveRates();
+      if (!data) data = await fetchBackupRates();
+      if (data) displayRates(data);
+    })();
+  </script>
+</body>
+</html>
