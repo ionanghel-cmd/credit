@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ro" class="h-full bg-gray-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cataloage Piese - MOTOLAND</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header + buton Înapoi -->
+  <header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-center relative">
+      <a href="./" class="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-gray-700 hover:text-gray-900">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="hidden sm:inline">Înapoi</span>
+      </a>
+      <img src="logos/logo.svg" alt="MOTOLAND" class="h-12">
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl mx-auto w-full px-6 py-12">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">
+      Cataloage Oficiale Piese & Accesorii
+    </h1>
+
+    <div x-data="{ open: '' }">
+      <!-- CAN-AM -->
+      <div class="border-b border-gray-200 last:border-0">
+        <button @click="open === 'canam' ? open = '' : open = 'canam'"
+                class="w-full py-5 px-6 flex items-center justify-between hover:bg-gray-50 transition">
+          <div class="flex items-center gap-4">
+            <img src="logos/canam.svg" alt="Can-Am" class="h-10">
+            <span class="text-xl font-semibold text-gray-800">CAN-AM / BRP</span>
+          </div>
+          <svg class="w-6 h-6 text-gray-500 transition" :class="open === 'canam' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+
+        <div x-show="open === 'canam'" x-transition class="px-6 pb-8">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <a href="https://www.brp.com/content/dam/brp-sites/Canada/2025f/5f3/2026-canam-on-road-2w-my2026-en.pdf" target="_blank" class="group">
+              <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+                <img src="cataloage/preview/canam-2w.jpg" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition">
+                <div class="p-4 text-center">
+                  <p class="font-medium text-gray-800">On-Road 2W</p>
+                  <p class="text-2xl font-bold text-orange-600">2026</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://www.brp.com/content/dam/brp-sites/Canada/2025f/5f3/2026-canam-on-road-3w-my2026-en.pdf" target="_blank" class="group">
+              <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+                <img src="cataloage/preview/canam-3w.jpg" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition">
+                <div class="p-4 text-center">
+                  <p class="font-medium text-gray-800">On-Road 3W</p>
+                  <p class="text-2xl font-bold text-orange-600">2026</p>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://epc.brp.com" target="_blank" class="group">
+              <div class="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+                <img src="cataloage/preview/canam-atv.jpg" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition">
+                <div class="p-4 text-center">
+                  <p class="font-medium text-gray-800">ATV / SSV</p>
+                  <p class="text-2xl font-bold text-orange-600">EPC Online</p>
+                </div>
+              </div>
+            </a>
+            <!-- adaugi tu restul... -->
+          </div>
+        </div>
+      </div>
+
+      <!-- CFMOTO -->
+      <div class="border-b border-gray-200 last:border-0">
+        <button @click="open === 'cfmoto' ? open = '' : open = 'cfmoto'"
+                class="w-full py-5 px-6 flex items-center justify-between hover:bg-gray-50 transition">
+          <div class="flex items-center gap-4">
+            <img src="logos/cfmoto.svg" alt="CFMOTO" class="h-10">
+            <span class="text-xl font-semibold text-gray-800">CFMOTO</span>
+          </div>
+          <svg class="w-6 h-6 text-gray-500 transition" :class="open === 'cfmoto' ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div x-show="open === 'cfmoto'" x-transition class="px-6 pb-8">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <!-- preview-uri CFMOTO aici -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Repetă pentru HONDA, YAMAHA, KTM etc. -->
+
+    </div>
+
+    <p class="text-center text-gray-500 mt-12 text-sm">
+      Click pe copertă pentru a deschide catalogul • Actualizat Decembrie 2025
+    </p>
+  </main>
+</body>
+</html>
