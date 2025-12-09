@@ -41,7 +41,7 @@
       <div x-show="results.length > 0" class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
         <div class="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-2">
           <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
           </svg>
           <span class="font-medium text-green-800">Rezultate găsite: <span x-text="results.length"></span></span>
         </div>
@@ -54,11 +54,13 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
-                  <div class="text-sm text-gray-500">
-                    <span x-show="item.codeToShow !== item.COD" class="text-orange-600 font-medium">
-                      Cod înlocuit: <span x-text="item.codeToShow"></span>
+                  <div class="text-sm">
+                    <!-- DOAR dacă are CODNOU real (nu gol) → este codul înlocuitor -->
+                    <span x-show="item.hasCodNou" class="text-orange-600 font-medium">
+                      Cod înlocuitor: <span x-text="item.codeToShow"></span>
                     </span>
-                    <span x-show="item.codeToShow === item.COD" x-text="item.codeToShow"></span>
+                    <!-- Dacă nu are CODNOU → afișează doar codul normal -->
+                    <span x-show="!item.hasCodNou" class="text-gray-500" x-text="item.codeToShow"></span>
                   </div>
                 </div>
               </div>
@@ -92,7 +94,7 @@
         results: [],
         items: [],
         MUL_STOC: 1.35 * 1.40 * 20,     // 37.8
-        MUL_URGENT: 1.60 * 1.60 * 20,   // 51.2 (modifică dacă vrei altul)
+        MUL_URGENT: 1.60 * 1.60 * 20,   // 51.2
 
         async init() {
           await this.loadAllFiles();
@@ -111,13 +113,18 @@
             'data/diverse.json'
           ];
 
-          const requests = files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []));
+          const requests = files.map(f => 
+            fetch(f + '?t=' + Date.now())
+              .then(r => r.ok ? r.json() : [])
+              .catch(() => [])
+          );
+
           const arrays = await Promise.all(requests);
 
           this.items = arrays.flatMap((arr, i) => 
             arr.map(item => ({
               ...item,
-              isSuzuki: files[i].includes('suzuki')
+              isSuzuki: files[i].toLowerCase().includes('suzuki')
             }))
           );
 
@@ -137,7 +144,11 @@
         },
 
         displayCode(item) {
-          return item.CODNOU?.trim() || item.COD?.trim() || '';
+          return (item.CODNOU && item.CODNOU.trim() !== '') ? item.CODNOU.trim() : item.COD.trim();
+        },
+
+        hasCodNou(item) {
+          return item.CODNOU && item.CODNOU.trim() !== '' && item.CODNOU.trim() !== item.COD.trim();
         },
 
         search() {
@@ -148,7 +159,6 @@
 
           const q = this.query.trim().toUpperCase();
 
-          // Găsim toate produsele care au COD sau CODNOU care conține query-ul
           const matches = this.items
             .filter(item => {
               const cod = (item.COD || '').toUpperCase();
@@ -157,15 +167,17 @@
             })
             .map(item => {
               const prices = this.getFinalPrice(item);
+              const codeToShow = this.displayCode(item);
               return {
                 ...item,
                 finalPrice: prices.stoc,
                 urgentPrice: prices.urgent || null,
-                codeToShow: this.displayCode(item)
+                codeToShow,
+                hasCodNou: this.hasCodNou(item)
               };
             });
 
-          // Eliminăm duplicatele după codul afișat (CODNOU are prioritate)
+          // Elimină duplicatele după codul afișat
           const seen = new Set();
           this.results = matches.filter(item => {
             if (seen.has(item.codeToShow)) return false;
