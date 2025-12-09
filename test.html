@@ -10,7 +10,6 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- BUTON ÎNAPOI -->
   <div class="fixed top-4 left-4 z-50">
     <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border border-gray-200">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,7 +32,7 @@
         Scrie codul exact sau parțial
       </p>
 
-      <input type="text" x-model.debounce.300ms="query"
+      <input type="text" x-model.debounce.500ms="query"
              placeholder="Introdu codul..."
              class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-600 focus:outline-none mb-8"
              autofocus>
@@ -47,7 +46,7 @@
           <span class="font-medium text-green-800">Rezultate găsite: <span x-text="results.length"></span></span>
         </div>
         <ul class="divide-y divide-gray-200">
-          <template x-for="item in results" :key="item.COD">
+          <template x-for="item in results" :key="item.id">
             <li class="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
               <div class="flex items-center gap-3 flex-1">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -98,8 +97,9 @@
         query: '',
         results: [],
         items: [],
+        loaded: false,
 
-        // TOATE BRANDURILE DIN TABELUL TĂU (exact cum ai cerut)
+        // TOATE REDUCERILE EXACT DIN TABELUL TĂU
         discounts: {
           "SUZUKI":     { stoc: 25, urgent: null },
           "HONDA":      { stoc: 35, urgent: 20 },
@@ -109,79 +109,73 @@
           "HUSQVARNA":  { stoc: 10, urgent: 10 },
           "PIAGGIO":    { stoc: 25, urgent: 25 },
           "DUCATI":     { stoc: null, urgent: 5 },
-          "DEFAULT":    { stoc: 30, urgent: 15 }   // China, generice etc.
+          "DEFAULT":    { stoc: 30, urgent: 15 }
         },
 
         BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
 
-        async init() {
-          await this.loadAllFiles();
+        init() {
+          this.loadAllFiles();
           this.$watch('query', () => this.search());
         },
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json',
-            'data/honda1.json',
-            'data/honda2.json',
-            'data/yamaha.json',
-            'data/kawasaki.json',
-            'data/china1.json',
-            'data/china2.json',
-            'data/china3.json',
-            'data/diverse.json'
+            'data/suzuki.json', 'data/honda1.json', 'data/honda2.json',
+            'data/yamaha.json', 'data/kawasaki.json',
+            'data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json'
           ];
 
-          const requests = files.map(f => 
-            fetch(f + '?t=' + Date.now())
-              .then(r => r.ok ? r.json() : null)
-              .catch(() => null)
-          );
+          for (const file of files) {
+            try {
+              const resp = await fetch(file + '?t=' + Date.now());
+              if (!resp.ok) continue;
+              const data = await resp.json();
 
-          const responses = await Promise.all(requests);
+              const array = Array.isArray(data) ? data : Object.values(data);
 
-          this.items = [];
+              array.forEach((raw, index) => {
+                if (!raw || !raw.COD) return;
 
-          responses.forEach(data => {
-            if (!data) return;
+                const cod = String(raw.COD || '').trim();
+                const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
+                const brandRaw = String(raw.BRAND || '').trim();
+                const pre = parseFloat(raw.PRE) || 0;
 
-            const array = Array.isArray(data) ? data : Object.values(data);
+                if (!cod || pre === 0) return;
 
-            array.forEach(raw => {
-              if (!raw || !raw.COD) return;
+                // Curățare brand
+                const clean = brandRaw.replace(/^\d+-/i, '').trim().toUpperCase();
+                const finalBrand = {
+                  'HOND': 'HONDA', 'SUZU': 'SUZUKI', 'YAMAH': 'YAMAHA',
+                  'KAWAS': 'KAWASAKI', 'HUSQ': 'HUSQVARNA', 'PIAG': 'PIAGGIO',
+                  'DUCA': 'DUCATI'
+                }[clean] || clean;
 
-              const brandRaw = (raw.BRAND || '').toString().trim();
-              const clean = brandRaw.replace(/^\d+-/i, '').trim().toUpperCase();
-
-              const finalBrand = clean === 'HOND' ? 'HONDA' :
-                                clean === 'SUZU' ? 'SUZUKI' :
-                                clean === 'YAMAH' ? 'YAMAHA' :
-                                clean === 'KAWAS' ? 'KAWASAKI' :
-                                clean === 'HUSQ' ? 'HUSQVARNA' :
-                                clean === 'PIAG' ? 'PIAGGIO' :
-                                clean === 'DUCA' ? 'DUCATI' :
-                                clean === 'KTM' ? 'KTM' : clean;
-
-              this.items.push({
-                ...raw,
-                COD: (raw.COD || '').toString().trim(),
-                CODNOU: raw.CODNOU ? (raw.CODNOU || '').toString().trim() : '',
-                cleanBrand: finalBrand,
-                isSuzuki: finalBrand === 'SUZUKI'
+                this.items.push({
+                  id: cod + '_' + index,
+                  COD: cod,
+                  CODNOU: codnou,
+                  DENUMIRE: String(raw.DENUMIRE || '').trim(),
+                  PRE: pre,
+                  BRAND: brandRaw,
+                  cleanBrand: finalBrand,
+                  isSuzuki: finalBrand === 'SUZUKI'
+                });
               });
-            });
-          });
+            } catch (e) {
+              console.warn('Eroare la încărcarea:', file);
+            }
+          }
 
-          console.log('Total produse încărcate:', this.items.length);
+          this.loaded = true;
+          console.log('Încărcate', this.items.length, 'produse');
           this.search();
         },
 
         getPrices(item) {
-          const pre = parseFloat(item.PRE) || 0;
-          if (pre === 0) return { stoc: 0, urgent: 0 };
-
+          const base = item.PRE * this.BASE_MULTIPLIER;
           const disc = this.discounts[item.cleanBrand] || this.discounts.DEFAULT;
-          const base = pre * this.BASE_MULTIPLIER;
 
           const stoc = disc.stoc !== null ? Math.round(base * (1 - disc.stoc / 100)) : null;
           const urgent = disc.urgent !== null ? Math.round(base * (1 - disc.urgent / 100)) : null;
@@ -198,33 +192,34 @@
         },
 
         search() {
-          if (!this.query.trim()) {
+          if (!this.loaded || !this.query.trim()) {
             this.results = [];
             return;
           }
 
           const q = this.query.trim().toUpperCase();
 
-          const matches = this.items.filter(item => {
-            return item.COD.toUpperCase().includes(q) || 
-                   (item.CODNOU && item.CODNOU.toUpperCase().includes(q));
-          });
+          let matches = this.items.filter(item =>
+            item.COD.toUpperCase().includes(q) ||
+            (item.CODNOU && item.CODNOU.toUpperCase().includes(q))
+          );
 
           this.results = matches.map(item => {
-            const prices = this.getPrices(item);
+            const p = this.getPrices(item);
             return {
               ...item,
-              finalPrice: prices.stoc,
-              urgentPrice: item.isSuzuki ? null : prices.urgent,
+              finalPrice: p.stoc,
+              urgentPrice: item.isSuzuki ? null : p.urgent,
               codeToShow: this.displayCode(item),
               hasCodNou: this.hasCodNou(item)
             };
           });
 
+          // Elimină duplicate
           const seen = new Set();
-          this.results = this.results.filter(item => {
-            if (seen.has(item.codeToShow)) return false;
-            seen.add(item.codeToShow);
+          this.results = this.results.filter(r => {
+            if (seen.has(r.codeToShow)) return false;
+            seen.add(r.codeToShow);
             return true;
           });
         },
@@ -232,7 +227,7 @@
         format(p) {
           return p ? p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
         }
-      }
+      };
     }
   </script>
 </body>
