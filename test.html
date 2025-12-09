@@ -52,15 +52,14 @@
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                 </svg>
-                <div>
+                <div class="flex-1">
                   <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
-                  <div class="text-sm">
-                    <!-- DOAR dacă are CODNOU real (nu gol) → este codul înlocuitor -->
-                    <span x-show="item.hasCodNou" class="text-orange-600 font-medium">
-                      Cod înlocuitor: <span x-text="item.codeToShow"></span>
+                  <div class="text-sm text-gray-600">
+                    <span class="font-semibold text-indigo-600" x-text="item.BRAND"></span>
+                    <span x-show="item.hasCodNou" class="text-orange-600 font-medium ml-3">
+                      → Cod înlocuitor: <span x-text="item.codeToShow"></span>
                     </span>
-                    <!-- Dacă nu are CODNOU → afișează doar codul normal -->
-                    <span x-show="!item.hasCodNou" class="text-gray-500" x-text="item.codeToShow"></span>
+                    <span x-show="!item.hasCodNou" class="text-gray-500 ml-3" x-text="item.codeToShow"></span>
                   </div>
                 </div>
               </div>
@@ -124,6 +123,7 @@
           this.items = arrays.flatMap((arr, i) => 
             arr.map(item => ({
               ...item,
+              sourceFile: files[i],
               isSuzuki: files[i].toLowerCase().includes('suzuki')
             }))
           );
@@ -173,11 +173,12 @@
                 finalPrice: prices.stoc,
                 urgentPrice: prices.urgent || null,
                 codeToShow,
-                hasCodNou: this.hasCodNou(item)
+                hasCodNou: this.hasCodNou(item),
+                BRAND: (item.BRAND || 'NECUNOSCUT').trim()
               };
             });
 
-          // Elimină duplicatele după codul afișat
+          // Elimină duplicate după codul afișat
           const seen = new Set();
           this.results = matches.filter(item => {
             if (seen.has(item.codeToShow)) return false;
