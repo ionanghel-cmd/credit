@@ -26,7 +26,7 @@
   <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-10">
     <div x-data="priceSearch()">
       <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">
-        Căutare Prețuri Piese China & Agro
+        Căutare Prețuri VDM
       </h1>
       <p class="text-center text-gray-600 mb-8 text-sm">
         Scrie codul exact sau parțial
@@ -110,8 +110,7 @@
           "KTM":      { stoc: 10, urgent: 10 },
           "HUSQVARNA":{ stoc: 10, urgent: 10 },
           "PIAGGIO":  { stoc: 25, urgent: 25 },
-          "DUCATI":   { stoc: null, urgent: 5 },
-          "DEFAULT":  { stoc: 30, urgent: 15 }      // pentru China, generice etc.
+          "DUCATI":   { stoc: null, urgent: 5 }
         },
 
         BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
@@ -123,8 +122,8 @@
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json', 'data/yamaha.json', 'data/honda.json',
-            'data/kawasaki.json', 'data/china1.json', 'data/china2.json',
+            'data/suzuki.json', 'data/yamaha.json', 'data/honda1.json',
+            'data/kawasaki.json', 'data/honda2.json', 'data/china2.json',
             'data/china3.json', 'data/diverse.json'
           ];
 
