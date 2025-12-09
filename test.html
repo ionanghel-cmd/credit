@@ -10,9 +10,8 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- BUTON ÎNAPOI -->
   <div class="fixed top-4 left-4 z-50">
-    <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200">
+    <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border border-gray-200">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
       </svg>
@@ -30,11 +29,11 @@
         Căutare Prețuri Piese China & Agro
       </h1>
       <p class="text-center text-gray-600 mb-8 text-sm">
-        Scrie cod, cod nou sau cuvinte din denumire
+        Scrie codul exact sau parțial
       </p>
 
       <input type="text" x-model.debounce.300ms="query"
-             placeholder="Caută piesă..."
+             placeholder="Introdu codul..."
              class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-600 focus:outline-none mb-8"
              autofocus>
 
@@ -51,14 +50,18 @@
             <li class="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
               <div class="flex items-center gap-3 flex-1">
                 <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
-                  <div class="text-sm text-gray-500" x-text="item.codeToShow"></div>
+                  <div class="text-sm text-gray-500">
+                    <span x-show="item.codeToShow !== item.COD" class="text-orange-600 font-medium">
+                      Cod înlocuit: <span x-text="item.codeToShow"></span>
+                    </span>
+                    <span x-show="item.codeToShow === item.COD" x-text="item.codeToShow"></span>
+                  </div>
                 </div>
               </div>
-
               <div class="text-right">
                 <div class="text-xl font-bold text-gray-900">
                   <span x-text="format(item.finalPrice)"></span> LEI
@@ -72,30 +75,24 @@
         </ul>
       </div>
 
-      <!-- NICIO CĂUTARE -->
       <div x-show="!query" class="text-center text-gray-400 py-12">
-        <p>Începe să scrii pentru a vedea prețurile</p>
+        <p>Începe să scrii codul pentru a vedea prețul</p>
       </div>
 
-      <!-- NICIUN REZULTAT -->
       <div x-show="query && results.length === 0" class="text-center py-12 text-gray-500">
-        <p class="text-lg">Niciun rezultat găsit</p>
-        <p class="text-sm mt-1">Încearcă alte cuvinte</p>
+        <p class="text-lg">Cod negăsit</p>
       </div>
     </div>
   </main>
 
-  <!-- SCRIPTUL FINAL -->
   <script>
     function priceSearch() {
       return {
         query: '',
         results: [],
         items: [],
-
-        // MODIFICĂ DOAR AICI CÂND VREI ALTE PREȚURI
-        MUL_STOC:   1.35 * 1.40 * 20,   // = 37.8 → Suzuki + Preț Stoc toate celelalte
-        MUL_URGENT: 1.60 * 1.60 * 20,   // = 51.2 → Preț Urgent (doar non-Suzuki)
+        MUL_STOC: 1.35 * 1.40 * 20,     // 37.8
+        MUL_URGENT: 1.60 * 1.60 * 20,   // 51.2 (modifică dacă vrei altul)
 
         async init() {
           await this.loadAllFiles();
@@ -112,21 +109,15 @@
             'data/china2.json',
             'data/china3.json',
             'data/diverse.json'
-            // adaugă câte fișiere vrei tu aici ↑
           ];
 
-          const requests = files.map(f =>
-            fetch(f + '?t=' + Date.now())
-              .then(r => r.ok ? r.json() : [])
-              .catch(() => [])
-          );
-
+          const requests = files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []));
           const arrays = await Promise.all(requests);
 
-          this.items = arrays.flatMap((arr, idx) =>
+          this.items = arrays.flatMap((arr, i) => 
             arr.map(item => ({
               ...item,
-              isSuzuki: files[idx].toLowerCase().includes('suzuki')
+              isSuzuki: files[i].includes('suzuki')
             }))
           );
 
@@ -136,15 +127,13 @@
         getFinalPrice(item) {
           const pre = parseFloat(item.PRE) || 0;
           if (pre === 0) return { stoc: 0, urgent: 0 };
-
           if (item.isSuzuki) {
             return { stoc: Math.round(pre * this.MUL_STOC), urgent: null };
-          } else {
-            return {
-              stoc:   Math.round(pre * this.MUL_STOC),
-              urgent: Math.round(pre * this.MUL_URGENT)
-            };
           }
+          return {
+            stoc: Math.round(pre * this.MUL_STOC),
+            urgent: Math.round(pre * this.MUL_URGENT)
+          };
         },
 
         displayCode(item) {
@@ -157,9 +146,15 @@
             return;
           }
 
-          const terms = this.query.toLowerCase().trim().split(/\s+/).filter(t => t.length > 1);
+          const q = this.query.trim().toUpperCase();
 
-          this.results = this.items
+          // Găsim toate produsele care au COD sau CODNOU care conține query-ul
+          const matches = this.items
+            .filter(item => {
+              const cod = (item.COD || '').toUpperCase();
+              const codnou = (item.CODNOU || '').toUpperCase();
+              return cod.includes(q) || codnou.includes(q);
+            })
             .map(item => {
               const prices = this.getFinalPrice(item);
               return {
@@ -168,13 +163,15 @@
                 urgentPrice: prices.urgent || null,
                 codeToShow: this.displayCode(item)
               };
-            })
-            .filter(item => {
-              const text = `${item.COD} ${item.CODNOU} ${item.DENUMIRE} ${item.BRAND}`.toLowerCase();
-              return terms.every(t => text.includes(t));
-            })
-            .sort((a, b) => a.DENUMIRE.localeCompare(b.DENUMIRE))
-            .slice(0, 1000);
+            });
+
+          // Eliminăm duplicatele după codul afișat (CODNOU are prioritate)
+          const seen = new Set();
+          this.results = matches.filter(item => {
+            if (seen.has(item.codeToShow)) return false;
+            seen.add(item.codeToShow);
+            return true;
+          });
         },
 
         format(p) {
