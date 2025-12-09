@@ -6,8 +6,10 @@
   <title>Căutare Prețuri Piese - MOTOLAND</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="icon" href="data:,">
 </head>
-<body class="bg-gray-100 min-h-screen">
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
   <div class="fixed top-4 left-4 z-50">
     <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border">
@@ -22,138 +24,197 @@
     <img src="logos/logo.svg" alt="MOTOLAND" class="h-12 mx-auto">
   </header>
 
-  <main class="max-w-3xl mx-auto px-6 py-10">
-    <div x-data="searchApp()" class="bg-white rounded-2xl shadow-xl p-8">
-      <h1 class="text-4xl font-bold text-center mb-4">Căutare Prețuri Piese</h1>
+  <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-10">
+    <!-- x-init FIX AICI -->
+    <div x-data="app()" x-init="init()" class="bg-white rounded-2xl shadow-xl p-8">
+
+      <h1 class="text-4xl font-bold text-center text-gray-800 mb-3">
+        Căutare Prețuri Piese China & Agro
+      </h1>
+      <p class="text-center text-gray-600 mb-8">Introdu codul exact sau parțial</p>
+
       <input 
         type="text" 
         x-model="query" 
-        @input.debounce.300ms="search"
-        placeholder="Scrie codul..."
-        class="w-full px-6 py-5 text-xl border-2 border-gray-300 rounded-xl focus:border-blue-600 focus:outline-none"
+        @input.debounce.300ms="search()"
+        placeholder="Ex: 16705NL5800, 4510028K62BGP..."
+        class="w-full px-6 py-5 text-xl border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none"
         autofocus
       >
 
-      <template x-if="results.length">
+      <!-- REZULTATE -->
+      <template x-if="ready && results.length > 0">
         <div class="mt-8 space-y-4">
-          <template x-for="r in results">
-            <div class="bg-gray-50 rounded-xl p-6 border hover:bg-gray-100 transition">
+          <template x-for="item in results" :key="item.id">
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:bg-gray-100 transition">
               <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="text-xl font-bold" x-text="r.name"></h3>
-                  <div class="text-sm text-gray-600 mt-1">
-                    <span class="font-semibold text-indigo-600" x-text="r.brand"></span>
-                    <span class="ml-3" x-text="r.code"></span>
-                    <span x-show="r.replaced" class="text-orange-600 font-medium ml-3">
-                      → Înlocuit cu: <span x-text="r.replaced"></span>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-gray-800" x-text="item.DENUMIRE"></h3>
+                  <div class="mt-2 text-sm">
+                    <span class="font-semibold text-blue-600" x-text="item.brand"></span>
+                    <span class="text-gray-600 ml-4" x-text="item.code"></span>
+                    <span x-show="item.codnou" class="text-orange-600 font-medium ml-3">
+                      → Înlocuit cu: <span x-text="item.codnou"></span>
                     </span>
                   </div>
                 </div>
+
                 <div class="text-right">
-                  <template x-if="r.brand === 'SUZUKI'">
-                    <div class="text-3xl font-bold text-gray-900" x-text="format(r.price) + ' LEI'"></div>
-                  </template>
-                  <template x-if="r.brand !== 'SUZUKI'">
-                    <div>
-                      <div class="text-2xl font-bold text-green-600">Stoc: <span x-text="format(r.price)"></span> LEI</div>
-                      <div class="text-xl font-bold text-red-600 mt-2">Urgent: <span x-text="format(r.urgent)"></span> LEI</div>
+                  <div x-show="item.isSuzuki" class="text-3xl font-bold text-gray-900">
+                    <span x-text="format(item.pret)"></span> LEI
+                  </div>
+
+                  <div x-show="!item.isSuzuki">
+                    <div class="text-2xl font-bold text-green-600">
+                      Stoc: <span x-text="format(item.pret_stoc)"></span> LEI
                     </div>
-                  </template>
+                    <div class="text-xl font-bold text-red-600 mt-2">
+                      Urgent: <span x-text="format(item.pret_urgent)"></span> LEI
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </template>
         </div>
       </template>
 
-      <div x-show="!query" class="text-center py-20 text-gray-400 text-xl">
-        Scrie un cod pentru a vedea prețul
+      <!-- NICIO CĂUTARE -->
+      <div x-show="ready && !query" class="text-center py-20 text-gray-400 text-lg">
+        Scrie un cod pentru a începe căutarea
       </div>
 
-      <div x-show="query && !results.length" class="text-center py-20 text-red-600 text-2xl font-bold">
+      <!-- COD NEGĂSIT -->
+      <div x-show="ready && query && results.length === 0" class="text-center py-20 text-red-600 text-2xl font-bold">
         Cod negăsit
       </div>
+
     </div>
   </main>
 
   <script>
-    function searchApp() {
-      const MULT = 1.35 * 1.40 * 20; // 37.8
-
-      const discounts = {
-        SUZUKI: 25, HONDA: 35, YAMAHA: 33, KAWASAKI: 25,
-        KTM: 10, HUSQVARNA: 10, PIAGGIO: 25, DUCATI: 5, DEFAULT: 30
-      };
-
-      const urgentDisc = {
-        HONDA: 20, YAMAHA: 20, KAWASAKI: 20, KTM: 10, HUSQVARNA: 10,
-        PIAGGIO: 25, DUCATI: 5, DEFAULT: 15
-      };
-
-      const files = [
-        'data/suzuki.json','data/honda1.json','data/honda2.json',
-        'data/yamaha.json','data/kawasaki.json',
-        'data/china1.json','data/china2.json','data/china3.json','data/diverse.json'
-      ];
-
-      let all = [];
-
-      // Încărcare simplă și sigură
-      Promise.all(files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json().catch(() => []) : [])))
-        .then(arrays => {
-          arrays.forEach(data => {
-            if (!data) return;
-            const list = Array.isArray(data) ? data : Object.values(data);
-            list.forEach(item => {
-              if (!item.COD || !item.PRE) return;
-              const cod = String(item.COD).trim();
-              const codnou = item.CODNOU ? String(item.CODNOU).trim() : '';
-              const pre = parseFloat(item.PRE);
-              if (!pre) return;
-
-              let brand = (item.BRAND || '').toString().trim().toUpperCase().replace(/^\d+-/, '');
-              if (brand.includes('HOND')) brand = 'HONDA';
-              if (brand.includes('SUZU')) brand = 'SUZUKI';
-              if (brand.includes('YAMAH')) brand = 'YAMAHA';
-              if (brand.includes('KAWAS')) brand = 'KAWASAKI';
-
-              const base = Math.round(pre * MULT);
-              const disc = discounts[brand] ?? discounts.DEFAULT;
-              const price = Math.round(base * (1 - disc/100));
-              const urgent = brand === 'SUZUKI' ? null : Math.round(base * (1 - (urgentDisc[brand] ?? urgentDisc.DEFAULT)/100));
-
-              all.push({
-                name: String(item.DENUMIRE || '').trim(),
-                brand: brand,
-                code: codnou || cod,
-                replaced: codnou && codnou !== cod ? codnou : '',
-                price: price,
-                urgent: urgent
-              });
-            });
-          });
-        });
-
+    function app() {
       return {
         query: '',
         results: [],
+        ready: false,
+        allItems: [],
+
+        discounts: {
+          SUZUKI: 25, HONDA: 35, YAMAHA: 33, KAWASAKI: 25,
+          KTM: 10, HUSQVARNA: 10, PIAGGIO: 25, DUCATI: 5,
+          DEFAULT: 30
+        },
+
+        urgentDiscount: {
+          HONDA: 20, YAMAHA: 20, KAWASAKI: 20,
+          KTM: 10, HUSQVARNA: 10, PIAGGIO: 25, DUCATI: 5,
+          DEFAULT: 15
+        },
+
+        init() {
+          this.loadAll();
+        },
+
+        async loadAll() {
+          const files = [
+            'data/suzuki.json',
+            'data/honda1.json',
+            'data/honda2.json',
+            'data/yamaha.json',
+            'data/kawasaki.json',
+            'data/china1.json',
+            'data/china2.json',
+            'data/china3.json',
+            'data/diverse.json'
+          ];
+
+          for (const file of files) {
+            try {
+              const res = await fetch(file + '?t=' + Date.now());
+              if (!res.ok) {
+                console.warn("Fișier negăsit:", file);
+                continue;
+              }
+
+              let data = await res.json();
+              if (!Array.isArray(data)) data = Object.values(data);
+
+              data.forEach(item => {
+                if (!item || !item.COD) return;
+
+                const cod = String(item.COD).trim();
+                const codnou = item.CODNOU ? String(item.CODNOU).trim() : '';
+                const brandRaw = String(item.BRAND || '').trim().toUpperCase();
+                const denumire = String(item.DENUMIRE || '').trim();
+
+                const preEur = parseFloat(String(item.PRE || '').replace(',', '.'));
+                if (isNaN(preEur)) return;
+
+                let brand = brandRaw.replace(/^\d+-/, '');
+                if (brand.includes('HOND')) brand = 'HONDA';
+                if (brand.includes('SUZU')) brand = 'SUZUKI';
+                if (brand.includes('YAMAH')) brand = 'YAMAHA';
+                if (brand.includes('KAWAS')) brand = 'KAWASAKI';
+
+                const multiplier = 1.35 * 1.40 * 20;
+                const base = Math.round(preEur * multiplier);
+
+                const d1 = this.discounts[brand] ?? this.discounts.DEFAULT;
+                const d2 = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
+
+                const pretStoc = Math.round(base * (1 - d1 / 100));
+                const pretUrgent = brand === "SUZUKI" ? null : Math.round(base * (1 - d2 / 100));
+
+                this.allItems.push({
+                  id: cod + "|" + (codnou || "0"),
+                  COD: cod,
+                  CODNOU: codnou,
+                  DENUMIRE: denumire,
+                  brand: brand,
+                  code: codnou || cod,
+                  codnou: codnou,
+                  isSuzuki: brand === "SUZUKI",
+                  pret: pretStoc,
+                  pret_stoc: pretStoc,
+                  pret_urgent: pretUrgent
+                });
+              });
+
+            } catch (err) {
+              console.error("Eroare la fișier:", file, err);
+            }
+          }
+
+          this.ready = true;
+          console.log("TOTAL PRODUSE:", this.allItems.length);
+          this.search();
+        },
 
         search() {
-          if (!this.query) {
+          if (!this.ready || !this.query.trim()) {
             this.results = [];
             return;
           }
-          const q = this.query.toUpperCase();
-          this.results = all
-            .filter(i => i.code.toUpperCase().includes(q))
-            .slice(0, 200);
+
+          const q = this.query.trim().toUpperCase();
+
+          this.results = this.allItems
+            .filter(item =>
+              item.COD.toUpperCase().includes(q) ||
+              (item.CODNOU && item.CODNOU.toUpperCase().includes(q)) ||
+              item.code.toUpperCase().includes(q)
+            )
+            .slice(0, 100);
         },
 
         format(x) {
-          return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') || '';
+          return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") || "—";
         }
       };
     }
   </script>
+
 </body>
 </html>
