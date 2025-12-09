@@ -63,12 +63,21 @@
                   </div>
                 </div>
               </div>
+
               <div class="text-right">
-                <div class="text-xl font-bold text-gray-900">
+                <!-- Suzuki: doar preț final -->
+                <div x-show="item.isSuzuki" class="text-xl font-bold text-gray-900">
                   <span x-text="format(item.finalPrice)"></span> LEI
                 </div>
-                <div x-show="item.urgentPrice" class="text-sm font-medium text-red-600 mt-1">
-                  Urgent: <span x-text="format(item.urgentPrice)"></span> LEI
+
+                <!-- Alte branduri: Preț Stoc + Preț Urgent -->
+                <div x-show="!item.isSuzuki">
+                  <div class="text-xl font-bold text-green-700">
+                    Stoc: <span x-text="format(item.finalPrice)"></span> LEI
+                  </div>
+                  <div class="text-lg font-medium text-red-600 mt-1">
+                    Urgent: <span x-text="format(item.urgentPrice)"></span> LEI
+                  </div>
                 </div>
               </div>
             </li>
@@ -79,7 +88,6 @@
       <div x-show="!query" class="text-center text-gray-400 py-12">
         <p>Începe să scrii codul pentru a vedea prețul</p>
       </div>
-
       <div x-show="query && results.length === 0" class="text-center py-12 text-gray-500">
         <p class="text-lg">Cod negăsit</p>
       </div>
@@ -92,8 +100,21 @@
         query: '',
         results: [],
         items: [],
-        MUL_STOC: 1.35 * 1.40 * 20,     // 37.8
-        MUL_URGENT: 1.60 * 1.60 * 20,   // 51.2
+
+        // === REDUCERI PE BRAND (modifici doar aici când schimbi tabela) ===
+        discounts: {
+          "SUZUKI":   { stoc: 25, urgent: null },   // doar stoc, 25% reducere
+          "HONDA":    { stoc: 35, urgent: 20 },
+          "YAMAHA":   { stoc: 33, urgent: 20 },
+          "KAWASAKI": { stoc: 25, urgent: 20 },
+          "KTM":      { stoc: 10, urgent: 10 },
+          "HUSQVARNA":{ stoc: 10, urgent: 10 },
+          "PIAGGIO":  { stoc: 25, urgent: 25 },
+          "DUCATI":   { stoc: null, urgent: 5 },
+          "DEFAULT":  { stoc: 30, urgent: 15 }      // pentru China, generice etc.
+        },
+
+        BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
 
         async init() {
           await this.loadAllFiles();
@@ -102,28 +123,17 @@
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json',
-            'data/yamaha.json',
-            'data/honda.json',
-            'data/kawasaki.json',
-            'data/china1.json',
-            'data/china2.json',
-            'data/china3.json',
-            'data/diverse.json'
+            'data/suzuki.json', 'data/yamaha.json', 'data/honda.json',
+            'data/kawasaki.json', 'data/china1.json', 'data/china2.json',
+            'data/china3.json', 'data/diverse.json'
           ];
 
-          const requests = files.map(f => 
-            fetch(f + '?t=' + Date.now())
-              .then(r => r.ok ? r.json() : [])
-              .catch(() => [])
-          );
-
+          const requests = files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []));
           const arrays = await Promise.all(requests);
 
-          this.items = arrays.flatMap((arr, i) => 
+          this.items = arrays.flatMap((arr, i) =>
             arr.map(item => ({
               ...item,
-              sourceFile: files[i],
               isSuzuki: files[i].toLowerCase().includes('suzuki')
             }))
           );
@@ -131,24 +141,27 @@
           this.search();
         },
 
-        getFinalPrice(item) {
+        getPrices(item) {
           const pre = parseFloat(item.PRE) || 0;
           if (pre === 0) return { stoc: 0, urgent: 0 };
-          if (item.isSuzuki) {
-            return { stoc: Math.round(pre * this.MUL_STOC), urgent: null };
-          }
-          return {
-            stoc: Math.round(pre * this.MUL_STOC),
-            urgent: Math.round(pre * this.MUL_URGENT)
-          };
+
+          const brandKey = (item.BRAND || '').toUpperCase().replace('1-', '');
+          const disc = this.discounts[brandKey] || this.discounts.DEFAULT;
+
+          const basePrice = pre * this.BASE_MULTIPLIER;
+
+          const stocPrice = disc.stoc !== null ? Math.round(basePrice * (1 - disc.stoc / 100)) : null;
+          const urgentPrice = disc.urgent !== null ? Math.round(basePrice * (1 - disc.urgent / 100)) : null;
+
+          return { stoc: stocPrice, urgent: urgentPrice };
         },
 
         displayCode(item) {
-          return (item.CODNOU && item.CODNOU.trim() !== '') ? item.CODNOU.trim() : item.COD.trim();
+          return (item.CODNOU && item.CODNOU.trim()) ? item.CODNOU.trim() : item.COD.trim();
         },
 
         hasCodNou(item) {
-          return item.CODNOU && item.CODNOU.trim() !== '' && item.CODNOU.trim() !== item.COD.trim();
+          return item.CODNOU && item.CODNOU.trim() && item.CODNOU.trim() !== item.COD.trim();
         },
 
         search() {
@@ -166,19 +179,18 @@
               return cod.includes(q) || codnou.includes(q);
             })
             .map(item => {
-              const prices = this.getFinalPrice(item);
+              const prices = this.getPrices(item);
               const codeToShow = this.displayCode(item);
               return {
                 ...item,
-                finalPrice: prices.stoc,
-                urgentPrice: prices.urgent || null,
+                finalPrice: item.isSuzuki ? prices.stoc : prices.stoc,
+                urgentPrice: item.isSuzuki ? null : prices.urgent,
                 codeToShow,
                 hasCodNou: this.hasCodNou(item),
                 BRAND: (item.BRAND || 'NECUNOSCUT').trim()
               };
             });
 
-          // Elimină duplicate după codul afișat
           const seen = new Set();
           this.results = matches.filter(item => {
             if (seen.has(item.codeToShow)) return false;
@@ -188,7 +200,7 @@
         },
 
         format(p) {
-          return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+          return p?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') || '—';
         }
       }
     }
