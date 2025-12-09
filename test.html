@@ -10,6 +10,7 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
+  <!-- BUTON ÎNAPOI -->
   <div class="fixed top-4 left-4 z-50">
     <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border border-gray-200">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,17 +99,17 @@
         results: [],
         items: [],
 
-        // REDUCERI PE BRAND (exact ca în tabelul tău)
+        // TOATE BRANDURILE DIN TABELUL TĂU (exact cum ai cerut)
         discounts: {
-          "SUZUKI":   { stoc: 25, urgent: null },
-          "HONDA":    { stoc: 35, urgent: 20 },
-          "YAMAHA":   { stoc: 33, urgent: 20 },
-          "KAWASAKI": { stoc: 25, urgent: 20 },
-          "KTM":      { stoc: 10, urgent: 10 },
-          "HUSQVARNA":{ stoc: 10, urgent: 10 },
-          "PIAGGIO":  { stoc: 25, urgent: 25 },
-          "DUCATI":   { stoc: null, urgent: 5 },
-          "DEFAULT":  { stoc: 30, urgent: 15 }
+          "SUZUKI":     { stoc: 25, urgent: null },
+          "HONDA":      { stoc: 35, urgent: 20 },
+          "YAMAHA":     { stoc: 33, urgent: 20 },
+          "KAWASAKI":   { stoc: 25, urgent: 20 },
+          "KTM":        { stoc: 10, urgent: 10 },
+          "HUSQVARNA":  { stoc: 10, urgent: 10 },
+          "PIAGGIO":    { stoc: 25, urgent: 25 },
+          "DUCATI":     { stoc: null, urgent: 5 },
+          "DEFAULT":    { stoc: 30, urgent: 15 }   // China, generice etc.
         },
 
         BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
@@ -120,30 +121,58 @@
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json', 'data/honda1.json', 'data/honda2.json',
-            'data/yamaha.json', 'data/kawasaki.json',
-            'data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json'
+            'data/suzuki.json',
+            'data/honda1.json',
+            'data/honda2.json',
+            'data/yamaha.json',
+            'data/kawasaki.json',
+            'data/china1.json',
+            'data/china2.json',
+            'data/china3.json',
+            'data/diverse.json'
           ];
 
-          const requests = files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []));
-          const arrays = await Promise.all(requests);
-
-          this.items = arrays.flatMap(arr => 
-            arr.map(raw => {
-              const brandRaw = (raw.BRAND || '').toString().trim();
-              const cleanBrand = brandRaw.replace(/^\d+-/, '').toUpperCase(); // "2-Hond" → "HOND" → apoi corectăm
-              const finalBrand = cleanBrand === 'HOND' ? 'HONDA' :
-                                cleanBrand === 'SUZU' ? 'SUZUKI' :
-                                cleanBrand === 'YAMAH' ? 'YAMAHA' : cleanBrand;
-
-              return {
-                ...raw,
-                cleanBrand: finalBrand,
-                isSuzuki: finalBrand === 'SUZUKI'
-              };
-            })
+          const requests = files.map(f => 
+            fetch(f + '?t=' + Date.now())
+              .then(r => r.ok ? r.json() : null)
+              .catch(() => null)
           );
 
+          const responses = await Promise.all(requests);
+
+          this.items = [];
+
+          responses.forEach(data => {
+            if (!data) return;
+
+            const array = Array.isArray(data) ? data : Object.values(data);
+
+            array.forEach(raw => {
+              if (!raw || !raw.COD) return;
+
+              const brandRaw = (raw.BRAND || '').toString().trim();
+              const clean = brandRaw.replace(/^\d+-/i, '').trim().toUpperCase();
+
+              const finalBrand = clean === 'HOND' ? 'HONDA' :
+                                clean === 'SUZU' ? 'SUZUKI' :
+                                clean === 'YAMAH' ? 'YAMAHA' :
+                                clean === 'KAWAS' ? 'KAWASAKI' :
+                                clean === 'HUSQ' ? 'HUSQVARNA' :
+                                clean === 'PIAG' ? 'PIAGGIO' :
+                                clean === 'DUCA' ? 'DUCATI' :
+                                clean === 'KTM' ? 'KTM' : clean;
+
+              this.items.push({
+                ...raw,
+                COD: (raw.COD || '').toString().trim(),
+                CODNOU: raw.CODNOU ? (raw.CODNOU || '').toString().trim() : '',
+                cleanBrand: finalBrand,
+                isSuzuki: finalBrand === 'SUZUKI'
+              });
+            });
+          });
+
+          console.log('Total produse încărcate:', this.items.length);
           this.search();
         },
 
@@ -161,11 +190,11 @@
         },
 
         displayCode(item) {
-          return (item.CODNOU && item.CODNOU.trim()) ? item.CODNOU.trim() : item.COD.trim();
+          return item.CODNOU || item.COD;
         },
 
         hasCodNou(item) {
-          return item.CODNOU && item.CODNOU.trim() && item.CODNOU.trim() !== item.COD.trim();
+          return item.CODNOU && item.CODNOU !== item.COD;
         },
 
         search() {
@@ -176,25 +205,24 @@
 
           const q = this.query.trim().toUpperCase();
 
-          const matches = this.items
-            .filter(item => {
-              const cod = (item.COD || '').toUpperCase();
-              const codnou = (item.CODNOU || '').toUpperCase();
-              return cod.includes(q) || codnou.includes(q);
-            })
-            .map(item => {
-              const prices = this.getPrices(item);
-              return {
-                ...item,
-                finalPrice: prices.stoc,
-                urgentPrice: item.isSuzuki ? null : prices.urgent,
-                codeToShow: this.displayCode(item),
-                hasCodNou: this.hasCodNou(item)
-              };
-            });
+          const matches = this.items.filter(item => {
+            return item.COD.toUpperCase().includes(q) || 
+                   (item.CODNOU && item.CODNOU.toUpperCase().includes(q));
+          });
+
+          this.results = matches.map(item => {
+            const prices = this.getPrices(item);
+            return {
+              ...item,
+              finalPrice: prices.stoc,
+              urgentPrice: item.isSuzuki ? null : prices.urgent,
+              codeToShow: this.displayCode(item),
+              hasCodNou: this.hasCodNou(item)
+            };
+          });
 
           const seen = new Set();
-          this.results = matches.filter(item => {
+          this.results = this.results.filter(item => {
             if (seen.has(item.codeToShow)) return false;
             seen.add(item.codeToShow);
             return true;
