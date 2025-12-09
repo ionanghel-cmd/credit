@@ -37,8 +37,13 @@
              class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-600 focus:outline-none mb-8"
              autofocus>
 
+      <!-- STATUS ÎNCĂRCARE -->
+      <div x-show="!loaded" class="text-center py-12 text-gray-500">
+        <p>Se încarcă prețurile...</p>
+      </div>
+
       <!-- REZULTATE -->
-      <div x-show="results.length > 0" class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+      <div x-show="loaded && results.length > 0" class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
         <div class="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-2">
           <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
@@ -49,10 +54,10 @@
           <template x-for="item in results" :key="item.id">
             <li class="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
               <div class="flex items-center gap-3 flex-1">
-                <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                 </svg>
-                <div class="flex-1">
+                <div>
                   <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
                   <div class="text-sm text-gray-600">
                     <span class="font-semibold text-indigo-600" x-text="item.cleanBrand"></span>
@@ -63,7 +68,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="text-right">
                 <div x-show="item.isSuzuki" class="text-xl font-bold text-gray-900">
                   <span x-text="format(item.finalPrice)"></span> LEI
@@ -82,10 +86,10 @@
         </ul>
       </div>
 
-      <div x-show="!query" class="text-center text-gray-400 py-12">
+      <div x-show="loaded && !query" class="text-center text-gray-400 py-12">
         <p>Începe să scrii codul pentru a vedea prețul</p>
       </div>
-      <div x-show="query && results.length === 0" class="text-center py-12 text-gray-500">
+      <div x-show="loaded && query && results.length === 0" class="text-center py-12 text-gray-500">
         <p class="text-lg">Cod negăsit</p>
       </div>
     </div>
@@ -99,7 +103,6 @@
         items: [],
         loaded: false,
 
-        // TOATE REDUCERILE EXACT DIN TABELUL TĂU
         discounts: {
           "SUZUKI":     { stoc: 25, urgent: null },
           "HONDA":      { stoc: 35, urgent: 20 },
@@ -112,7 +115,7 @@
           "DEFAULT":    { stoc: 30, urgent: 15 }
         },
 
-        BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
+        BASE_MULTIPLIER: 1.35 * 1.40 * 20,
 
         init() {
           this.loadAllFiles();
@@ -121,55 +124,70 @@
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json', 'data/honda1.json', 'data/honda2.json',
-            'data/yamaha.json', 'data/kawasaki.json',
-            'data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json'
+            'data/suzuki.json',
+            'data/honda1.json',
+            'data/honda2.json',
+            'data/yamaha.json',
+            'data/kawasaki.json',
+            'data/china1.json',
+            'data/china2.json',
+            'data/china3.json',
+            'data/diverse.json'
           ];
 
           for (const file of files) {
             try {
-              const resp = await fetch(file + '?t=' + Date.now());
-              if (!resp.ok) continue;
+              const resp = await fetch(file + '?v=' + Date.now());
+              if (!resp.ok) {
+                console.warn('Nu am putut încărca:', file);
+                continue;
+              }
               const data = await resp.json();
 
-              const array = Array.isArray(data) ? data : Object.values(data);
+              let array = [];
+              if (Array.isArray(data)) {
+                array = data;
+              } else if (data && typeof data === 'object') {
+                array = Object.values(data);
+              }
 
-              array.forEach((raw, index) => {
-                if (!raw || !raw.COD) return;
-
+              array.forEach((raw, idx) => {
                 const cod = String(raw.COD || '').trim();
+                if (!cod) return;
+
                 const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
-                const brandRaw = String(raw.BRAND || '').trim();
+                const denumire = String(raw.DENUMIRE || '').trim();
                 const pre = parseFloat(raw.PRE) || 0;
+                if (pre === 0) return;
 
-                if (!cod || pre === 0) return;
+                const brandRaw = String(raw.BRAND || '').trim();
+                const clean = brandRaw.replace(/^\d+-/i, '').toUpperCase();
 
-                // Curățare brand
-                const clean = brandRaw.replace(/^\d+-/i, '').trim().toUpperCase();
-                const finalBrand = {
+                const brandMap = {
                   'HOND': 'HONDA', 'SUZU': 'SUZUKI', 'YAMAH': 'YAMAHA',
-                  'KAWAS': 'KAWASAKI', 'HUSQ': 'HUSQVARNA', 'PIAG': 'PIAGGIO',
-                  'DUCA': 'DUCATI'
-                }[clean] || clean;
+                  'KAWAS': 'KAWASAKI', 'HUSQ': 'HUSQVARNA',
+                  'PIAG': 'PIAGGIO', 'DUCA': 'DUCATI'
+                };
+                const finalBrand = brandMap[clean] || clean || 'NECUNOSCUT';
 
                 this.items.push({
-                  id: cod + '_' + index,
+                  id: cod + '_' + idx,
                   COD: cod,
                   CODNOU: codnou,
-                  DENUMIRE: String(raw.DENUMIRE || '').trim(),
+                  DENUMIRE: denumire,
                   PRE: pre,
-                  BRAND: brandRaw,
                   cleanBrand: finalBrand,
                   isSuzuki: finalBrand === 'SUZUKI'
                 });
               });
-            } catch (e) {
-              console.warn('Eroare la încărcarea:', file);
+
+            } catch (err) {
+              console.error('Eroare la', file, err);
             }
           }
 
           this.loaded = true;
-          console.log('Încărcate', this.items.length, 'produse');
+          console.log('TOTAL PRODUSE ÎNCĂRCATE:', this.items.length);
           this.search();
         },
 
@@ -199,7 +217,7 @@
 
           const q = this.query.trim().toUpperCase();
 
-          let matches = this.items.filter(item =>
+          const matches = this.items.filter(item =>
             item.COD.toUpperCase().includes(q) ||
             (item.CODNOU && item.CODNOU.toUpperCase().includes(q))
           );
@@ -217,9 +235,10 @@
 
           // Elimină duplicate
           const seen = new Set();
-          this.results = this.results.filter(r => {
-            if (seen.has(r.codeToShow)) return false;
-            seen.add(r.codeToShow);
+          this.results = this.results.filter(item => {
+            const key = item.codeToShow;
+            if (seen.has(key)) return false;
+            seen.add(key);
             return true;
           });
         },
