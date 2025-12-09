@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Căutare Prețuri Piese - MOTOLAND</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="icon" href="data:,">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- BUTON ÎNAPOI -->
+  <div class="fixed top-4 left-4 z-50">
+    <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 border border-gray-200">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">Înapoi</span>
+    </a>
+  </div>
+
+  <header class="bg-white shadow-sm border-b py-5 text-center">
+    <img src="logos/logo.svg" alt="MOTOLAND" class="h-10 mx-auto">
+  </header>
+
+  <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-10">
+    <div x-data="priceSearch()">
+      <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">
+        Căutare Prețuri Piese China & Agro
+      </h1>
+      <p class="text-center text-gray-600 mb-8 text-sm">
+        Scrie cod, cod nou sau cuvinte din denumire
+      </p>
+
+      <input type="text" x-model.debounce.300ms="query"
+             placeholder="Caută piesă..."
+             class="w-full px-5 py-4 text-lg border border-gray-300 rounded-xl focus:border-gray-600 focus:outline-none mb-8"
+             autofocus>
+
+      <!-- REZULTATE -->
+      <div x-show="results.length > 0" class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+        <div class="bg-green-50 border-b border-green-200 px-6 py-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span class="font-medium text-green-800">Rezultate găsite: <span x-text="results.length"></span></span>
+        </div>
+        <ul class="divide-y divide-gray-200">
+          <template x-for="item in results" :key="item.COD">
+            <li class="px-6 py-4 hover:bg-gray-50 flex justify-between items-center">
+              <div class="flex items-center gap-3 flex-1">
+                <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <div>
+                  <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
+                  <div class="text-sm text-gray-500" x-text="item.codeToShow"></div>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <div class="text-xl font-bold text-gray-900">
+                  <span x-text="format(item.finalPrice)"></span> LEI
+                </div>
+                <div x-show="item.urgentPrice" class="text-sm font-medium text-red-600 mt-1">
+                  Urgent: <span x-text="format(item.urgentPrice)"></span> LEI
+                </div>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+
+      <!-- NICIO CĂUTARE -->
+      <div x-show="!query" class="text-center text-gray-400 py-12">
+        <p>Începe să scrii pentru a vedea prețurile</p>
+      </div>
+
+      <!-- NICIUN REZULTAT -->
+      <div x-show="query && results.length === 0" class="text-center py-12 text-gray-500">
+        <p class="text-lg">Niciun rezultat găsit</p>
+        <p class="text-sm mt-1">Încearcă alte cuvinte</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- SCRIPTUL FINAL -->
+  <script>
+    function priceSearch() {
+      return {
+        query: '',
+        results: [],
+        items: [],
+
+        // MODIFICĂ DOAR AICI CÂND VREI ALTE PREȚURI
+        MUL_STOC:   1.35 * 1.40 * 20,   // = 37.8 → Suzuki + Preț Stoc toate celelalte
+        MUL_URGENT: 1.60 * 1.60 * 20,   // = 51.2 → Preț Urgent (doar non-Suzuki)
+
+        async init() {
+          await this.loadAllFiles();
+          this.$watch('query', () => this.search());
+        },
+
+        async loadAllFiles() {
+          const files = [
+            'data/suzuki.json',
+            'data/yamaha.json',
+            'data/honda.json',
+            'data/kawasaki.json',
+            'data/china1.json',
+            'data/china2.json',
+            'data/china3.json',
+            'data/diverse.json'
+            // adaugă câte fișiere vrei tu aici ↑
+          ];
+
+          const requests = files.map(f =>
+            fetch(f + '?t=' + Date.now())
+              .then(r => r.ok ? r.json() : [])
+              .catch(() => [])
+          );
+
+          const arrays = await Promise.all(requests);
+
+          this.items = arrays.flatMap((arr, idx) =>
+            arr.map(item => ({
+              ...item,
+              isSuzuki: files[idx].toLowerCase().includes('suzuki')
+            }))
+          );
+
+          this.search();
+        },
+
+        getFinalPrice(item) {
+          const pre = parseFloat(item.PRE) || 0;
+          if (pre === 0) return { stoc: 0, urgent: 0 };
+
+          if (item.isSuzuki) {
+            return { stoc: Math.round(pre * this.MUL_STOC), urgent: null };
+          } else {
+            return {
+              stoc:   Math.round(pre * this.MUL_STOC),
+              urgent: Math.round(pre * this.MUL_URGENT)
+            };
+          }
+        },
+
+        displayCode(item) {
+          return item.CODNOU?.trim() || item.COD?.trim() || '';
+        },
+
+        search() {
+          if (!this.query.trim()) {
+            this.results = [];
+            return;
+          }
+
+          const terms = this.query.toLowerCase().trim().split(/\s+/).filter(t => t.length > 1);
+
+          this.results = this.items
+            .map(item => {
+              const prices = this.getFinalPrice(item);
+              return {
+                ...item,
+                finalPrice: prices.stoc,
+                urgentPrice: prices.urgent || null,
+                codeToShow: this.displayCode(item)
+              };
+            })
+            .filter(item => {
+              const text = `${item.COD} ${item.CODNOU} ${item.DENUMIRE} ${item.BRAND}`.toLowerCase();
+              return terms.every(t => text.includes(t));
+            })
+            .sort((a, b) => a.DENUMIRE.localeCompare(b.DENUMIRE))
+            .slice(0, 1000);
+        },
+
+        format(p) {
+          return p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
