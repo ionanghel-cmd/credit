@@ -26,7 +26,7 @@
   <main class="flex-1 max-w-2xl mx-auto w-full px-6 py-10">
     <div x-data="priceSearch()">
       <h1 class="text-3xl font-bold text-gray-800 text-center mb-2">
-        Căutare Prețuri VDM
+        Căutare Prețuri Piese China & Agro
       </h1>
       <p class="text-center text-gray-600 mb-8 text-sm">
         Scrie codul exact sau parțial
@@ -55,7 +55,7 @@
                 <div class="flex-1">
                   <div class="font-medium text-gray-800" x-text="item.DENUMIRE"></div>
                   <div class="text-sm text-gray-600">
-                    <span class="font-semibold text-indigo-600" x-text="item.BRAND"></span>
+                    <span class="font-semibold text-indigo-600" x-text="item.cleanBrand"></span>
                     <span x-show="item.hasCodNou" class="text-orange-600 font-medium ml-3">
                       → Cod înlocuitor: <span x-text="item.codeToShow"></span>
                     </span>
@@ -65,12 +65,9 @@
               </div>
 
               <div class="text-right">
-                <!-- Suzuki: doar preț final -->
                 <div x-show="item.isSuzuki" class="text-xl font-bold text-gray-900">
                   <span x-text="format(item.finalPrice)"></span> LEI
                 </div>
-
-                <!-- Alte branduri: Preț Stoc + Preț Urgent -->
                 <div x-show="!item.isSuzuki">
                   <div class="text-xl font-bold text-green-700">
                     Stoc: <span x-text="format(item.finalPrice)"></span> LEI
@@ -101,9 +98,9 @@
         results: [],
         items: [],
 
-        // === REDUCERI PE BRAND (modifici doar aici când schimbi tabela) ===
+        // REDUCERI PE BRAND (exact ca în tabelul tău)
         discounts: {
-          "SUZUKI":   { stoc: 25, urgent: null },   // doar stoc, 25% reducere
+          "SUZUKI":   { stoc: 25, urgent: null },
           "HONDA":    { stoc: 35, urgent: 20 },
           "YAMAHA":   { stoc: 33, urgent: 20 },
           "KAWASAKI": { stoc: 25, urgent: 20 },
@@ -111,7 +108,7 @@
           "HUSQVARNA":{ stoc: 10, urgent: 10 },
           "PIAGGIO":  { stoc: 25, urgent: 25 },
           "DUCATI":   { stoc: null, urgent: 5 },
-          "DEFAULT":  { stoc: 30, urgent: 15 }      // pentru China, generice etc.
+          "DEFAULT":  { stoc: 30, urgent: 15 }
         },
 
         BASE_MULTIPLIER: 1.35 * 1.40 * 20,  // 37.8
@@ -123,19 +120,28 @@
 
         async loadAllFiles() {
           const files = [
-            'data/suzuki.json', 'data/yamaha.json', 'data/honda1.json',
-            'data/kawasaki.json', 'data/honda2.json', 'data/china2.json',
-            'data/china3.json', 'data/diverse.json'
+            'data/suzuki.json', 'data/honda1.json', 'data/honda2.json',
+            'data/yamaha.json', 'data/kawasaki.json',
+            'data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json'
           ];
 
           const requests = files.map(f => fetch(f + '?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []));
           const arrays = await Promise.all(requests);
 
-          this.items = arrays.flatMap((arr, i) =>
-            arr.map(item => ({
-              ...item,
-              isSuzuki: files[i].toLowerCase().includes('suzuki')
-            }))
+          this.items = arrays.flatMap(arr => 
+            arr.map(raw => {
+              const brandRaw = (raw.BRAND || '').toString().trim();
+              const cleanBrand = brandRaw.replace(/^\d+-/, '').toUpperCase(); // "2-Hond" → "HOND" → apoi corectăm
+              const finalBrand = cleanBrand === 'HOND' ? 'HONDA' :
+                                cleanBrand === 'SUZU' ? 'SUZUKI' :
+                                cleanBrand === 'YAMAH' ? 'YAMAHA' : cleanBrand;
+
+              return {
+                ...raw,
+                cleanBrand: finalBrand,
+                isSuzuki: finalBrand === 'SUZUKI'
+              };
+            })
           );
 
           this.search();
@@ -145,15 +151,13 @@
           const pre = parseFloat(item.PRE) || 0;
           if (pre === 0) return { stoc: 0, urgent: 0 };
 
-          const brandKey = (item.BRAND || '').toUpperCase().replace('1-', '');
-          const disc = this.discounts[brandKey] || this.discounts.DEFAULT;
+          const disc = this.discounts[item.cleanBrand] || this.discounts.DEFAULT;
+          const base = pre * this.BASE_MULTIPLIER;
 
-          const basePrice = pre * this.BASE_MULTIPLIER;
+          const stoc = disc.stoc !== null ? Math.round(base * (1 - disc.stoc / 100)) : null;
+          const urgent = disc.urgent !== null ? Math.round(base * (1 - disc.urgent / 100)) : null;
 
-          const stocPrice = disc.stoc !== null ? Math.round(basePrice * (1 - disc.stoc / 100)) : null;
-          const urgentPrice = disc.urgent !== null ? Math.round(basePrice * (1 - disc.urgent / 100)) : null;
-
-          return { stoc: stocPrice, urgent: urgentPrice };
+          return { stoc, urgent };
         },
 
         displayCode(item) {
@@ -180,14 +184,12 @@
             })
             .map(item => {
               const prices = this.getPrices(item);
-              const codeToShow = this.displayCode(item);
               return {
                 ...item,
-                finalPrice: item.isSuzuki ? prices.stoc : prices.stoc,
+                finalPrice: prices.stoc,
                 urgentPrice: item.isSuzuki ? null : prices.urgent,
-                codeToShow,
-                hasCodNou: this.hasCodNou(item),
-                BRAND: (item.BRAND || 'NECUNOSCUT').trim()
+                codeToShow: this.displayCode(item),
+                hasCodNou: this.hasCodNou(item)
               };
             });
 
@@ -200,7 +202,7 @@
         },
 
         format(p) {
-          return p?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') || '—';
+          return p ? p.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
         }
       }
     }
