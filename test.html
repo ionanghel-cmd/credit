@@ -38,7 +38,7 @@
           <option value="">Toate brandurile</option>
           <option value="suzuki">Suzuki</option>
           <option value="honda">Honda</option>
-          <option value="yamaha">Yamaha</option>
+          <option value="ducati">Ducati</option>
           <option value="kawasaki">Kawasaki</option>
           <option value="china">China / Diverse</option>
         </select>
@@ -119,7 +119,7 @@
           const names = {
             suzuki: 'Suzuki',
             honda: 'Honda',
-            yamaha: 'Yamaha',
+            ducati: 'Ducati',
             kawasaki: 'Kawasaki',
             china: 'China / Diverse',
             '': 'toate fișierele'
@@ -144,7 +144,7 @@
             'data/honda2.json',
             'data/yamaha.json',
             'data/kawasaki.json',
-            'data/china1.json',
+            'data/ducati.json',
             'data/china2.json',
             'data/china3.json',
             'data/diverse.json'
@@ -158,7 +158,7 @@
             const map = {
               suzuki:   ['data/suzuki.json'],
               honda:    ['data/honda1.json', 'data/honda2.json'],
-              yamaha:   ['data/yamaha.json'],
+              ducati:   ['data/ducati.json'],
               kawasaki: ['data/kawasaki.json'],
               china:    ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
             };
@@ -199,6 +199,7 @@
               if (brand.includes('HOND'))  brand = 'HONDA';
               if (brand.includes('SUZU'))  brand = 'SUZUKI';
               if (brand.includes('YAMAH')) brand = 'YAMAHA';
+              if (brand.includes('DUCATI')) brand = 'DUCATI';
               if (brand.includes('KAWAS')) brand = 'KAWASAKI';
 
               const preEur = parseFloat(raw.PRE);
