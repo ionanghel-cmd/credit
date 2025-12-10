@@ -1,213 +1,128 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Căutare Prețuri Piese - MOTOLAND</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link rel="icon" href="data:,">
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<script>
+  function app() {
+    return {
+      query: '',
+      selectedBrand: '',
+      results: [],
+      loading: false,
+      cache: {},
 
-  <div class="fixed top-4 left-4 z-50">
-    <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-      </svg>
-      Înapoi
-    </a>
-  </div>
+      discounts: { SUZUKI:25, HONDA:35, YAMAHA:33, KAWASAKI:25, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:30 },
+      urgentDiscount: { HONDA:20, YAMAHA:20, KAWASAKI:20, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:15 },
 
-  <header class="bg-white shadow-sm py-6 text-center">
-    <img src="logos/logo.svg" alt="MOTOLAND" class="h-12 mx-auto">
-  </header>
+      get brandName() {
+        const names = { suzuki:'Suzuki', honda:'Honda', yamaha:'Yamaha', kawasaki:'Kawasaki', china:'China/Diverse', '':'toate fișierele' };
+        return names[this.selectedBrand] || 'fișierele';
+      },
 
-  <main class="flex-1 max-w-4xl mx-auto w-full px-6 py-10">
-    <div x-data="app()" class="bg-white rounded-2xl shadow-xl p-8">
+      async search() {
+        if (!this.query.trim()) {
+          this.results = [];
+          this.loading = false;
+          return;
+        }
 
-      <h1 class="text-4xl font-bold text-center text-gray-800 mb-3">
-        Pricelist VDM
-      </h1>
-      <p class="text-center text-gray-600 mb-8">Alege brandul și introdu codul</p>
+        this.loading = true;
+        const q = this.query.trim().toUpperCase();
 
-      <div class="flex gap-4 mb-8">
-        <select x-model="selectedBrand" @change="query = ''; results = []; search()"
-                class="flex-1 px-5 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none">
-          <option value="">Toate brandurile</option>
-          <option value="suzuki">Suzuki</option>
-          <option value="honda">Honda</option>
-          <option value="yamaha">Yamaha</option>
-          <option value="kawasaki">Kawasaki</option>
-          <option value="china">China / Diverse</option>
-        </select>
+        // === LISTA COMPLETĂ DE FIȘIERE ===
+        const allFiles = [
+          'data/suzuki.json',
+          'data/honda1.json',
+          'data/honda2.json',
+          'data/yamaha.json',
+          'data/kawasaki.json',
+          'data/china1.json',
+          'data/china2.json',
+          'data/china3.json',
+          'data/diverse.json'
+        ];
 
-        <input type="text" x-model="query" @input.debounce.300ms="search()"
-               placeholder="Ex: 16705NL5800, 4510028K62BGP..."
-               class="flex-2 px-6 py-4 text-xl border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none"
-               autofocus>
-      </div>
+        let filesToSearch = [];
 
-      <!-- STATUS MIC -->
-      <div x-show="loading" class="text-center text-gray-500 text-sm mb-4">
-        Se caută în <span x-text="brandName"></span>...
-      </div>
+        if (!this.selectedBrand || this.selectedBrand === '') {
+          // TOATE brandurile → toate cele 9 fișiere
+          filesToSearch = allFiles;
+        } else {
+          const map = {
+            suzuki:   ['data/suzuki.json'],
+            honda:    ['data/honda1.json', 'data/honda2.json'],
+            yamaha:   ['data/yamaha.json'],
+            kawasaki: ['data/kawasaki.json'],
+            china:    ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
+          };
+          filesToSearch = map[this.selectedBrand] || allFiles;
+        }
 
-      <!-- REZULTATE -->
-      <template x-if="results.length > 0">
-        <div class="space-y-4">
-          <template x-for="item in results" :key="item.id">
-            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:bg-gray-100 transition">
-              <div class="flex justify-between items-start">
-                <div class="flex-1">
-                  <h3 class="text-xl font-bold text-gray-800" x-text="item.DENUMIRE"></h3>
-                  <div class="mt-2 text-sm">
-                    <span class="font-semibold text-blue-600" x-text="item.brand"></span>
-                    <span class="text-gray-600 ml-4" x-text="item.code"></span>
-                    <span x-show="item.codnou" class="text-orange-600 font-medium ml-3">
-                      → Înlocuit cu: <span x-text="item.codnou"></span>
-                    </span>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <div x-show="item.isSuzuki" class="text-3xl font-bold text-gray-900">
-                    <span x-text="format(item.pret)"></span> LEI
-                  </div>
-                  <div x-show="!item.isSuzuki">
-                    <div class="text-2xl font-bold text-green-600">
-                      Stoc: <span x-text="format(item.pret_stoc)"></span> LEI
-                    </div>
-                    <div class="text-xl font-bold text-red-600 mt-2">
-                      Urgent: <span x-text="format(item.pret_urgent)"></span> LEI
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-      </template>
+        const items = [];
 
-      <!-- NIMIC GĂSIT -->
-      <div x-show="!loading && query && results.length === 0" class="text-center py-20 text-red-600 text-2xl font-bold">
-        Cod negăsit
-      </div>
-
-      <!-- SCRIE CEVA -->
-      <div x-show="!query" class="text-center py-20 text-gray-400 text-lg">
-        Alege un brand și introdu codul pentru a începe căutarea
-      </div>
-
-    </div>
-  </main>
-
-  <script>
-    function app() {
-      return {
-        query: '',
-        selectedBrand: '',
-        results: [],
-        loading: false,
-        cache: {}, // ține datele încărcate pe brand
-
-        discounts: { SUZUKI:25, HONDA:35, YAMAHA:33, KAWASAKI:25, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:30 },
-        urgentDiscount: { HONDA:20, YAMAHA:20, KAWASAKI:20, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:15 },
-
-        get brandName() {
-          const names = { suzuki:'Suzuki', honda:'Honda', yamaha:'Yamaha', kawasaki:'Kawasaki', china:'China/Diverse', '':'toate fișierele' };
-          return names[this.selectedBrand] || 'fișierele';
-        },
-
-        async search() {
-          if (!this.query.trim()) {
-            this.results = [];
-            return;
-          }
-
-          this.loading = true;
-          const q = this.query.trim().toUpperCase();
-
-          let filesToSearch = [];
-
-          if (!this.selectedBrand || this.selectedBrand === '') {
-            // toate brandurile
-            filesToSearch = [
-              'data/suzuki.json', 'data/honda1.json', 'data/honda2.json'
-            ];
-          } else {
-            // doar fișierele brandului ales
-            const map = {
-              suzuki: ['data/suzuki.json'],
-              honda: ['data/honda1.json', 'data/honda2.json'],
-              yamaha: ['data/yamaha.json'],
-              kawasaki: ['data/kawasaki.json'],
-              china: ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
-            };
-            filesToSearch = map[this.selectedBrand];
-          }
-
-          const items = [];
-
-          for (const file of filesToSearch) {
-            if (!this.cache[file]) {
-              try {
-                const res = await fetch(file + '?t=' + Date.now());
-                if (!res.ok) continue;
-                let data = await res.json();
-                if (!Array.isArray(data)) data = Object.values(data);
-                this.cache[file] = data;
-              } catch (e) {
-                console.warn('Nu am putut încărca:', file);
+        for (const file of filesToSearch) {
+          // Încarcă doar dacă nu e deja în cache
+          if (!this.cache[file]) {
+            try {
+              const res = await fetch(file + '?t=' + Date.now());
+              if (!res.ok) {
+                console.warn(`404: ${file}`);
                 continue;
               }
+              let data = await res.json();
+              if (!Array.isArray(data)) data = Object.values(data);
+              this.cache[file] = data;
+              console.log(`Încărcat: ${file} (${data.length} produse)`);
+            } catch (e) {
+              console.warn(`Eroare la ${file}:`, e);
+              continue;
             }
-
-            const data = this.cache[file];
-            data.forEach(raw => {
-              if (!raw.COD || !raw.PRE) return;
-              const cod = String(raw.COD).trim();
-              const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
-              if (!cod.toUpperCase().includes(q) && (!codnou || !codnou.toUpperCase().includes(q))) return;
-
-              let brand = (String(raw.BRAND || '').trim().toUpperCase().replace(/^\d+-/, ''));
-              if (brand.includes('HOND')) brand = 'HONDA';
-              if (brand.includes('SUZU')) brand = 'SUZUKI';
-              if (brand.includes('YAMAH')) brand = 'YAMAHA';
-              if (brand.includes('KAWAS')) brand = 'KAWASAKI';
-
-              const preEur = parseFloat(raw.PRE);
-              if (isNaN(preEur) || preEur <= 0) return;
-
-              const base = Math.round(preEur * 1.35 * 1.40 * 20);
-              const discStoc = this.discounts[brand] ?? this.discounts.DEFAULT;
-              const discUrg = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
-
-              const pretStoc = Math.round(base * (1 - discStoc / 100));
-              const pretUrgent = brand === 'SUZUKI' ? null : Math.round(base * (1 - discUrg / 100));
-
-              items.push({
-                id: cod + '_' + Date.now(),
-                DENUMIRE: String(raw.DENUMIRE || '').trim(),
-                brand: brand,
-                code: codnou || cod,
-                codnou: codnou || null,
-                isSuzuki: brand === 'SUZUKI',
-                pret: pretStoc,
-                pret_stoc: pretStoc,
-                pret_urgent: pretUrgent
-              });
-            });
           }
 
-          this.results = items.slice(0, 100);
-          this.loading = false;
-        },
+          const data = this.cache[file];
 
-        format(x) {
-          return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
+          for (const raw of data) {
+            if (!raw.COD || !raw.PRE) continue;
+
+            const cod    = String(raw.COD).trim();
+            const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
+
+            if (!cod.toUpperCase().includes(q) && (!codnou || !codnou.toUpperCase().includes(q))) continue;
+
+            let brand = (String(raw.BRAND || '').trim().toUpperCase().replace(/^\d+-/, ''));
+            if (brand.includes('HOND'))  brand = 'HONDA';
+            if (brand.includes('SUZU'))  brand = 'SUZUKI';
+            if (brand.includes('YAMAH')) brand = 'YAMAHA';
+            if (brand.includes('KAWAS')) brand = 'KAWASAKI';
+
+            const preEur = parseFloat(raw.PRE);
+            if (isNaN(preEur) || preEur <= 0) continue;
+
+            const base = Math.round(preEur * 1.35 * 1.40 * 20);
+
+            const discStoc = this.discounts[brand] ?? this.discounts.DEFAULT;
+            const discUrg  = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
+
+            const pretStoc   = Math.round(base * (1 - discStoc / 100));
+            const pretUrgent = brand === 'SUZUKI' ? null : Math.round(base * (1 - discUrg / 100));
+
+            items.push({
+              id: cod + '_' + Date.now() + Math.random(),
+              DENUMIRE: String(raw.DENUMIRE || '').trim(),
+              brand: brand,
+              code: codnou || cod,
+              codnou: codnou || null,
+              isSuzuki: brand === 'SUZUKI',
+              pret: pretStoc,
+              pret_stoc: pretStoc,
+              pret_urgent: pretUrgent
+            });
+          }
         }
+
+        this.results = items.slice(0, 100);
+        this.loading = false;
+      },
+
+      format(x) {
+        return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
       }
     }
-  </script>
-</body>
-</html>
+  }
+</script>
