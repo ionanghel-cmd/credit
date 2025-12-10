@@ -128,108 +128,119 @@
         },
 
         async search() {
-          if (!this.query.trim()) {
-            this.results = [];
-            this.loading = false;
-            return;
-          }
+  if (!this.query.trim()) {
+    this.results = [];
+    this.loading = false;
+    return;
+  }
 
-          this.loading = true;
-          const q = this.query.trim().toUpperCase();
+  this.loading = true;
+  const q = this.query.trim().toUpperCase();
 
-          // === TOATE FIȘIERELE POSIBILE ===
-          const allFiles = [
-            'data/suzuki.json',
-            'data/honda1.json',
-            'data/honda2.json',
-            'data/yamaha.json',
-            'data/kawasaki.json',
-            'data/ducati.json',
-            'data/china2.json',
-            'data/china3.json',
-            'data/diverse.json'
-          ];
+  // === FUNCTIE NOUĂ: ROTUNJIRE LA URMĂTOAREA ZECIME DE 10 ===
+  const roundUpToTen = (num) => {
+    return Math.ceil(num / 10) * 10;
+  };
+  // Exemple:
+  // 6403 → 6410
+  // 5987 → 5990
+  // 6120 → 6120
+  // 6001 → 6010
 
-          let filesToSearch = [];
+  const allFiles = [
+    'data/suzuki.json',
+    'data/honda1.json',
+    'data/honda2.json',
+    'data/yamaha.json',
+    'data/kawasaki.json',
+    'data/ducati.json',
+    'data/china1.json',
+    'data/china2.json',
+    'data/china3.json',
+    'data/diverse.json'
+  ];
 
-          if (!this.selectedBrand) {
-            filesToSearch = allFiles;
-          } else {
-            const map = {
-              suzuki:   ['data/suzuki.json'],
-              honda:    ['data/honda1.json', 'data/honda2.json'],
-              ducati:   ['data/ducati.json'],
-              kawasaki: ['data/kawasaki.json'],
-              china:    ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
-            };
-            filesToSearch = map[this.selectedBrand] || allFiles;
-          }
+  let filesToSearch = [];
 
-          const items = [];
+  if (!this.selectedBrand) {
+    filesToSearch = allFiles;
+  } else {
+    const map = {
+      suzuki:   ['data/suzuki.json'],
+      honda:    ['data/honda1.json', 'data/honda2.json'],
+      ducati:   ['data/ducati.json'],
+      kawasaki: ['data/kawasaki.json'],
+      china:    ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
+    };
+    filesToSearch = map[this.selectedBrand] || allFiles;
+  }
 
-          for (const file of filesToSearch) {
-            if (!this.cache[file]) {
-              try {
-                const res = await fetch(file + '?t=' + Date.now());
-                if (!res.ok) {
-                  console.warn(`404 sau eroare: ${file}`);
-                  continue;
-                }
-                let data = await res.json();
-                if (!Array.isArray(data)) data = Object.values(data);
-                this.cache[file] = data;
-                console.log(`Încărcat ${data.length} produse din ${file}`);
-              } catch (e) {
-                console.warn(`Eroare la încărcarea ${file}:`, e);
-                continue;
-              }
-            }
+  const items = [];
 
-            const data = this.cache[file];
+  for (const file of filesToSearch) {
+    if (!this.cache[file]) {
+      try {
+        const res = await fetch(file + '?t=' + Date.now());
+        if (!res.ok) {
+          console.warn(`404 sau eroare: ${file}`);
+          continue;
+        }
+        let data = await res.json();
+        if (!Array.isArray(data)) data = Object.values(data);
+        this.cache[file] = data;
+        console.log(`Încărcat ${data.length} produse din ${file}`);
+      } catch (e) {
+        console.warn(`Eroare la încărcarea ${file}:`, e);
+        continue;
+      }
+    }
 
-            for (const raw of data) {
-              if (!raw.COD || !raw.PRE) continue;
+    const data = this.cache[file];
 
-              const cod    = String(raw.COD).trim();
-              const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
+    for (const raw of data) {
+      if (!raw.COD || !raw.PRE) continue;
 
-              if (!cod.toUpperCase().includes(q) && (!codnou || !codnou.toUpperCase().includes(q))) continue;
+      const cod = String(raw.COD).trim();
+      const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
 
-              let brand = (String(raw.BRAND || '').trim().toUpperCase().replace(/^\d+-/, ''));
-              if (brand.includes('HOND'))  brand = 'HONDA';
-              if (brand.includes('SUZU'))  brand = 'SUZUKI';
-              if (brand.includes('YAMAH')) brand = 'YAMAHA';
-              if (brand.includes('DUCATI')) brand = 'DUCATI';
-              if (brand.includes('KAWAS')) brand = 'KAWASAKI';
+      if (!cod.toUpperCase().includes(q) && (!codnou || !codnou.toUpperCase().includes(q))) continue;
 
-              const preEur = parseFloat(raw.PRE);
-              if (isNaN(preEur) || preEur <= 0) continue;
+      let brand = (String(raw.BRAND || '').trim().toUpperCase().replace(/^\d+-/, ''));
+      if (brand.includes('HOND'))  brand = 'HONDA';
+      if (brand.includes('SUZU'))  brand = 'SUZUKI';
+      if (brand.includes('YAMAH')) brand = 'YAMAHA';
+      if (brand.includes('DUCATI')) brand = 'DUCATI';
+      if (brand.includes('KAWAS')) brand = 'KAWASAKI';
 
-              const base = Math.round(preEur * 1.35 * 1.40 * 20); // 37.8
+      const preEur = parseFloat(raw.PRE);
+      if (isNaN(preEur) || preEur <= 0) continue;
 
-              const discStoc = this.discounts[brand] ?? this.discounts.DEFAULT;
-              const discUrg  = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
+      const base = preEur * 1.35 * 1.40 * 20; // 37.8x
 
-              const pretStoc   = Math.round(base * (1 - discStoc / 100));
-              const pretUrgent = brand === 'SUZUKI' ? null : Math.round(base * (1 - discUrg / 100));
+      const discStoc = this.discounts[brand] ?? this.discounts.DEFAULT;
+      const discUrg  = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
 
-              items.push({
-                id: cod + '_' + Date.now() + Math.random(),
-                DENUMIRE: String(raw.DENUMIRE || '').trim(),
-                brand: brand,
-                code: codnou || cod,
-                codnou: codnou || null,
-                isSuzuki: brand === 'SUZUKI',
-                pret: pretStoc,
-                pret_stoc: pretStoc,
-                pret_urgent: pretUrgent
-              });
-            }
-          }
+      // AICI FOLOSIM ROTUNJIREA LA URMĂTOAREA ZECIME
+      const pretStoc   = roundUpToTen(base * (1 - discStoc / 100));
+      const pretUrgent = brand === 'SUZUKI' ? null : roundUpToTen(base * (1 - discUrg / 100));
 
-          this.results = items.slice(0, 100);
-          this.loading = false;
-        },
+      items.push({
+        id: cod + '_' + Date.now() + Math.random(),
+        DENUMIRE: String(raw.DENUMIRE || '').trim(),
+        brand: brand,
+        code: codnou || cod,
+        codnou: codnou || null,
+        isSuzuki: brand === 'SUZUKI',
+        pret: pretStoc,
+        pret_stoc: pretStoc,
+        pret_urgent: pretUrgent
+      });
+    }
+  }
+
+  this.results = items.slice(0, 100);
+  this.loading = false;
+},
 
         format(x) {
           return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
