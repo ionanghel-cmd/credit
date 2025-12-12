@@ -4,15 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricelist VDM - MOTOLAND</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link rel="icon" href="data:,">
+
   <style>
     input::placeholder, select { color: #9ca3af; }
   </style>
+  <link rel="icon" href="data:,">
 </head>
+
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
+  <!-- BUTON ÎNAPOI -->
   <div class="fixed top-4 left-4 z-50">
     <a href="../credit/" class="flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-3 rounded-xl shadow-lg border">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,19 +26,22 @@
     </a>
   </div>
 
+  <!-- HEADER -->
   <header class="bg-white shadow-sm py-6 text-center">
     <img src="logos/logo.svg" alt="MOTOLAND" class="h-12 mx-auto">
   </header>
 
+  <!-- CONȚINUT -->
   <main class="flex-1 max-w-4xl mx-auto w-full px-6 py-10">
     <div x-data="app()" class="bg-white rounded-2xl shadow-xl p-8">
 
       <h1 class="text-4xl font-bold text-center text-gray-800 mb-3">Pricelist VDM</h1>
       <p class="text-center text-gray-600 mb-8">Alege brandul și introdu codul piesei</p>
 
+      <!-- FORMULAR -->
       <div class="flex flex-col sm:flex-row gap-4 mb-8">
-        <select x-model="selectedBrand" @change="query=''; results=[]; search()"
-                class="w-full sm:w-64 px-5 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none">
+        <select x-model="selectedBrand" @change="resetSearch()"
+                class="w-full sm:w-64 px-5 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-blue-500">
           <option value="">Toate brandurile</option>
           <option value="suzuki">Suzuki</option>
           <option value="honda">Honda</option>
@@ -43,9 +50,9 @@
           <option value="china">China / Diverse</option>
         </select>
 
-        <input type="text" x-model="query" @input.debounce.300ms="search()"
+        <input type="text" x-model="query" @input.debounce.400ms="search()"
                placeholder="Ex: 16705NL5800, 4510028K62BGP..."
-               class="flex-1 px-6 py-4 text-xl border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none"
+               class="flex-1 px-6 py-4 text-xl border-2 border-gray-300 rounded-xl focus:border-blue-500"
                autofocus>
       </div>
 
@@ -54,14 +61,18 @@
         Se caută în <strong x-text="brandName"></strong>...
       </div>
 
-      <!-- REZULTATE -->
+      <!-- LISTĂ DE REZULTATE -->
       <template x-if="results.length > 0">
         <div class="space-y-5">
           <template x-for="item in results" :key="item.id">
             <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:bg-gray-100 transition-shadow">
+
               <div class="flex flex-col md:flex-row justify-between items-start gap-4">
+
+                <!-- DETALII -->
                 <div class="flex-1">
                   <h3 class="text-xl font-bold text-gray-800" x-text="item.DENUMIRE"></h3>
+
                   <div class="mt-2 text-sm text-gray-600">
                     <span class="font-semibold text-blue-600" x-text="item.brand"></span>
                     <span class="ml-4 font-mono" x-text="item.code"></span>
@@ -70,27 +81,36 @@
                     </span>
                   </div>
                 </div>
+
+                <!-- PREȚURI -->
                 <div class="text-right">
+
                   <div x-show="item.isSuzuki" class="text-3xl font-bold text-gray-900">
                     <span x-text="format(item.pret)"></span> LEI
                   </div>
+
                   <div x-show="!item.isSuzuki">
                     <div class="text-2xl font-bold text-green-600">
                       Stoc: <span x-text="format(item.pret_stoc)"></span> LEI
                     </div>
+
                     <div class="text-xl font-bold text-red-600 mt-2">
                       Urgent: <span x-text="format(item.pret_urgent)"></span> LEI
                     </div>
                   </div>
+
                 </div>
+
               </div>
+
             </div>
           </template>
         </div>
       </template>
 
       <!-- COD NEGĂSIT -->
-      <div x-show="!loading && query && results.length === 0" class="text-center py-24 text-red-600 text-2xl font-bold">
+      <div x-show="!loading && query && results.length === 0"
+           class="text-center py-24 text-red-600 text-2xl font-bold">
         Cod negăsit
       </div>
 
@@ -102,151 +122,169 @@
     </div>
   </main>
 
+
+  <!-- LOGICA APLICAȚIEI OPTIMIZATĂ -->
   <script>
     function app() {
+      const EUR_TO_LEI = 37.8;
+
+      const BRAND_MAP = {
+        SUZ: 'SUZUKI',
+        HON: 'HONDA',
+        YAM: 'YAMAHA',
+        DUC: 'DUCATI',
+        KAW: 'KAWASAKI'
+      };
+
+      const PRICE_DISCOUNT = {
+        SUZUKI: 25,
+        HONDA: 35,
+        YAMAHA: 33,
+        KAWASAKI: 25,
+        KTM: 10,
+        HUSQVARNA: 10,
+        PIAGGIO: 25,
+        DUCATI: 5,
+        DEFAULT: 30
+      };
+
+      const URGENT_DISCOUNT = {
+        HONDA: 20,
+        YAMAHA: 20,
+        KAWASAKI: 20,
+        KTM: 10,
+        HUSQVARNA: 10,
+        PIAGGIO: 25,
+        DUCATI: 5,
+        DEFAULT: 15
+      };
+
+      const FILES = {
+        suzuki: ['data/suzuki.json'],
+        honda: ['data/honda1.json', 'data/honda2.json'],
+        ducati: ['data/ducati.json'],
+        kawasaki: ['data/kawasaki.json'],
+        china: ['data/china1.json','data/china2.json','data/china3.json','data/diverse.json']
+      };
+
+      const ALL_FILES = [
+        'data/suzuki.json',
+        'data/honda1.json',
+        'data/honda2.json',
+        'data/yamaha.json',
+        'data/kawasaki.json',
+        'data/ducati.json',
+        'data/china1.json',
+        'data/china2.json',
+        'data/china3.json',
+        'data/diverse.json'
+      ];
+
       return {
+
         query: '',
         selectedBrand: '',
         results: [],
         loading: false,
         cache: {},
 
-        // Reduceri (modifică doar dacă schimbi politica de preț)
-        discounts: { SUZUKI:25, HONDA:35, YAMAHA:33, KAWASAKI:25, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:30 },
-        urgentDiscount: { HONDA:20, YAMAHA:20, KAWASAKI:20, KTM:10, HUSQVARNA:10, PIAGGIO:25, DUCATI:5, DEFAULT:15 },
+        resetSearch() {
+          this.query = '';
+          this.results = [];
+        },
 
         get brandName() {
-          const names = {
-            suzuki: 'Suzuki',
-            honda: 'Honda',
-            ducati: 'Ducati',
-            kawasaki: 'Kawasaki',
-            china: 'China / Diverse',
-            '': 'toate fișierele'
-          };
-          return names[this.selectedBrand] || 'fișierele';
+          return this.selectedBrand
+            ? this.selectedBrand.charAt(0).toUpperCase() + this.selectedBrand.slice(1)
+            : 'toate fișierele';
+        },
+
+        normalizeBrand(str) {
+          const raw = String(str || '').toUpperCase();
+          for (const key in BRAND_MAP) {
+            if (raw.includes(key)) return BRAND_MAP[key];
+          }
+          return raw || 'DIVERSE';
+        },
+
+        roundUpToTen(n) {
+          return Math.ceil(n / 10) * 10;
+        },
+
+        async loadFiles(files) {
+          const promises = files.map(file =>
+            this.cache[file]
+              ? Promise.resolve(this.cache[file])
+              : fetch(file).then(r => r.json()).catch(() => [])
+          );
+
+          const loaded = await Promise.all(promises);
+
+          files.forEach((f, i) => {
+            this.cache[f] = Array.isArray(loaded[i]) ? loaded[i] : Object.values(loaded[i]);
+          });
         },
 
         async search() {
-  if (!this.query.trim()) {
-    this.results = [];
-    this.loading = false;
-    return;
-  }
+          if (!this.query.trim()) {
+            this.results = [];
+            return;
+          }
 
-  this.loading = true;
-  const q = this.query.trim().toUpperCase();
+          this.loading = true;
+          const q = this.query.trim().toUpperCase();
 
-  // === FUNCTIE NOUĂ: ROTUNJIRE LA URMĂTOAREA ZECIME DE 10 ===
-  const roundUpToTen = (num) => {
-    return Math.ceil(num / 10) * 10;
-  };
-  // Exemple:
-  // 6403 → 6410
-  // 5987 → 5990
-  // 6120 → 6120
-  // 6001 → 6010
+          const files = this.selectedBrand ? FILES[this.selectedBrand] : ALL_FILES;
+          await this.loadFiles(files);
 
-  const allFiles = [
-    'data/suzuki.json',
-    'data/honda1.json',
-    'data/honda2.json',
-    'data/yamaha.json',
-    'data/kawasaki.json',
-    'data/ducati.json',
-    'data/china1.json',
-    'data/china2.json',
-    'data/china3.json',
-    'data/diverse.json'
-  ];
+          const items = [];
 
-  let filesToSearch = [];
+          for (const file of files) {
+            for (const raw of this.cache[file]) {
 
-  if (!this.selectedBrand) {
-    filesToSearch = allFiles;
-  } else {
-    const map = {
-      suzuki:   ['data/suzuki.json'],
-      honda:    ['data/honda1.json', 'data/honda2.json'],
-      ducati:   ['data/ducati.json'],
-      kawasaki: ['data/kawasaki.json'],
-      china:    ['data/china1.json', 'data/china2.json', 'data/china3.json', 'data/diverse.json']
-    };
-    filesToSearch = map[this.selectedBrand] || allFiles;
-  }
+              if (!raw.COD || !raw.PRE) continue;
 
-  const items = [];
+              const cod = String(raw.COD).trim().toUpperCase();
+              const codnou = raw.CODNOU ? String(raw.CODNOU).trim().toUpperCase() : '';
 
-  for (const file of filesToSearch) {
-    if (!this.cache[file]) {
-      try {
-        const res = await fetch(file + '?t=' + Date.now());
-        if (!res.ok) {
-          console.warn(`404 sau eroare: ${file}`);
-          continue;
-        }
-        let data = await res.json();
-        if (!Array.isArray(data)) data = Object.values(data);
-        this.cache[file] = data;
-        console.log(`Încărcat ${data.length} produse din ${file}`);
-      } catch (e) {
-        console.warn(`Eroare la încărcarea ${file}:`, e);
-        continue;
-      }
-    }
+              if (!cod.includes(q) && (!codnou || !codnou.includes(q))) continue;
 
-    const data = this.cache[file];
+              const brand = this.normalizeBrand(raw.BRAND);
+              const preEur = Number(raw.PRE);
+              if (!Number.isFinite(preEur) || preEur <= 0) continue;
 
-    for (const raw of data) {
-      if (!raw.COD || !raw.PRE) continue;
+              const base = preEur * EUR_TO_LEI;
 
-      const cod = String(raw.COD).trim();
-      const codnou = raw.CODNOU ? String(raw.CODNOU).trim() : '';
+              const discStoc = PRICE_DISCOUNT[brand] ?? PRICE_DISCOUNT.DEFAULT;
+              const discUrg = URGENT_DISCOUNT[brand] ?? URGENT_DISCOUNT.DEFAULT;
 
-      if (!cod.toUpperCase().includes(q) && (!codnou || !codnou.toUpperCase().includes(q))) continue;
+              const pretStoc = this.roundUpToTen(base * (1 - discStoc / 100));
+              const pretUrg = brand === 'SUZUKI' ? null : this.roundUpToTen(base * (1 - discUrg / 100));
 
-      let brand = (String(raw.BRAND || '').trim().toUpperCase().replace(/^\d+-/, ''));
-      if (brand.includes('HOND'))  brand = 'HONDA';
-      if (brand.includes('SUZU'))  brand = 'SUZUKI';
-      if (brand.includes('YAMAH')) brand = 'YAMAHA';
-      if (brand.includes('DUCATI')) brand = 'DUCATI';
-      if (brand.includes('KAWAS')) brand = 'KAWASAKI';
+              items.push({
+                id: cod + Math.random(),
+                DENUMIRE: String(raw.DENUMIRE || '').trim(),
+                brand: brand,
+                code: codnou || cod,
+                codnou: codnou || null,
+                isSuzuki: brand === 'SUZUKI',
+                pret: pretStoc,
+                pret_stoc: pretStoc,
+                pret_urgent: pretUrg
+              });
+            }
+          }
 
-      const preEur = parseFloat(raw.PRE);
-      if (isNaN(preEur) || preEur <= 0) continue;
-
-      const base = preEur * 1.35 * 1.40 * 20; // 37.8x
-
-      const discStoc = this.discounts[brand] ?? this.discounts.DEFAULT;
-      const discUrg  = this.urgentDiscount[brand] ?? this.urgentDiscount.DEFAULT;
-
-      // AICI FOLOSIM ROTUNJIREA LA URMĂTOAREA ZECIME
-      const pretStoc   = roundUpToTen(base * (1 - discStoc / 100));
-      const pretUrgent = brand === 'SUZUKI' ? null : roundUpToTen(base * (1 - discUrg / 100));
-
-      items.push({
-        id: cod + '_' + Date.now() + Math.random(),
-        DENUMIRE: String(raw.DENUMIRE || '').trim(),
-        brand: brand,
-        code: codnou || cod,
-        codnou: codnou || null,
-        isSuzuki: brand === 'SUZUKI',
-        pret: pretStoc,
-        pret_stoc: pretStoc,
-        pret_urgent: pretUrgent
-      });
-    }
-  }
-
-  this.results = items.slice(0, 100);
-  this.loading = false;
-},
+          this.results = items.slice(0, 100);
+          this.loading = false;
+        },
 
         format(x) {
           return x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '—';
         }
-      }
+      };
     }
   </script>
+
 </body>
 </html>
